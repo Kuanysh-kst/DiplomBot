@@ -1,25 +1,49 @@
 package kz.kuanysh.bot;
 
-import com.pengrad.telegrambot.TelegramBot;
-import com.pengrad.telegrambot.UpdatesListener;
-import com.pengrad.telegrambot.model.Update;
-import com.pengrad.telegrambot.request.SendMessage;
-import com.pengrad.telegrambot.response.SendResponse;
 
-public class Bot {
-    private final TelegramBot bot = new TelegramBot(System.getenv("BOT_TOKEN"));
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-    public void serve() {
+public class Bot extends TelegramLongPollingBot {
 
-        bot.setUpdatesListener(updates -> {
-            updates.forEach(this::process);
-            return UpdatesListener.CONFIRMED_UPDATES_ALL;
-        });
+    private static final Logger LOGGER = LoggerFactory.getLogger(Bot.class);
 
+    private final String botUserName;
+
+    private final String botToken;
+
+    public Bot(String botUserName, String botToken) {
+        this.botUserName = botUserName;
+        this.botToken = botToken;
     }
 
-    private void process(Update update){
-        long chatId = update.message().chat().id();
-        SendResponse response = bot.execute( new SendMessage(chatId, "Hello!"));
+    @Override
+    public String getBotUsername() {
+        return botUserName;
+    }
+
+    @Override
+    public String getBotToken() {
+        return botToken;
+    }
+
+    @Override
+    public void onUpdateReceived(Update update) {
+
+        if (update.hasMessage() && update.getMessage().hasText()){
+            SendMessage response;
+
+            LOGGER.info("Пользователь "+update.getMessage().getChat().getUserName()+" прислал сообщение "+update.getMessage().getText());
+            response = new SendMessage(update.getMessage().getChatId().toString(),"Echo: "+update.getMessage().getText());
+            try{
+                execute(response);
+            }catch (TelegramApiException e){
+                LOGGER.error("Could not send echo message to the user", e);
+            }
+        }
     }
 }
