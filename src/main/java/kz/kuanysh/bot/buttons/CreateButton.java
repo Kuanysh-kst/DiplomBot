@@ -53,9 +53,9 @@ public class CreateButton {
                 .build();
     }
 
-    public static BotApiMethod<Message> sendReply(Message message, String text, ReplyKeyboardMarkup replyKeyboardMarkup) {
+    public static BotApiMethod<Message> sendReply(Long chatId, String text, ReplyKeyboardMarkup replyKeyboardMarkup) {
         return SendMessage.builder()
-                .chatId(message.getChatId().toString())
+                .chatId(chatId.toString())
                 .replyMarkup(replyKeyboardMarkup)
                 .text(text)
                 .build();

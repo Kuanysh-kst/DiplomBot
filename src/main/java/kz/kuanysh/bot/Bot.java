@@ -4,8 +4,9 @@ package kz.kuanysh.bot;
 import kz.kuanysh.bot.factory.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.Sender;
+import kz.kuanysh.bot.factory.dialogs.StartDialog;
 import kz.kuanysh.bot.factory.factories.ChoiceDialogFactory;
-import kz.kuanysh.bot.factory.factories.SecondDialogFactory;
+import kz.kuanysh.bot.factory.factories.FindJobDialogFactory;
 import kz.kuanysh.bot.factory.factories.StartDialogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,18 +49,25 @@ public class Bot extends TelegramLongPollingBot {
             Long chatId = update.getMessage().getChatId();
             DialogFactory dialogFactory = createDialogFactory(update.getMessage().getText());
             executeMessage(update.getMessage(), dialogFactory);
-            users.put(chatId, dialogFactory);
+        } else if (update.hasCallbackQuery()) {
+            Long chatId = update.getCallbackQuery().getMessage().getChatId();
+            DialogFactory dialogFactory = createDialogFactory(update.getCallbackQuery().getData());
+            executeMessage(update.getCallbackQuery().getMessage(), dialogFactory);
         }
     }
 
+
+
     public static DialogFactory createDialogFactory(String text) {
-        if (text.equals("/second")) {
-            return new SecondDialogFactory();
-        } else if (text.equals("next")) {
+        LOGGER.info(text);
+        if (text.equals("next")) {
             return new ChoiceDialogFactory();
+        } else if (text.equals("/findJob")) {
+             return new FindJobDialogFactory();
         } else {
             return new StartDialogFactory();
         }
+
     }
 
 
@@ -67,7 +75,7 @@ public class Bot extends TelegramLongPollingBot {
         Dialog dialog = dialogFactory.createDialog();
         Sender sender = dialogFactory.createSender();
         try {
-            var response = sender.sendMessage(message.getChatId(), dialog.getText());
+            var response = sender.sendMessage(message, dialog.getText());
             execute(response);
         } catch (TelegramApiException e) {
             LOGGER.error("Ошибка ввода : ", e);

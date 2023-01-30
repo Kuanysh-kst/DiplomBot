@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class StartMessage implements Sender {
     @Override
-    public   BotApiMethod<Message> sendMessage(Long chatId, String content) {
+    public   BotApiMethod<Message> sendMessage(Message message, String content) {
         ReplyKeyboardMarkup replyMarkup = new ReplyKeyboardMarkup();
         replyMarkup.setOneTimeKeyboard(true);
         var keyboard = new ArrayList<KeyboardRow>();
@@ -25,7 +25,7 @@ public class StartMessage implements Sender {
 
         replyMarkup.setKeyboard(keyboard);
        return SendMessage.builder()
-                .chatId(chatId.toString())
+                .chatId(message.getChatId().toString())
                 .replyMarkup(replyMarkup)
                 .text(content)
                 .build();

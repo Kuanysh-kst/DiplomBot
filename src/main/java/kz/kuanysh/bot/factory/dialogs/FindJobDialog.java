@@ -2,9 +2,9 @@ package kz.kuanysh.bot.factory.dialogs;
 
 import kz.kuanysh.bot.factory.Dialog;
 
-public class SecondDialog implements Dialog {
+public class FindJobDialog implements Dialog {
     @Override
     public String getText() {
-        return "it's second factory";
+        return "Выберите в какая работа вам нужно : ";
     }
 }

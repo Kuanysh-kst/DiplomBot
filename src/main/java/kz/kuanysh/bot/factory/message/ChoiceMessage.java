@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ChoiceMessage implements Sender {
     @Override
-    public BotApiMethod<Message> sendMessage(Long chatId, String content) {
+    public BotApiMethod<Message> sendMessage(Message message, String content) {
         InlineKeyboardMarkup inlineKeyboardMarkup   = new InlineKeyboardMarkup();
         List<InlineKeyboardButton> firstRow = new ArrayList<>();
         List<InlineKeyboardButton> secondRow = new ArrayList<>();
@@ -35,7 +35,7 @@ public class ChoiceMessage implements Sender {
 
         inlineKeyboardMarkup.setKeyboard(keyboard);
 
-        return CreateButton.sendInline(chatId,content, inlineKeyboardMarkup);
+        return CreateButton.sendInline(message.getChatId(),content, inlineKeyboardMarkup);
 
     }
 }

@@ -16,4 +16,6 @@ public class ChoiceDialogFactory implements DialogFactory {
     public Sender createSender() {
         return new ChoiceMessage();
     }
+
+
 }

@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f849323b-9126-4f6c-9880-be17e28e6a64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/CreateButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/dialogs/ChoiceDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/factories/ChoiceDialogFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/message/ChoiceMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/InlineListButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/dialogs/FindJobDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/factories/FindJobDialogFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/message/FindJobMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
@@ -18,22 +18,27 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/Bot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/DialogChain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/Dialog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/DialogFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/Sender.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/Bot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/buttons/CreateButton.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/buttons/CreateButton.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/Sender.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/Sender.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/dialogs/FirstDialog.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/dialogs/SecondDialog.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/factories/SecondDialogFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/factories/StartDialogFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/factories/StartDialogFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/factories/StartDialogFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/message/ChoiceMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/message/ChoiceMessage.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/message/SecondMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/message/StartMessage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/message/StartMessage.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/factory/message/StartMessage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/Bot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/DialogChain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/message/SecondMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/message/SecondMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/CreateButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/CreateButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/dialogs/FirstDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/dialogs/StartDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/dialogs/SecondDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/factories/ChoiceDialogFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/factories/ChoiceDialogFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/factories/SecondDialogFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/factories/StartDialogFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/factories/StartDialogFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/message/ChoiceMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/message/ChoiceMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/message/SecondMessage.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/message/StartMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/factory/message/StartMessage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
