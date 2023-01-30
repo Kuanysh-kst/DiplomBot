@@ -4,6 +4,7 @@ package kz.kuanysh.bot;
 import kz.kuanysh.bot.factory.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.Sender;
+import kz.kuanysh.bot.factory.factories.ChoiceDialogFactory;
 import kz.kuanysh.bot.factory.factories.SecondDialogFactory;
 import kz.kuanysh.bot.factory.factories.StartDialogFactory;
 import org.slf4j.Logger;
@@ -54,6 +55,8 @@ public class Bot extends TelegramLongPollingBot {
     public static DialogFactory createDialogFactory(String text) {
         if (text.equals("/second")) {
             return new SecondDialogFactory();
+        } else if (text.equals("next")) {
+            return new ChoiceDialogFactory();
         } else {
             return new StartDialogFactory();
         }

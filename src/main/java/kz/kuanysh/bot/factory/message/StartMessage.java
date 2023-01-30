@@ -15,11 +15,13 @@ public class StartMessage implements Sender {
         ReplyKeyboardMarkup replyMarkup = new ReplyKeyboardMarkup();
         replyMarkup.setOneTimeKeyboard(true);
         var keyboard = new ArrayList<KeyboardRow>();
-
         KeyboardRow firstRow = new KeyboardRow();
-        firstRow.add("First button");
-        firstRow.add("Second button");
+        KeyboardRow secondRow = new KeyboardRow();
+        firstRow.add("next");
+        secondRow.add("О нас \uD83E\uDD16");
+        secondRow.add("Реклама \uD83E\uDD41");
         keyboard.add(firstRow);
+        keyboard.add(secondRow);
 
         replyMarkup.setKeyboard(keyboard);
        return SendMessage.builder()
