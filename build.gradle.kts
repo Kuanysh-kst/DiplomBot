@@ -19,8 +19,3 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.assertj:assertj-core:3.22.0")
 }
-
-//tasks.jar{
-//    mainfest.attributes["Main-Class"] = "kz.kuanysh.bot.Main"
-//}
-

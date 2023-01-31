@@ -7,6 +7,6 @@ public class StartDialog implements Dialog {
     public String getText() {
         return  "Привет это бот для поиска работы \n"+
                 "бот для поиска работы имеет может работать со следующими командами \n"+
-                "/second";
+                "";
     }
 }

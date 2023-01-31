@@ -1,13 +1,9 @@
 package kz.kuanysh.bot;
 
-
+import kz.kuanysh.bot.buttons.ButtonController;
 import kz.kuanysh.bot.factory.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.Sender;
-import kz.kuanysh.bot.factory.dialogs.StartDialog;
-import kz.kuanysh.bot.factory.factories.ChoiceDialogFactory;
-import kz.kuanysh.bot.factory.factories.FindJobDialogFactory;
-import kz.kuanysh.bot.factory.factories.StartDialogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -47,29 +43,14 @@ public class Bot extends TelegramLongPollingBot {
 
         if (update.hasMessage() && update.getMessage().hasText()) {
             Long chatId = update.getMessage().getChatId();
-            DialogFactory dialogFactory = createDialogFactory(update.getMessage().getText());
+            DialogFactory dialogFactory = ButtonController.createDialogFactory(update.getMessage().getText());
             executeMessage(update.getMessage(), dialogFactory);
         } else if (update.hasCallbackQuery()) {
             Long chatId = update.getCallbackQuery().getMessage().getChatId();
-            DialogFactory dialogFactory = createDialogFactory(update.getCallbackQuery().getData());
+            DialogFactory dialogFactory = ButtonController.createDialogFactory(update.getCallbackQuery().getData());
             executeMessage(update.getCallbackQuery().getMessage(), dialogFactory);
         }
     }
-
-
-
-    public static DialogFactory createDialogFactory(String text) {
-        LOGGER.info(text);
-        if (text.equals("next")) {
-            return new ChoiceDialogFactory();
-        } else if (text.equals("/findJob")) {
-             return new FindJobDialogFactory();
-        } else {
-            return new StartDialogFactory();
-        }
-
-    }
-
 
     private void executeMessage(Message message, DialogFactory dialogFactory) {
         Dialog dialog = dialogFactory.createDialog();

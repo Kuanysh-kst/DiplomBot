@@ -5,11 +5,7 @@ import kz.kuanysh.bot.buttons.InlineListButton;
 import kz.kuanysh.bot.factory.Sender;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FindJobMessage implements Sender {
