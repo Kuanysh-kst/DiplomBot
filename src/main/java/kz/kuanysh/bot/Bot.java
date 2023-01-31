@@ -11,12 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Bot extends TelegramLongPollingBot {
-
-    Map<Long, DialogFactory> users = new HashMap<>();
     private static final Logger LOGGER = LoggerFactory.getLogger(Bot.class);
 
     private final String botUserName;
@@ -42,11 +37,9 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
 
         if (update.hasMessage() && update.getMessage().hasText()) {
-            Long chatId = update.getMessage().getChatId();
             DialogFactory dialogFactory = ButtonController.createDialogFactory(update.getMessage().getText());
             executeMessage(update.getMessage(), dialogFactory);
         } else if (update.hasCallbackQuery()) {
-            Long chatId = update.getCallbackQuery().getMessage().getChatId();
             DialogFactory dialogFactory = ButtonController.createDialogFactory(update.getCallbackQuery().getData());
             executeMessage(update.getCallbackQuery().getMessage(), dialogFactory);
         }
