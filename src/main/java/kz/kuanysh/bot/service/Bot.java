@@ -10,15 +10,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
+import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Component
 public class Bot extends TelegramLongPollingBot {
 
-    private BotConfig botConfig;
+    private final BotConfig botConfig;
 
     public Bot(BotConfig botConfig) {
         this.botConfig = botConfig;
@@ -54,7 +60,7 @@ public class Bot extends TelegramLongPollingBot {
         Dialog dialog = dialogFactory.createDialog();
         Sender sender = dialogFactory.createSender();
         try {
-            var response = sender.sendMessage(message, dialog.getText());
+            var response = sender.sendMessage(message, dialog.getText(message));
             execute(response);
         } catch (TelegramApiException e) {
             log.error("Error occurred: " + e.getMessage());

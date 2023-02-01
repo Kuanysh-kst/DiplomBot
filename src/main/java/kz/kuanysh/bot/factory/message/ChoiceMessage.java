@@ -20,12 +20,12 @@ public class ChoiceMessage implements Sender {
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         InlineKeyboardButton firstButton = InlineKeyboardButton.builder()
                 .text("найти работу ")
-                .callbackData("/findJob")
+                .callbackData("/findjob")
                 .build();
 
         InlineKeyboardButton secondButton = InlineKeyboardButton.builder()
                 .text("найти сотрудника")
-                .callbackData("/findWorker")
+                .callbackData("/findworker")
                 .build();
 
         firstRow.add(firstButton);

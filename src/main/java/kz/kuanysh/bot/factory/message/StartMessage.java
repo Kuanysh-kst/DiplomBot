@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class StartMessage implements Sender {
     @Override
     public BotApiMethod<Message> sendMessage(Message message, String content) {
-        String resultText = "Привет " + message.getChat().getFirstName() + content;
 
         WebAppInfo webAppInfo = new WebAppInfo();
         webAppInfo.setUrl("https://hh.kz/");
@@ -39,7 +38,7 @@ public class StartMessage implements Sender {
         return SendMessage.builder()
                 .chatId(message.getChatId().toString())
                 .replyMarkup(replyMarkup)
-                .text(resultText)
+                .text(content)
                 .build();
     }
 }
