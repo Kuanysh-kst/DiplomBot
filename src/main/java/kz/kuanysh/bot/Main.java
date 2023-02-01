@@ -1,5 +1,6 @@
 package kz.kuanysh.bot;
 
+import kz.kuanysh.bot.service.Bot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.TelegramBotsApi;

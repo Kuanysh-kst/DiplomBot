@@ -1,4 +1,4 @@
-package kz.kuanysh.bot;
+package kz.kuanysh.bot.service;
 
 import kz.kuanysh.bot.buttons.ButtonController;
 import kz.kuanysh.bot.factory.Dialog;
