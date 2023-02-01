@@ -5,6 +5,7 @@ import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.factory.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.Sender;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,9 +14,9 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+@Slf4j
 @Component
 public class Bot extends TelegramLongPollingBot {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Bot.class);
 
     private BotConfig botConfig;
 
@@ -37,9 +38,13 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
 
         if (update.hasMessage() && update.getMessage().hasText()) {
+
+            String userFirstName = update.getMessage().getChat().getFirstName();
+
             DialogFactory dialogFactory = ButtonController.createDialogFactory(update.getMessage().getText());
             executeMessage(update.getMessage(), dialogFactory);
         } else if (update.hasCallbackQuery()) {
+
             DialogFactory dialogFactory = ButtonController.createDialogFactory(update.getCallbackQuery().getData());
             executeMessage(update.getCallbackQuery().getMessage(), dialogFactory);
         }
@@ -52,7 +57,7 @@ public class Bot extends TelegramLongPollingBot {
             var response = sender.sendMessage(message, dialog.getText());
             execute(response);
         } catch (TelegramApiException e) {
-            LOGGER.error("Ошибка ввода : ", e);
+            log.error("Error occurred: " + e.getMessage());
         }
     }
 }
