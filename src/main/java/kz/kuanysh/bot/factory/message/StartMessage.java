@@ -31,6 +31,7 @@ public class StartMessage implements Sender {
         secondRow.add("Реклама \uD83E\uDD41");
         keyboard.add(firstRow);
         keyboard.add(secondRow);
+        replyMarkup.setResizeKeyboard(true);
 
         replyMarkup.setKeyboard(keyboard);
         return SendMessage.builder()
