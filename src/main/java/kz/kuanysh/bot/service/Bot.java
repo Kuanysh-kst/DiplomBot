@@ -1,36 +1,36 @@
 package kz.kuanysh.bot.service;
 
 import kz.kuanysh.bot.buttons.ButtonController;
+import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.factory.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.Sender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+@Component
 public class Bot extends TelegramLongPollingBot {
     private static final Logger LOGGER = LoggerFactory.getLogger(Bot.class);
 
-    private final String botUserName;
+    private BotConfig botConfig;
 
-    private final String botToken;
-
-    public Bot(String botUserName, String botToken) {
-        this.botUserName = botUserName;
-        this.botToken = botToken;
+    public Bot(BotConfig botConfig) {
+        this.botConfig = botConfig;
     }
 
     @Override
     public String getBotUsername() {
-        return botUserName;
+        return botConfig.getBotUserName();
     }
 
     @Override
     public String getBotToken() {
-        return botToken;
+        return botConfig.getToken();
     }
 
     @Override
