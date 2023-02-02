@@ -21,8 +21,11 @@ public class Bot extends TelegramLongPollingBot {
     @Autowired
     private final BotConfig botConfig;
 
-    public Bot(BotConfig botConfig) {
+    private final UserService userService;
+
+    public Bot(BotConfig botConfig,UserService userService) {
         this.botConfig = botConfig;
+        this.userService = userService;
     }
 
     @Override
@@ -41,6 +44,7 @@ public class Bot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
             DialogFactory dialogFactory = ButtonController.createDialogFactory(update.getMessage().getText());
             executeMessage(update.getMessage(), dialogFactory);
+            userService.registerUser(update.getMessage());
         } else if (update.hasCallbackQuery()) {
 
             DialogFactory dialogFactory = ButtonController.createDialogFactory(update.getCallbackQuery().getData());
