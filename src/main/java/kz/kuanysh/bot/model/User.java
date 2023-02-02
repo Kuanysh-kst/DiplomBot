@@ -1,7 +1,6 @@
 package kz.kuanysh.bot.model;
 
 import lombok.Data;
-import org.glassfish.grizzly.http.util.TimeStamp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
