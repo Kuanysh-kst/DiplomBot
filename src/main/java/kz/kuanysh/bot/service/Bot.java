@@ -32,8 +32,6 @@ public class Bot extends TelegramLongPollingBot {
     @Autowired
     private final BotConfig botConfig;
 
-    private UserRepository userRepository;
-
     public Bot(BotConfig botConfig) {
         this.botConfig = botConfig;
     }
@@ -75,20 +73,5 @@ public class Bot extends TelegramLongPollingBot {
         }
     }
 
-    private void registerUser(Message message) {
-        if (userRepository.findById(message.getChatId()).isEmpty()) {
-            var chatId = message.getChatId();
-            var chat = message.getChat();
 
-            User user = new User();
-            user.setChatId(chatId);
-            user.setFirstName(chat.getFirstName());
-            user.setLastName(chat.getLastName());
-            user.setUserName(chat.getUserName());
-            user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
-
-            userRepository.save(user);
-            log.info("user saved: " + user);
-        }
-    }
 }
