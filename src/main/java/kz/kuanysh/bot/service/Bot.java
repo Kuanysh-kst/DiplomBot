@@ -5,9 +5,11 @@ import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.factory.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.Sender;
+import kz.kuanysh.bot.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
@@ -24,7 +26,10 @@ import java.util.List;
 @Component
 public class Bot extends TelegramLongPollingBot {
 
+    @Autowired
     private final BotConfig botConfig;
+
+    private UserRepository userRepository;
 
     public Bot(BotConfig botConfig) {
         this.botConfig = botConfig;

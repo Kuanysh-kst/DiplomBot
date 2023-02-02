@@ -24,8 +24,10 @@ dependencies {
     implementation("org.telegram:telegrambots:6.0.1")
     implementation("ch.qos.logback:logback-classic:1.2.11")
     implementation("org.springframework.boot:spring-boot-starter-parent:2.7.1")
-
+    implementation("org.postgresql:postgresql:42.5.0")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.flywaydb:flyway-core")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

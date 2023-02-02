@@ -1,3 +1,18 @@
 bot:
   username: Diplom_kst_bot
   token: 5920322820:AAGDmCGI1cUjqa8p3LlSwEtWOTGEWv-2K9A
+spring:
+  datasource:
+    username: postgres
+    password: password
+  jpa:
+    show-sql: false
+    hibernate.dll-auto: create
+    generate-ddl: false
+    # hibernate.ddl-auto: update
+  flyway:
+    baseline-on-migrate: true
+    locations: classpath:db.migration
+    url: jdbc:postgresql://localhost:5432/postgres
+    user: postgres
+    password: password
