@@ -6,7 +6,6 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +19,12 @@ public class ChoiceMessage implements Sender {
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         InlineKeyboardButton firstButton = InlineKeyboardButton.builder()
                 .text("найти работу ")
-                .callbackData("/findJob")
+                .callbackData("/findjob")
                 .build();
 
         InlineKeyboardButton secondButton = InlineKeyboardButton.builder()
                 .text("найти сотрудника")
-                .callbackData("/findWorker")
+                .callbackData("/findworker")
                 .build();
 
         firstRow.add(firstButton);

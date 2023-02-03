@@ -7,6 +7,7 @@ import kz.kuanysh.bot.factory.dialogs.StartDialog;
 import kz.kuanysh.bot.factory.message.StartMessage;
 
 public class StartDialogFactory implements DialogFactory {
+
     @Override
     public Dialog createDialog() {
         return new StartDialog();

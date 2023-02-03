@@ -4,7 +4,7 @@ import kz.kuanysh.bot.factory.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.Sender;
 import kz.kuanysh.bot.factory.dialogs.SorryDialog;
-import kz.kuanysh.bot.factory.message.SorryMessage;
+import kz.kuanysh.bot.factory.message.TextMessage;
 
 public class SorryDialogFactory implements DialogFactory {
     @Override
@@ -14,6 +14,6 @@ public class SorryDialogFactory implements DialogFactory {
 
     @Override
     public Sender createSender() {
-        return new SorryMessage();
+        return new TextMessage();
     }
 }

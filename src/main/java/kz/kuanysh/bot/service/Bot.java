@@ -1,36 +1,41 @@
-package kz.kuanysh.bot;
+package kz.kuanysh.bot.service;
 
 import kz.kuanysh.bot.buttons.ButtonController;
+import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.factory.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.Sender;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+
+@Slf4j
+@Component
 public class Bot extends TelegramLongPollingBot {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Bot.class);
 
-    private final String botUserName;
+    @Autowired
+    private final BotConfig botConfig;
 
-    private final String botToken;
+    private final UserService userService;
 
-    public Bot(String botUserName, String botToken) {
-        this.botUserName = botUserName;
-        this.botToken = botToken;
+    public Bot(BotConfig botConfig,UserService userService) {
+        this.botConfig = botConfig;
+        this.userService = userService;
     }
 
     @Override
     public String getBotUsername() {
-        return botUserName;
+        return botConfig.getBotUserName();
     }
 
     @Override
     public String getBotToken() {
-        return botToken;
+        return botConfig.getToken();
     }
 
     @Override
@@ -39,7 +44,9 @@ public class Bot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
             DialogFactory dialogFactory = ButtonController.createDialogFactory(update.getMessage().getText());
             executeMessage(update.getMessage(), dialogFactory);
+            userService.registerUser(update.getMessage());
         } else if (update.hasCallbackQuery()) {
+
             DialogFactory dialogFactory = ButtonController.createDialogFactory(update.getCallbackQuery().getData());
             executeMessage(update.getCallbackQuery().getMessage(), dialogFactory);
         }
@@ -49,10 +56,10 @@ public class Bot extends TelegramLongPollingBot {
         Dialog dialog = dialogFactory.createDialog();
         Sender sender = dialogFactory.createSender();
         try {
-            var response = sender.sendMessage(message, dialog.getText());
+            var response = sender.sendMessage(message, dialog.getText(message));
             execute(response);
         } catch (TelegramApiException e) {
-            LOGGER.error("Ошибка ввода : ", e);
+            log.error("Error occurred: " + e.getMessage());
         }
     }
 }

@@ -4,7 +4,6 @@ import kz.kuanysh.bot.factory.Sender;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 public class StartMessage implements Sender {
     @Override
     public BotApiMethod<Message> sendMessage(Message message, String content) {
+
         WebAppInfo webAppInfo = new WebAppInfo();
         webAppInfo.setUrl("https://hh.kz/");
         ReplyKeyboardMarkup replyMarkup = new ReplyKeyboardMarkup();
@@ -32,7 +32,6 @@ public class StartMessage implements Sender {
         keyboard.add(firstRow);
         keyboard.add(secondRow);
         replyMarkup.setResizeKeyboard(true);
-
         replyMarkup.setKeyboard(keyboard);
         return SendMessage.builder()
                 .chatId(message.getChatId().toString())
