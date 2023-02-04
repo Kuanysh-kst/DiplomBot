@@ -1,11 +1,11 @@
 package kz.kuanysh.bot.service;
 
 import kz.kuanysh.bot.buttons.ButtonController;
+import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.dialogs.Dialog;
 import kz.kuanysh.bot.factory.factories.dialog.SorryDialogFactory;
 import kz.kuanysh.bot.factory.message.Sender;
-import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -13,13 +13,15 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import java.io.Serializable;
 
 public class MessageHandler {
-    public static DialogFactory factoryControl(Update update, UserService userService) {
+    public static DialogFactory factoryControl(Update update, UserService userService,BotConfig botConfig) {
 
         if (update.hasMessage() && update.getMessage().hasText()) {
+            Long chatId = update.getMessage().getChatId();
             userService.registerUser(update.getMessage());
-            return ButtonController.createDialogFactory(update.getMessage().getText());
+            return ButtonController.createDialogFactory(update.getMessage().getText(),chatId,botConfig);
         } else if (update.hasCallbackQuery()) {
-            return ButtonController.createDialogFactory(update.getCallbackQuery().getData());
+            Long chatId = update.getCallbackQuery().getMessage().getChatId();
+            return ButtonController.createDialogFactory(update.getCallbackQuery().getData(),chatId,botConfig );
         } else {
             return new SorryDialogFactory();
         }
