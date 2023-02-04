@@ -1,4 +1,4 @@
-package kz.kuanysh.bot.factory;
+package kz.kuanysh.bot.factory.dialogs;
 
 import org.telegram.telegrambots.meta.api.objects.Message;
 

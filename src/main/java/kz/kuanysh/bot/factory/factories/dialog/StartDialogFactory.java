@@ -1,8 +1,8 @@
-package kz.kuanysh.bot.factory.factories;
+package kz.kuanysh.bot.factory.factories.dialog;
 
-import kz.kuanysh.bot.factory.Dialog;
+import kz.kuanysh.bot.factory.dialogs.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
-import kz.kuanysh.bot.factory.Sender;
+import kz.kuanysh.bot.factory.message.Sender;
 import kz.kuanysh.bot.factory.dialogs.StartDialog;
 import kz.kuanysh.bot.factory.message.StartMessage;
 
@@ -17,4 +17,5 @@ public class StartDialogFactory implements DialogFactory {
     public Sender createSender() {
         return new StartMessage();
     }
+
 }

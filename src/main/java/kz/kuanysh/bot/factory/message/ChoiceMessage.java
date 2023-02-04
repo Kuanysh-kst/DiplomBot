@@ -1,19 +1,19 @@
 package kz.kuanysh.bot.factory.message;
 
 import kz.kuanysh.bot.buttons.CreateButton;
-import kz.kuanysh.bot.factory.Sender;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChoiceMessage implements Sender {
     @Override
-    public BotApiMethod<Message> sendMessage(Message message, String content) {
-        InlineKeyboardMarkup inlineKeyboardMarkup   = new InlineKeyboardMarkup();
+    public  BotApiMethod<Message> sendMessage(Message message, String content) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<InlineKeyboardButton> firstRow = new ArrayList<>();
         List<InlineKeyboardButton> secondRow = new ArrayList<>();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
@@ -34,7 +34,7 @@ public class ChoiceMessage implements Sender {
 
         inlineKeyboardMarkup.setKeyboard(keyboard);
 
-        return CreateButton.sendInline(message.getChatId(),content, inlineKeyboardMarkup);
+        return CreateButton.sendInline(message.getChatId(), content, inlineKeyboardMarkup);
 
     }
 }
