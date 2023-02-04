@@ -19,6 +19,7 @@ public class ButtonController {
 
         if (chatId.equals(botConfig.getOwnerId())) {
             log.info(text);
+            log.info(String.valueOf(chatId));
             Map<String, Supplier<DialogFactory>> factories = Map.of(
                     "/start", StartDialogFactory::new,
                     "next", ChoiceDialogFactory::new,
@@ -32,6 +33,7 @@ public class ButtonController {
             return supplier.get();
         } else {
             log.info(text);
+            log.info(String.valueOf(chatId));
             Map<String, Supplier<DialogFactory>> factories = Map.of(
                     "/start", StartDialogFactory::new,
                     "next", ChoiceDialogFactory::new,

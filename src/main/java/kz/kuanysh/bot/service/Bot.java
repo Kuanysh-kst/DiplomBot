@@ -1,8 +1,13 @@
 package kz.kuanysh.bot.service;
 
+import kz.kuanysh.bot.buttons.CreateButton;
 import kz.kuanysh.bot.config.BotConfig;
+import kz.kuanysh.bot.model.Ads;
+import kz.kuanysh.bot.model.User;
+import kz.kuanysh.bot.repository.AdsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -19,6 +24,8 @@ public class Bot extends TelegramLongPollingBot {
     @Autowired
     private final BotConfig botConfig;
 
+    @Autowired
+    private AdsRepository adsRepository;
     private final UserService userService;
 
     public Bot(BotConfig botConfig, UserService userService) {
@@ -38,7 +45,7 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        var factory = MessageHandler.factoryControl(update,userService,botConfig);
+        var factory = MessageHandler.factoryControl(update, userService, botConfig);
         var response = MessageHandler.createSendMessage(factory, update);
         executeMessage(response);
     }
@@ -49,6 +56,22 @@ public class Bot extends TelegramLongPollingBot {
             execute(response);
         } catch (TelegramApiException e) {
             log.error("Error occurred: " + e.getMessage());
+        }
+    }
+
+    @Scheduled(cron = "${cron.scheduler}")
+    private void sendAds() {
+        var ads = adsRepository.findAll();
+        var users = userService.findAll();
+
+        for (Ads ad : ads) {
+            for (User user : users) {
+                try {
+                    execute(CreateButton.sendText(user.getChatId(), ad.getAd()));
+                } catch (TelegramApiException e) {
+                    log.error("Error occurred: " + e.getMessage());
+                }
+            }
         }
     }
 
