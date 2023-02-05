@@ -1,27 +1,26 @@
 package kz.kuanysh.bot.factory.factories.dialog;
 
-import kz.kuanysh.bot.factory.Event.Event;
-import kz.kuanysh.bot.factory.Event.StartEvent;
-import kz.kuanysh.bot.factory.dialogs.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
+import kz.kuanysh.bot.factory.Event.CategoryEvent;
+import kz.kuanysh.bot.factory.Event.Event;
+import kz.kuanysh.bot.factory.dialogs.Dialog;
+import kz.kuanysh.bot.factory.dialogs.GeoDialog;
+import kz.kuanysh.bot.factory.keyboards.GeoKeyboard;
 import kz.kuanysh.bot.factory.keyboards.SenderKeyboard;
-import kz.kuanysh.bot.factory.dialogs.HelpDialog;
-import kz.kuanysh.bot.factory.keyboards.TextKeyboard;
 
-public class HelpFactory implements DialogFactory {
-
+public class GeoFactory implements DialogFactory {
     @Override
     public Dialog createDialog() {
-        return new HelpDialog();
+        return new GeoDialog();
     }
 
     @Override
     public SenderKeyboard createSender() {
-        return new TextKeyboard();
+        return new GeoKeyboard();
     }
 
     @Override
     public Event serviceEvent() {
-        return new StartEvent();
+        return new CategoryEvent();
     }
 }

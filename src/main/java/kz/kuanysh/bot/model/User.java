@@ -23,6 +23,8 @@ public class User {
 
     private String status;
 
+    private String category;
+
     @Override
     public String toString() {
         return "User{" +
@@ -31,7 +33,8 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
                 ", registeredAt=" + registeredAt + '\'' +
-                ", status=" + status +
+                ", status=" + status + '\'' +
+                ", category=" + category +
                 '}';
     }
 }

@@ -45,15 +45,32 @@ public class UserService {
         return userRepository.findById(chatId);
     }
 
-    public void saveUserStatus(Message message,String text) {
-        var chatId = message.getChatId();
+    private User getUserById(Long chatId) {
         Optional<User> userOptional = findById(chatId);
-
         if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setStatus(text);
+            return userOptional.get();
+        } else {
+            User user = new User();
+            user.setChatId(chatId);
             userRepository.save(user);
-            log.info("User status saved: " + user.getStatus());
+            log.info("Saved user with only id:" + chatId);
+            return user;
         }
+    }
+
+    public void saveUserStatus(Message message, String text) {
+        var chatId = message.getChatId();
+        var user = getUserById(chatId);
+        user.setStatus(text);
+        userRepository.save(user);
+        log.info("User with Id:" + message.getChatId() + " status saved: " + user.getStatus());
+    }
+
+    public void saveUserCategory(Message message, String text) {
+        var chatId = message.getChatId();
+        var user = getUserById(chatId);
+        user.setCategory(text);
+        userRepository.save(user);
+        log.info("User with Id:" + message.getChatId() + " category saved: " + user.getCategory());
     }
 }

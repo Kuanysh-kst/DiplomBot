@@ -1,14 +1,12 @@
-package kz.kuanysh.bot.factory.message;
+package kz.kuanysh.bot.factory.keyboards;
 
-import kz.kuanysh.bot.buttons.CreateButton;
+import kz.kuanysh.bot.buttons.PatternKeyboard;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-import java.io.Serializable;
-
-public class TextMessage implements Sender {
+public class TextKeyboard implements SenderKeyboard {
     @Override
     public  BotApiMethod<Message> sendMessage(Message message, String content) {
-        return CreateButton.sendText(message,content);
+        return PatternKeyboard.sendText(message,content);
     }
 }

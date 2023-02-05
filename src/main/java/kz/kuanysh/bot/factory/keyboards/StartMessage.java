@@ -1,4 +1,4 @@
-package kz.kuanysh.bot.factory.message;
+package kz.kuanysh.bot.factory.keyboards;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -8,10 +8,9 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StartMessage implements Sender {
+public class StartMessage implements SenderKeyboard {
     @Override
     public BotApiMethod<Message> sendMessage(Message message, String content) {
 

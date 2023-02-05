@@ -2,12 +2,12 @@ package kz.kuanysh.bot.factory;
 
 import kz.kuanysh.bot.factory.Event.Event;
 import kz.kuanysh.bot.factory.dialogs.Dialog;
-import kz.kuanysh.bot.factory.message.Sender;
+import kz.kuanysh.bot.factory.keyboards.SenderKeyboard;
 
 public interface DialogFactory {
     Dialog createDialog();
 
-    Sender createSender();
+    SenderKeyboard createSender();
 
     Event serviceEvent();
 }

@@ -4,9 +4,9 @@ import kz.kuanysh.bot.factory.Event.Event;
 import kz.kuanysh.bot.factory.Event.StartEvent;
 import kz.kuanysh.bot.factory.dialogs.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
-import kz.kuanysh.bot.factory.message.Sender;
+import kz.kuanysh.bot.factory.keyboards.SenderKeyboard;
 import kz.kuanysh.bot.factory.dialogs.StartDialog;
-import kz.kuanysh.bot.factory.message.StartMessage;
+import kz.kuanysh.bot.factory.keyboards.StartMessage;
 
 public class StartDialogFactory implements DialogFactory {
 
@@ -16,7 +16,7 @@ public class StartDialogFactory implements DialogFactory {
     }
 
     @Override
-    public Sender createSender() {
+    public SenderKeyboard createSender() {
         return new StartMessage();
     }
 

@@ -1,6 +1,6 @@
 package kz.kuanysh.bot.service;
 
-import kz.kuanysh.bot.buttons.CreateButton;
+import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.model.Ads;
 import kz.kuanysh.bot.model.User;
@@ -53,7 +53,6 @@ public class Bot extends TelegramLongPollingBot {
 
             var factory = MessageHandler.factoryControl(text, chatId, botConfig,message,userService);
             var response = MessageHandler.createSendMessage(factory, message);
-
             executeMessage(response);
         } else if (update.hasCallbackQuery()) {
             Message message = update.getCallbackQuery().getMessage();
@@ -62,7 +61,6 @@ public class Bot extends TelegramLongPollingBot {
 
             var factory = MessageHandler.factoryControl(text, chatId, botConfig,message,userService);
             var response = MessageHandler.createSendMessage(factory, message);
-
             executeMessage(response);
         }
     }
@@ -84,7 +82,7 @@ public class Bot extends TelegramLongPollingBot {
         for (Ads ad : ads) {
             for (User user : users) {
                 try {
-                    execute(CreateButton.sendText(user.getChatId(), ad.getAd()));
+                    execute(PatternKeyboard.sendText(user.getChatId(), ad.getAd()));
                 } catch (TelegramApiException e) {
                     log.error("Error occurred: " + e.getMessage());
                 }

@@ -1,6 +1,6 @@
-package kz.kuanysh.bot.factory.message;
+package kz.kuanysh.bot.factory.keyboards;
 
-import kz.kuanysh.bot.buttons.CreateButton;
+import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.buttons.InlineListButton;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.io.Serializable;
 import java.util.List;
 
-public class FindJobMessage implements Sender {
+public class FindJobKeyboard implements SenderKeyboard {
     List<String> workNames() {
         return List.of(
                 "стройтельные работы",
@@ -40,6 +40,6 @@ public class FindJobMessage implements Sender {
         keyboard.add(InlineListButton.backButton("nextBack"));
 
         inlineKeyboardMarkup.setKeyboard(keyboard);
-        return CreateButton.sendEdit(message, content, inlineKeyboardMarkup);
+        return PatternKeyboard.sendEdit(message, content, inlineKeyboardMarkup);
     }
 }

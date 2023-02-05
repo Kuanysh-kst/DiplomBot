@@ -5,8 +5,8 @@ import kz.kuanysh.bot.factory.Event.Event;
 import kz.kuanysh.bot.factory.Event.StartEvent;
 import kz.kuanysh.bot.factory.dialogs.ChoiceDialog;
 import kz.kuanysh.bot.factory.dialogs.Dialog;
-import kz.kuanysh.bot.factory.message.ChoiceEditMessage;
-import kz.kuanysh.bot.factory.message.Sender;
+import kz.kuanysh.bot.factory.keyboards.ChoiceEditKeyboard;
+import kz.kuanysh.bot.factory.keyboards.SenderKeyboard;
 
 public class ChoiceEditFactory implements DialogFactory {
     @Override
@@ -15,8 +15,8 @@ public class ChoiceEditFactory implements DialogFactory {
     }
 
     @Override
-    public Sender createSender() {
-        return new ChoiceEditMessage();
+    public SenderKeyboard createSender() {
+        return new ChoiceEditKeyboard();
     }
 
     @Override

@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
-public class CreateButton {
+public class PatternKeyboard {
         public static PartialBotApiMethod<Message> sendPhoto(Message message,String text, String imageUrl) {
         InputFile photo = new InputFile(String.valueOf(imageUrl));
         return SendPhoto.builder()
