@@ -1,0 +1,26 @@
+Index: src/main/java/kz/kuanysh/bot/model/Ads.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/kz/kuanysh/bot/model/Ads.java b/src/main/java/kz/kuanysh/bot/model/Ads.java
+new file mode 100644
+--- /dev/null	
++++ b/src/main/java/kz/kuanysh/bot/model/Ads.java	
+@@ -0,0 +1,16 @@
++package kz.kuanysh.bot.model;
++
++import javax.persistence.Entity;
++import javax.persistence.GeneratedValue;
++import javax.persistence.GenerationType;
++import javax.persistence.Id;
++
++@Entity(name = "adsTable")
++public class Ads {
++    @Id
++    @GeneratedValue(strategy = GenerationType.AUTO)
++    private Long id;
++
++    private String ad;
++
++}

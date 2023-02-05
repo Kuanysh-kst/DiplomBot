@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -16,6 +17,10 @@ public class UserService {
 
     public UserService(UserRepository userRepository)  {
         this.userRepository = userRepository;
+    }
+
+    public List<User> findAll(){
+        return userRepository.findAll();
     }
 
     public void registerUser(Message message) {

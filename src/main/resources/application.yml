@@ -1,6 +1,9 @@
 bot:
   username: Diplom_kst_bot
   token: 5920322820:AAGDmCGI1cUjqa8p3LlSwEtWOTGEWv-2K9A
+  owner: 928437440
+cron:
+  scheduler: 0 0 * * * *
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres

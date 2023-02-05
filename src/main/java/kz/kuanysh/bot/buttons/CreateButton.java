@@ -10,15 +10,13 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
-import java.io.Serializable;
-
 public class CreateButton {
-        public static PartialBotApiMethod<Message> sendPhoto(Message message, String imageUrl) {
+        public static PartialBotApiMethod<Message> sendPhoto(Message message,String text, String imageUrl) {
         InputFile photo = new InputFile(String.valueOf(imageUrl));
         return SendPhoto.builder()
                 .photo(photo)
                 .chatId(message.getChatId().toString())
-                .caption("test")
+                .caption(text)
                 .build();
     }
 
@@ -35,7 +33,12 @@ public class CreateButton {
                 .text(text)
                 .build();
     }
-
+    public static BotApiMethod<Message> sendText(Long chatId, String text) {
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(text)
+                .build();
+    }
     public static BotApiMethod<Message> sendInline(Long chatId, String text, InlineKeyboardMarkup inlineKeyboardMarkup) {
         return SendMessage.builder()
                 .chatId(chatId.toString())
@@ -44,7 +47,7 @@ public class CreateButton {
                 .build();
     }
 
-    public static BotApiMethod<Serializable> sendEdit(Message message, String text, InlineKeyboardMarkup inlineKeyboardMarkup) {
+    public static EditMessageText sendEdit(Message message, String text, InlineKeyboardMarkup inlineKeyboardMarkup) {
         return EditMessageText.builder()
                 .chatId(message.getChatId().toString())
                 .messageId(message.getMessageId())
