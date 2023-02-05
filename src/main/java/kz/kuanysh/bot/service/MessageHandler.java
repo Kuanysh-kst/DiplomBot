@@ -14,15 +14,16 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import java.io.Serializable;
 
 public class MessageHandler {
-    public static DialogFactory factoryControl(String text, Long chatId, BotConfig botConfig) {
-        return ButtonController.createDialogFactory(text, chatId, botConfig);
+    public static DialogFactory factoryControl(String text, Long chatId, BotConfig botConfig,Message message,UserService userService) {
+        DialogFactory dialogFactory =  ButtonController.createDialogFactory(text, chatId, botConfig);
+        Event event = dialogFactory.serviceEvent();
+        event.createEvent(message,userService, text);
+        return dialogFactory;
     }
 
-    public static BotApiMethod<Serializable> createSendMessage(DialogFactory dialogFactory, Message message,UserService userService) {
+    public static BotApiMethod<Serializable> createSendMessage(DialogFactory dialogFactory, Message message) {
         Sender sender = dialogFactory.createSender();
         Dialog dialog = dialogFactory.createDialog();
-        Event event = dialogFactory.serviceEvent();
-        event.createEvent(message,userService);
 
         return sender.sendMessage(message, dialog.getText(message));
     }

@@ -1,5 +1,6 @@
 package kz.kuanysh.bot.factory.factories.dialog;
 
+import kz.kuanysh.bot.factory.Event.ChoiceEvent;
 import kz.kuanysh.bot.factory.Event.Event;
 import kz.kuanysh.bot.factory.Event.StartEvent;
 import kz.kuanysh.bot.factory.dialogs.Dialog;
@@ -21,6 +22,6 @@ public class FindJobDialogFactory implements DialogFactory {
 
     @Override
     public Event serviceEvent() {
-        return new StartEvent();
+        return new ChoiceEvent();
     }
 }

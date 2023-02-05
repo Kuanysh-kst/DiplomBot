@@ -51,8 +51,8 @@ public class Bot extends TelegramLongPollingBot {
             String text = message.getText();
             Long chatId = message.getChatId();
 
-            var factory = MessageHandler.factoryControl(text, chatId, botConfig);
-            var response = MessageHandler.createSendMessage(factory, message,userService);
+            var factory = MessageHandler.factoryControl(text, chatId, botConfig,message,userService);
+            var response = MessageHandler.createSendMessage(factory, message);
 
             executeMessage(response);
         } else if (update.hasCallbackQuery()) {
@@ -60,8 +60,8 @@ public class Bot extends TelegramLongPollingBot {
             String text = update.getCallbackQuery().getData();
             Long chatId = message.getChatId();
 
-            var factory = MessageHandler.factoryControl(text, chatId, botConfig);
-            var response = MessageHandler.createSendMessage(factory, message,userService);
+            var factory = MessageHandler.factoryControl(text, chatId, botConfig,message,userService);
+            var response = MessageHandler.createSendMessage(factory, message);
 
             executeMessage(response);
         }

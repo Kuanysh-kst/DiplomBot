@@ -21,6 +21,8 @@ public class User {
 
     private Timestamp registeredAt;
 
+    private String status;
+
     @Override
     public String toString() {
         return "User{" +
@@ -28,7 +30,8 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", userName='" + userName + '\'' +
-                ", registeredAt=" + registeredAt +
+                ", registeredAt=" + registeredAt + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
