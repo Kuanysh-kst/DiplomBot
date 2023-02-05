@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -45,9 +46,25 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        var factory = MessageHandler.factoryControl(update, userService, botConfig);
-        var response = MessageHandler.createSendMessage(factory, update);
-        executeMessage(response);
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            Message message = update.getMessage();
+            String text = message.getText();
+            Long chatId = message.getChatId();
+
+            var factory = MessageHandler.factoryControl(text, chatId, botConfig);
+            var response = MessageHandler.createSendMessage(factory, message,userService);
+
+            executeMessage(response);
+        } else if (update.hasCallbackQuery()) {
+            Message message = update.getCallbackQuery().getMessage();
+            String text = update.getCallbackQuery().getData();
+            Long chatId = message.getChatId();
+
+            var factory = MessageHandler.factoryControl(text, chatId, botConfig);
+            var response = MessageHandler.createSendMessage(factory, message,userService);
+
+            executeMessage(response);
+        }
     }
 
     private void executeMessage(BotApiMethod<Serializable> response) {
