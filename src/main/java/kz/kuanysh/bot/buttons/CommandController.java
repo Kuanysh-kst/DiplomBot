@@ -13,7 +13,6 @@ import java.util.function.Supplier;
 public class CommandController {
 
     public static DialogFactory createDialogFactory(String text, Long chatId, BotConfig botConfig) {
-
         log.info("Command:" + text + " , from:" + chatId);
         Map<String, Supplier<DialogFactory>> factories = new HashMap<>();
         factories.put("/start", StartDialogFactory::new);
@@ -30,4 +29,5 @@ public class CommandController {
         Supplier<DialogFactory> supplier = factories.getOrDefault(text, SorryDialogFactory::new);
         return supplier.get();
     }
+
 }

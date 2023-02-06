@@ -1,5 +1,6 @@
-package kz.kuanysh.bot.factory.dialogs;
+package kz.kuanysh.bot.factory.dialogs.info;
 
+import kz.kuanysh.bot.factory.dialogs.Dialog;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class SorryDialog implements Dialog {

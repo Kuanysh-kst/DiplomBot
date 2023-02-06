@@ -5,7 +5,7 @@ import kz.kuanysh.bot.factory.Event.StartEvent;
 import kz.kuanysh.bot.factory.dialogs.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.keyboards.SenderKeyboard;
-import kz.kuanysh.bot.factory.dialogs.HelpDialog;
+import kz.kuanysh.bot.factory.dialogs.info.HelpDialog;
 import kz.kuanysh.bot.factory.keyboards.TextKeyboard;
 
 public class HelpFactory implements DialogFactory {
