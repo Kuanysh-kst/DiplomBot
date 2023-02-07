@@ -1,5 +1,10 @@
 package kz.kuanysh.bot.service;
 
+import org.apache.logging.log4j.message.Message;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+
+import java.io.Serializable;
+
 public interface SendBotMessageService {
-    void sendMessage(String chatId, String message);
+    void sendMessageSerializable(BotApiMethod<Serializable> response);
 }

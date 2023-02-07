@@ -83,8 +83,8 @@ public class UserService {
         log.info("User with Id:" + message.getChatId() + " location saved: " + user.getCategory());
     }
 
-    public Location getFromUserLocation(Long chatId){
-         var user = getUserById(chatId);
-         return user.getLocation();
+    public Location getFromUserLocation(Long chatId) {
+        var user = getUserById(chatId);
+        return user.getLocation();
     }
 }

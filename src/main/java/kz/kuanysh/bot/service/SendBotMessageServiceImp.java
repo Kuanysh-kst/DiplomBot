@@ -3,8 +3,10 @@ package kz.kuanysh.bot.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.io.Serializable;
 
 @Slf4j
 @Service
@@ -18,13 +20,9 @@ public class SendBotMessageServiceImp implements SendBotMessageService {
     }
 
     @Override
-    public void sendMessage(String chatId, String message) {
-        SendMessage sendMessage = SendMessage.builder()
-                .chatId(chatId)
-                .text(message)
-                .build();
+    public void sendMessageSerializable(BotApiMethod<Serializable> response) {
         try {
-            bot.execute(sendMessage);
+            bot.execute(response);
         } catch (TelegramApiException e) {
             log.error("Error occurred: " + e);
         }
