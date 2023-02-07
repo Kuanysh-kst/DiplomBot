@@ -4,7 +4,6 @@ import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.sql.Timestamp;
@@ -75,16 +74,8 @@ public class UserService {
         log.info("User with Id:" + message.getChatId() + " category saved: " + user.getCategory());
     }
 
-    public void saveUserLocation(Message message, Location location) {
-        var chatId = message.getChatId();
-        var user = getUserById(chatId);
-        user.setLocation(location);
-        userRepository.save(user);
-        log.info("User with Id:" + message.getChatId() + " location saved: " + user.getCategory());
+    public List<User> findByStringField(String fieldValue) {
+        return userRepository.findByStatus(fieldValue);
     }
 
-    public Location getFromUserLocation(Long chatId) {
-        var user = getUserById(chatId);
-        return user.getLocation();
-    }
 }
