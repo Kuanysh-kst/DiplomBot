@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import java.util.List;
 
-public class ChoiceKeyboard implements SenderKeyboard {
+public class ChoiceKeyboard implements Keyboard {
 
     public List<String> listChoice() {
         return List.of("найти работу",

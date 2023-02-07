@@ -5,6 +5,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.io.Serializable;
 
-public interface SenderKeyboard {
+public interface Keyboard {
     <T extends Serializable> BotApiMethod<Serializable> sendMessage(Message message, String content);
 }

@@ -1,7 +1,7 @@
 package kz.kuanysh.bot.factory;
 
 import kz.kuanysh.bot.factory.dialogs.Dialog;
-import kz.kuanysh.bot.factory.keyboards.SenderKeyboard;
+import kz.kuanysh.bot.factory.keyboards.Keyboard;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 public interface DialogFactory {
     Dialog createDialog();
 
-    SenderKeyboard createSender();
+    Keyboard createKeyBoard();
 
     void doEvent(UserService userService, Message message , String text);
 

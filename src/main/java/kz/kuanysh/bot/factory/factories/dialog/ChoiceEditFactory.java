@@ -4,7 +4,7 @@ import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.dialogs.ChoiceDialog;
 import kz.kuanysh.bot.factory.dialogs.Dialog;
 import kz.kuanysh.bot.factory.keyboards.ChoiceEditKeyboard;
-import kz.kuanysh.bot.factory.keyboards.SenderKeyboard;
+import kz.kuanysh.bot.factory.keyboards.Keyboard;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -19,7 +19,7 @@ public class ChoiceEditFactory implements DialogFactory {
     }
 
     @Override
-    public SenderKeyboard createSender() {
+    public Keyboard createKeyBoard() {
         return new ChoiceEditKeyboard();
     }
 

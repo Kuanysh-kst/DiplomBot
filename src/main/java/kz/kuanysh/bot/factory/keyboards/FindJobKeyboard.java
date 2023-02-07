@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.io.Serializable;
 import java.util.List;
 
-public class FindJobKeyboard implements SenderKeyboard {
+public class FindJobKeyboard implements Keyboard {
     List<String> workNames() {
         return List.of(
                 "стройтельные работы",

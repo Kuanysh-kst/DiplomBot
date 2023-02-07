@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
 
 import java.util.ArrayList;
 
-public class StartMessage implements SenderKeyboard {
+public class StartMessage implements Keyboard {
     @Override
     public BotApiMethod<Message> sendMessage(Message message, String content) {
 

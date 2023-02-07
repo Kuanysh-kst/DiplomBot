@@ -2,7 +2,7 @@ package kz.kuanysh.bot.factory.factories.dialog;
 
 import kz.kuanysh.bot.factory.dialogs.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
-import kz.kuanysh.bot.factory.keyboards.SenderKeyboard;
+import kz.kuanysh.bot.factory.keyboards.Keyboard;
 import kz.kuanysh.bot.factory.dialogs.info.HelpDialog;
 import kz.kuanysh.bot.factory.keyboards.TextKeyboard;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
@@ -20,7 +20,7 @@ public class HelpFactory implements DialogFactory {
     }
 
     @Override
-    public SenderKeyboard createSender() {
+    public Keyboard createKeyBoard() {
         return new TextKeyboard();
     }
 

@@ -4,7 +4,7 @@ import kz.kuanysh.bot.buttons.CommandController;
 import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.dialogs.Dialog;
-import kz.kuanysh.bot.factory.keyboards.SenderKeyboard;
+import kz.kuanysh.bot.factory.keyboards.Keyboard;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class MessageHandler {
@@ -15,7 +15,7 @@ public class MessageHandler {
     }
 
     public static void executeResponse(DialogFactory dialogFactory, Message message, SendBotMessageServiceImp sendResponse) {
-        SenderKeyboard sender = dialogFactory.createSender();
+        Keyboard sender = dialogFactory.createKeyBoard();
         Dialog dialog = dialogFactory.createDialog();
         var response = sender.sendMessage(message, dialog.getText(message));
         dialogFactory.execute(response,sendResponse);

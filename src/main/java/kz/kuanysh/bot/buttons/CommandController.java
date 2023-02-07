@@ -21,11 +21,13 @@ public class CommandController {
         factories.put("/findworker", FindWorkerFactory::new);
         factories.put("/help", HelpFactory::new);
         factories.put("nextBack", ChoiceEditFactory::new);
-        factories.put("/constructionWork", GeoFactory::new);
-        factories.put("/workLoader", GeoFactory::new);
-        factories.put("/delivery work", GeoFactory::new);
-        factories.put("/workCafe", GeoFactory::new);
-        factories.put("/cleaningWork", GeoFactory::new);
+        factories.put("/getResult", ResultFactory::new);
+        factories.put("/constructionWork", ResultFactory::new);
+        factories.put("/workLoader", ResultFactory::new);
+        factories.put("/delivery work", ResultFactory::new);
+        factories.put("/workCafe", ResultFactory::new);
+        factories.put("/cleaningWork", ResultFactory::new);
+
         Supplier<DialogFactory> supplier = factories.getOrDefault(text, SorryDialogFactory::new);
         return supplier.get();
     }
