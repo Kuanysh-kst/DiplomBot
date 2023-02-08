@@ -1,9 +1,9 @@
-package kz.kuanysh.bot.factory.factories.dialog;
+package kz.kuanysh.bot.factory.factories.dialog.info;
 
 import kz.kuanysh.bot.factory.dialogs.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.keyboards.Keyboard;
-import kz.kuanysh.bot.factory.dialogs.info.HelpDialog;
+import kz.kuanysh.bot.factory.dialogs.info.SorryDialog;
 import kz.kuanysh.bot.factory.keyboards.TextKeyboard;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
@@ -12,11 +12,10 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.io.Serializable;
 
-public class HelpFactory implements DialogFactory {
-
+public class SorryDialogFactory implements DialogFactory {
     @Override
     public Dialog createDialog() {
-        return new HelpDialog();
+        return new SorryDialog();
     }
 
     @Override
@@ -26,11 +25,12 @@ public class HelpFactory implements DialogFactory {
 
     @Override
     public void doEvent(UserService userService, Message message , String text) {
-
     }
 
     @Override
     public void execute(BotApiMethod<Serializable> response, SendBotMessageServiceImp sendBotMessageServiceImp) {
         sendBotMessageServiceImp.sendMessageSerializable(response);
     }
+
+
 }

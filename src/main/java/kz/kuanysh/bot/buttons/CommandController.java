@@ -1,8 +1,9 @@
 package kz.kuanysh.bot.buttons;
 
-import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.factories.dialog.*;
+import kz.kuanysh.bot.factory.factories.dialog.info.HelpFactory;
+import kz.kuanysh.bot.factory.factories.dialog.info.SorryDialogFactory;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -12,7 +13,7 @@ import java.util.function.Supplier;
 @Slf4j
 public class CommandController {
 
-    public static DialogFactory createDialogFactory(String text, Long chatId, BotConfig botConfig) {
+    public static DialogFactory createDialogFactory(String text, Long chatId) {
         log.info("Command:" + text + " , from:" + chatId);
         Map<String, Supplier<DialogFactory>> factories = new HashMap<>();
         factories.put("/start", StartDialogFactory::new);
@@ -27,6 +28,7 @@ public class CommandController {
         factories.put("/delivery work", ResultFactory::new);
         factories.put("/workCafe", ResultFactory::new);
         factories.put("/cleaningWork", ResultFactory::new);
+        factories.put("/getResult", FinishFactory::new);
 
         Supplier<DialogFactory> supplier = factories.getOrDefault(text, SorryDialogFactory::new);
         return supplier.get();

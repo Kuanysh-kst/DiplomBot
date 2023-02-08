@@ -1,6 +1,7 @@
 package kz.kuanysh.bot.model;
 
 import lombok.Data;
+import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.Location;
 
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class User {
 
     private String category;
 
-    private Location location;
+    private Contact contact;
 
     @Override
     public String toString() {
@@ -38,7 +39,7 @@ public class User {
                 ", registeredAt=" + registeredAt + '\'' +
                 ", status=" + status + '\'' +
                 ", category=" + category + '\'' +
-                ", location=" + location +
+                ", contact=" + contact + '\'' +
                 '}';
     }
 }

@@ -4,7 +4,7 @@ import kz.kuanysh.bot.factory.dialogs.Dialog;
 import kz.kuanysh.bot.factory.DialogFactory;
 import kz.kuanysh.bot.factory.keyboards.Keyboard;
 import kz.kuanysh.bot.factory.dialogs.StartDialog;
-import kz.kuanysh.bot.factory.keyboards.StartMessage;
+import kz.kuanysh.bot.factory.keyboards.StartKeyboard;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -21,11 +21,12 @@ public class StartDialogFactory implements DialogFactory {
 
     @Override
     public Keyboard createKeyBoard() {
-        return new StartMessage();
+        return new StartKeyboard();
     }
 
     @Override
-    public void doEvent(UserService userService , Message message , String text) {
+    public void doEvent(UserService userService, Message message, String text) {
+        userService.saveUserInBase(message);
     }
 
     @Override

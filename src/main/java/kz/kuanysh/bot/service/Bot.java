@@ -26,6 +26,7 @@ public class Bot extends TelegramLongPollingBot {
     private final UserService userService;
 
     public Bot(BotConfig botConfig, UserService userService) {
+
         this.botConfig = botConfig;
         this.userService = userService;
     }
@@ -47,14 +48,13 @@ public class Bot extends TelegramLongPollingBot {
             String text = message.getText();
             Long chatId = message.getChatId();
 
-            var factory = MessageHandler.factoryControl(text, chatId, botConfig, message, userService);
+            var factory = MessageHandler.factoryControl(text, chatId, message, userService);
             MessageHandler.executeResponse(factory, message, new SendBotMessageServiceImp(this));
         } else if (update.hasCallbackQuery()) {
             Message message = update.getCallbackQuery().getMessage();
             String text = update.getCallbackQuery().getData();
             Long chatId = message.getChatId();
-
-            var factory = MessageHandler.factoryControl(text, chatId, botConfig, message, userService);
+            var factory = MessageHandler.factoryControl(text, chatId, message, userService);
             MessageHandler.executeResponse(factory, message, new SendBotMessageServiceImp(this));
         }
     }

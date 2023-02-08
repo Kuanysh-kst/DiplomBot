@@ -4,6 +4,7 @@ import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.sql.Timestamp;
@@ -20,14 +21,17 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+
+    public User getUserById(Long chatId) {
+        Optional<User> userOptional = findById(chatId);
+        return userOptional.orElseGet(User::new);
     }
 
     public void saveUserInBase(Message message) {
-        if (message.getText().equals("/start") && userRepository.findById(message.getChatId()).isEmpty()) {
+        if ( userRepository.findById(message.getChatId()).isEmpty()) {
             var chatId = message.getChatId();
             var chat = message.getChat();
+            Contact contact = message.getContact();
 
             User user = new User();
             user.setChatId(chatId);
@@ -35,7 +39,7 @@ public class UserService {
             user.setLastName(chat.getLastName());
             user.setUserName(chat.getUserName());
             user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
-
+            user.setContact(contact);
             userRepository.save(user);
             log.info("user saved: " + user);
         }
@@ -43,19 +47,6 @@ public class UserService {
 
     public Optional<User> findById(Long chatId) {
         return userRepository.findById(chatId);
-    }
-
-    private User getUserById(Long chatId) {
-        Optional<User> userOptional = findById(chatId);
-        if (userOptional.isPresent()) {
-            return userOptional.get();
-        } else {
-            User user = new User();
-            user.setChatId(chatId);
-            userRepository.save(user);
-            log.info("Saved user with only id:" + chatId);
-            return user;
-        }
     }
 
     public void saveUserStatus(Message message, String text) {
@@ -66,6 +57,14 @@ public class UserService {
         log.info("User with Id:" + message.getChatId() + " status saved: " + user.getStatus());
     }
 
+        public void saveUserContact(Message message) {
+        var chatId = message.getChatId();
+        var user = getUserById(chatId);
+        user.setContact(message.getContact());
+        userRepository.save(user);
+        log.info("User with Id:" + message.getChatId() + " contact saved: " + user.getContact());
+    }
+
     public void saveUserCategory(Message message, String text) {
         var chatId = message.getChatId();
         var user = getUserById(chatId);
@@ -74,8 +73,11 @@ public class UserService {
         log.info("User with Id:" + message.getChatId() + " category saved: " + user.getCategory());
     }
 
-    public List<User> findByStringField(String fieldValue) {
-        return userRepository.findByStatus(fieldValue);
+    public List<User> findByStatusAndCategory(String status, String category) {
+        return userRepository.findByStatusAndCategory(status, category);
     }
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 }

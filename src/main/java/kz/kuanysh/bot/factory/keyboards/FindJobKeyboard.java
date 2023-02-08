@@ -7,7 +7,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class FindJobKeyboard implements Keyboard {
@@ -31,7 +30,7 @@ public class FindJobKeyboard implements Keyboard {
     }
 
     @Override
-    public BotApiMethod<Serializable> sendMessage(Message message, String content) {
+    public BotApiMethod sendMessage(Message message, String content) {
 
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard;

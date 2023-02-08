@@ -25,7 +25,8 @@ public class ResultFactory implements DialogFactory {
 
     @Override
     public void doEvent(UserService userService, Message message, String text) {
-
+        userService.saveUserCategory(message,text);
+        userService.saveUserContact(message);
     }
 
     @Override

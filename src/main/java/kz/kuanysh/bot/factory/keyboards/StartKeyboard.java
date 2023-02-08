@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
 
 import java.util.ArrayList;
 
-public class StartMessage implements Keyboard {
+public class StartKeyboard implements Keyboard {
     @Override
     public BotApiMethod<Message> sendMessage(Message message, String content) {
 
@@ -23,8 +23,8 @@ public class StartMessage implements Keyboard {
         KeyboardRow secondRow = new KeyboardRow();
         firstRow.add("next");
         KeyboardButton about = KeyboardButton.builder()
-                .text("О нас \uD83E\uDD16")
-                .webApp(webAppInfo)
+                .text("setContact")
+                .requestContact(true)
                 .build();
         secondRow.add(about);
         secondRow.add("Реклама \uD83E\uDD41");

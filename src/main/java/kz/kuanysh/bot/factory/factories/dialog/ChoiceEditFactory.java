@@ -24,7 +24,7 @@ public class ChoiceEditFactory implements DialogFactory {
     }
 
     @Override
-    public void doEvent(UserService userService, Message message , String text) {
+    public void doEvent(UserService userService, Message message, String text) {
         userService.saveUserInBase(message);
     }
 
