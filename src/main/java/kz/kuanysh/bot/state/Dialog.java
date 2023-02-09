@@ -29,8 +29,8 @@ public class Dialog implements Serializable {
                 state.getClass().getSimpleName());
     }
 
-    public <T extends Serializable> BotApiMethod getKeyBoard(Message message) {
-        return state.getKeyBoard(message, state.getText(message));
+    public <T extends Serializable> BotApiMethod getKeyBoard(Message message,String command) {
+        return state.getKeyBoard(message, state.getText(message),command);
     }
 
     public void nextDialogState(Contact contact) {

@@ -19,7 +19,7 @@ public class CategoryDialogChain extends DialogStateChain {
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         if (command.equals("/findjob")) {
-            var response = state.getKeyBoard(message);
+            var response = state.getKeyBoard(message,command);
             execute.sendMessageSerializable(response);
 
             state.nextDialogState(message.getText());
@@ -30,7 +30,7 @@ public class CategoryDialogChain extends DialogStateChain {
             Dialog backState = new Dialog(new ChoiceUserActivity());
             state.backDialogState();
 
-            var response = state.getKeyBoard(message);
+            var response = state.getKeyBoard(message,command);
 
             execute.sendMessageSerializable(response);
 

@@ -40,15 +40,17 @@ public class ChoiceUserActivity implements UserActivity<String> {
     }
 
     @Override
-    public BotApiMethod getKeyBoard(Message message, String text) {
+    public BotApiMethod getKeyBoard(Message message, String text,String command) {
 
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
-        List<List<InlineKeyboardButton>> keyboard = InlineListButton.listButtons(listChoice(),listChoiceCallBack());
+        List<List<InlineKeyboardButton>> keyboard = InlineListButton.listButtons(listChoice(), listChoiceCallBack());
         inlineKeyboardMarkup.setKeyboard(keyboard);
-
-        return PatternKeyboard.sendInline(message.getChatId(), text, inlineKeyboardMarkup);
-
+        if (command.equals("/back")) {
+            return PatternKeyboard.sendEdit(message, text, inlineKeyboardMarkup);
+        } else {
+            return PatternKeyboard.sendInline(message.getChatId(), text, inlineKeyboardMarkup);
+        }
     }
 
 

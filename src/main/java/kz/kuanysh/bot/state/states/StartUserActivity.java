@@ -31,7 +31,7 @@ public class StartUserActivity implements UserActivity<String> {
     }
 
     @Override
-    public BotApiMethod<Message> getKeyBoard(Message message ,String text) {
+    public BotApiMethod<Message> getKeyBoard(Message message ,String text,String command) {
                 WebAppInfo webAppInfo = new WebAppInfo();
         webAppInfo.setUrl("https://hh.kz/");
         ReplyKeyboardMarkup replyMarkup = new ReplyKeyboardMarkup();

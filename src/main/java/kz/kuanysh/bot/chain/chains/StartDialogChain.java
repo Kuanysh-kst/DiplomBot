@@ -22,7 +22,7 @@ public class StartDialogChain extends DialogStateChain {
     @Override
     protected void doProcess(Message message, Dialog context, String command, UserService userService, SendBotMessageServiceImp execute) {
         if (command.equals("/start")) {
-            var response = context.getKeyBoard(message);
+            var response = context.getKeyBoard(message,command);
             execute.sendMessageSerializable(response);
 
             context.nextDialogState(message.getText());

@@ -56,7 +56,7 @@ public class CategoryActivity implements UserActivity<String> {
     }
 
     @Override
-    public <T extends Serializable> BotApiMethod getKeyBoard(Message message, String text) {
+    public <T extends Serializable> BotApiMethod getKeyBoard(Message message, String text,String command) {
        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
         List<List<InlineKeyboardButton>> keyboard = InlineListButton.listButtons(workNames(),callBackWorkNames());

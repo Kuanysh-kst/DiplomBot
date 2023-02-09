@@ -56,34 +56,14 @@ public class GetNumActivity implements UserActivity {
     }
 
     @Override
-    public BotApiMethod<Serializable> getKeyBoard(Message message,String text) {
+    public BotApiMethod<Serializable> getKeyBoard(Message message,String text,String command) {
                 InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard;
 
         keyboard = InlineListButton.listButtons(workNames(), callBackWorkNames());
-        keyboard.add(InlineListButton.backButton("nextBack"));
+        keyboard.add(InlineListButton.backButton("/back"));
 
         inlineKeyboardMarkup.setKeyboard(keyboard);
         return PatternKeyboard.sendEdit(message, text, inlineKeyboardMarkup);
     }
-
-//    @Override
-//    public Dialog createDialog() {
-//        return new FindWorkerDialog();
-//    }
-//
-//    @Override
-//    public Keyboard createKeyBoard() {
-//        return new FindJobKeyboard();
-//    }
-//
-//    @Override
-//    public void doEvent(UserService userService, Message message , String text) {
-//        userService.saveUserStatus(message , text);
-//    }
-//
-//    @Override
-//    public void execute(BotApiMethod<Serializable> response, SendBotMessageServiceImp sendBotMessageServiceImp) {
-//        sendBotMessageServiceImp.sendMessageSerializable(response);
-//    }
 }

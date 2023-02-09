@@ -23,7 +23,7 @@ public class ChoiceDialogChiang extends DialogStateChain {
     @Override
     protected void doProcess(Message message, Dialog context,String command, UserService userService, SendBotMessageServiceImp executeService) {
         if (command.equals("next")) {
-            var response = context.getKeyBoard(message);
+            var response = context.getKeyBoard(message,command);
             executeService.sendMessageSerializable(response);
 
             context.nextDialogState(message.getText());
