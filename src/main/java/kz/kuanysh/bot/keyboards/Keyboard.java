@@ -1,4 +1,4 @@
-package kz.kuanysh.bot.state.keyboards;
+package kz.kuanysh.bot.keyboards;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;

@@ -1,6 +1,7 @@
 package kz.kuanysh.bot.chain.chains;
 
 import kz.kuanysh.bot.chain.DialogStateChain;
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
@@ -19,15 +20,13 @@ public class CategoryDialogChain extends DialogStateChain {
     }
 
     @Override
-    protected <T extends Serializable> BotApiMethod<T> doProcess(Message message, Dialog context, UserService userService) {
-        if (message.getText().equals("/workLoader")) {
+    protected void doProcess(Message message, Dialog context, String command, UserService userService, SendBotMessageServiceImp executeService) {
+        if (command.equals("/workLoader")) {
             UserActivity userActivity = context.getState();
             context.nextDialogState(message.getText());
-            return userActivity.getKeyBoard(message, context.getContent());
         } else {
             context.backDialogState();
             UserActivity userActivity = context.getState();
-            return userActivity.getKeyBoard(message, context.getContent());
         }
     }
 

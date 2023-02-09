@@ -13,12 +13,14 @@ import java.util.List;
 public class ChoiceUserActivity implements UserActivity<String> {
     public List<String> listChoice() {
         return List.of("найти работу",
-                "найти сотрудника");
+                "найти сотрудника",
+                "назад");
     }
 
     public List<String> listChoiceCallBack() {
         return List.of("/findjob",
-                "/findworker");
+                "/findworker",
+                "/back");
     }
 
     @Override
@@ -32,7 +34,7 @@ public class ChoiceUserActivity implements UserActivity<String> {
     }
 
     @Override
-    public String getContent(Message message) {
+    public String getText(Message message) {
         return "Вы хотите найти работу или \n" +
                 "вы хотите нанять сотрудника?";
     }

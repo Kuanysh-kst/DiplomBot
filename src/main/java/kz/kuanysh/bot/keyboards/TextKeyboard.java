@@ -1,4 +1,4 @@
-package kz.kuanysh.bot.state.keyboards;
+package kz.kuanysh.bot.keyboards;
 
 import kz.kuanysh.bot.buttons.PatternKeyboard;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;

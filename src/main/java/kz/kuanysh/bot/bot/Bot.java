@@ -1,4 +1,4 @@
-package kz.kuanysh.bot.service;
+package kz.kuanysh.bot.bot;
 
 import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.chain.DialogStateChain;
@@ -7,6 +7,8 @@ import kz.kuanysh.bot.chain.chains.ChoiceDialogChiang;
 import kz.kuanysh.bot.chain.chains.StartDialogChain;
 import kz.kuanysh.bot.chain.chains.StatusDialogChain;
 import kz.kuanysh.bot.config.BotConfig;
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
+import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.model.Ads;
 import kz.kuanysh.bot.model.User;
@@ -32,7 +34,6 @@ public class Bot extends TelegramLongPollingBot {
     @Autowired
     private AdsRepository adsRepository;
     private final UserService userService;
-    HashMap<Long, Dialog> users = new HashMap<>();
     private final DialogStateChain dialogChain;
 
     public Bot(BotConfig botConfig, UserService userService) {
@@ -59,34 +60,19 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
+            userService.saveUserInBase(update.getMessage());
             Message message = update.getMessage();
-//            userService.saveUserInBase(message);
-            Long chatId = message.getChatId();
+            String command = message.getText();
             Dialog dialog = userService.findDialog(message);
-            log.info("from rep: "+ dialog.getState().getClass().getSimpleName());
-            messageState(message, dialog);
-//            MessageHandler.executeResponse(factory, message, new SendBotMessageServiceImp(this));
-        }
-//        } else if (update.hasCallbackQuery()) {
-//            Message message = update.getCallbackQuery().getMessage();
-//            String text = update.getCallbackQuery().getData();
-//            Long chatId = message.getChatId();
-////            var factory = MessageHandler.factoryControl(text, chatId, message, userService);
-//            MessageHandler.executeResponse(factory, message, new SendBotMessageServiceImp(this));
-//        }
-    }
-
-    private void messageState(Message message, Dialog context) {
-        userService.saveDialog(message, context);
-        log.info("to save in rep: "+context.getState().getClass().getSimpleName());
-        var response = dialogChain.processState(message, context,userService);
-
-        try {
-            execute(response);
-        } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
+            dialogChain.processState(message, dialog,command, userService, new SendBotMessageServiceImp(this));
+        } else if (update.hasCallbackQuery()) {
+            Message message = update.getCallbackQuery().getMessage();
+            String command = update.getCallbackQuery().getData();
+            Dialog dialog = userService.findDialog(message);
+            dialogChain.processState(message, dialog,command, userService, new SendBotMessageServiceImp(this));
         }
     }
+
 
     @Scheduled(cron = "${cron.scheduler}")
     private void sendAds() {

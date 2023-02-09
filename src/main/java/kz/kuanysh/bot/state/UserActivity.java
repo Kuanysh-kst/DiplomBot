@@ -18,7 +18,7 @@ public interface UserActivity<T> extends Serializable {
 
     UserActivity backDialogState();
 
-    String getContent(Message message);
+    String getText(Message message);
 
     <T extends Serializable> BotApiMethod<Serializable> getKeyBoard(Message message,String text);
 }

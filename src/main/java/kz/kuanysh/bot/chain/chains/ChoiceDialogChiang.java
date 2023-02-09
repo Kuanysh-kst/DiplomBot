@@ -1,6 +1,8 @@
 package kz.kuanysh.bot.chain.chains;
 
+import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.chain.DialogStateChain;
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
@@ -19,21 +21,20 @@ public class ChoiceDialogChiang extends DialogStateChain {
     }
 
     @Override
-    protected <T extends Serializable> BotApiMethod<T> doProcess(Message message, Dialog context, UserService userService) {
-        if (message.getText().equals("next")) {
-            log.info("it's Choice /findjob");
-            String content = context.getContent();
-            UserActivity userActivity = context.getState();
+    protected void doProcess(Message message, Dialog context,String command, UserService userService, SendBotMessageServiceImp executeService) {
+        if (command.equals("next")) {
+            var response = context.getKeyBoard();
+            executeService.sendMessageSerializable(response);
+
             context.nextDialogState(message.getText());
             userService.saveDialog(message, context);
-            return userActivity.getKeyBoard(message, content);
+
         } else {
-            context.backDialogState();
-            UserActivity userActivity = context.getState();
-            userService.saveDialog(message, context);
-            return userActivity.getKeyBoard(message, context.getContent());
+            var response = PatternKeyboard.sendText(message.getChatId(), "Нейзвестная команда");
+            executeService.sendMessage(response);
         }
     }
+
 
     @Override
     protected boolean shouldProcessState(UserActivity userActivity) {

@@ -1,6 +1,6 @@
 package kz.kuanysh.bot.config;
 
-import kz.kuanysh.bot.service.Bot;
+import kz.kuanysh.bot.bot.Bot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;

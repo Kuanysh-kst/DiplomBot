@@ -51,7 +51,7 @@ public class CategoryActivity implements UserActivity {
     }
 
     @Override
-    public String getContent(Message message) {
+    public String getText(Message message) {
         return "Выберите категорию ";
     }
 

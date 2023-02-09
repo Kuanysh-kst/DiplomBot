@@ -1,12 +1,13 @@
 package kz.kuanysh.bot.chain.chains;
 
+import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.chain.DialogStateChain;
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
 import kz.kuanysh.bot.state.states.StartUserActivity;
 import lombok.extern.slf4j.Slf4j;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.io.Serializable;
@@ -19,18 +20,17 @@ public class StartDialogChain extends DialogStateChain {
     }
 
     @Override
-    protected <T extends Serializable> BotApiMethod<T> doProcess(Message message, Dialog context, UserService userService) {
-        if (message.getText().equals("/start")) {
-            log.info("it's /start: " + context.getState().getClass().getSimpleName());
-            String content = context.getContent();
-            UserActivity userActivity = context.getState();
+    protected void doProcess(Message message, Dialog context, String command, UserService userService, SendBotMessageServiceImp execute) {
+        if (command.equals("/start")) {
+            var response = context.getKeyBoard();
+            execute.sendMessageSerializable(response);
+
             context.nextDialogState(message.getText());
             userService.saveDialog(message, context);
-            return userActivity.getKeyBoard(message, content);
+
         } else {
-            log.info("it's /start else: " + context.getState().getClass().getSimpleName());
-            UserActivity userActivity = context.getState();
-            return userActivity.getKeyBoard(message, context.getContent());
+            var response = PatternKeyboard.sendText(message.getChatId(), "Нейзвестная команда");
+            execute.sendMessage(response);
         }
     }
 

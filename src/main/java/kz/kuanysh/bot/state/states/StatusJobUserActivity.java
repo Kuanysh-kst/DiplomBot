@@ -40,7 +40,7 @@ public class StatusJobUserActivity implements UserActivity<String> {
     }
 
     @Override
-    public String getContent(Message message) {
+    public String getText(Message message) {
         return "Выберите свой статус ";
     }
 

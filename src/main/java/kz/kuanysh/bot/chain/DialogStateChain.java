@@ -1,5 +1,6 @@
 package kz.kuanysh.bot.chain;
 
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
@@ -18,18 +19,18 @@ public abstract class DialogStateChain {
         this.nextChain = nextChain;
     }
 
-    public <T extends Serializable >BotApiMethod<T> processState(Message message , Dialog context,UserService userService){
-        if (shouldProcessState(context.getState())){
-            log.info("shouldProcessState in factory {} in {}", context.getClass().getSimpleName(),context.getState().getClass().getSimpleName());
-            return doProcess(message, context,userService);
-        }else if (nextChain != null){
-            return nextChain.processState(message, context,userService);
-        }else {
+    public void processState(Message message, Dialog context,String command, UserService userService, SendBotMessageServiceImp executeService) {
+        if (shouldProcessState(context.getState())) {
+            log.info("shouldProcessState in factory {} in {}", context.getClass().getSimpleName(), context.getState().getClass().getSimpleName());
+             doProcess(message, context,command, userService,executeService);
+        } else if (nextChain != null) {
+           nextChain.processState(message, context,command, userService, executeService);
+        } else {
             throw new IllegalStateException(context.getClass().getSimpleName());
         }
     }
 
-    protected abstract <T extends Serializable >BotApiMethod<T> doProcess(Message message, Dialog context, UserService userService);
+    protected abstract void doProcess(Message message, Dialog context,String command, UserService userService,SendBotMessageServiceImp executeService);
 
     protected abstract boolean shouldProcessState(UserActivity userActivity);
 }
