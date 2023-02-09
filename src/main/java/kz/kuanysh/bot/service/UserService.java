@@ -1,5 +1,7 @@
 package kz.kuanysh.bot.service;
 
+import kz.kuanysh.bot.state.Dialog;
+import kz.kuanysh.bot.state.states.StartUserActivity;
 import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -22,13 +24,31 @@ public class UserService {
     }
 
 
+    public Dialog findDialog(Message message) {
+        Long chatId = message.getChatId();
+        if (getUserById(chatId).getDialog() == null) {
+            return new Dialog(new StartUserActivity(), message);
+        }{
+            return getUserById(chatId).getDialog();
+        }
+    }
+
+    public void saveDialog(Message message, Dialog dialog) {
+        var chatId = message.getChatId();
+        var user = getUserById(chatId);
+        user.setDialog(dialog);
+        userRepository.save(user);
+        log.info("User with Id:" + message.getChatId() + " dialogHashMap saved: " + user.getStatus());
+    }
+
     public User getUserById(Long chatId) {
         Optional<User> userOptional = findById(chatId);
         return userOptional.orElseGet(User::new);
     }
 
+
     public void saveUserInBase(Message message) {
-        if ( userRepository.findById(message.getChatId()).isEmpty()) {
+        if (userRepository.findById(message.getChatId()).isEmpty()) {
             var chatId = message.getChatId();
             var chat = message.getChat();
             Contact contact = message.getContact();
@@ -57,7 +77,7 @@ public class UserService {
         log.info("User with Id:" + message.getChatId() + " status saved: " + user.getStatus());
     }
 
-        public void saveUserContact(Message message) {
+    public void saveUserContact(Message message) {
         var chatId = message.getChatId();
         var user = getUserById(chatId);
         user.setContact(message.getContact());
@@ -72,6 +92,7 @@ public class UserService {
         userRepository.save(user);
         log.info("User with Id:" + message.getChatId() + " category saved: " + user.getCategory());
     }
+
 
     public List<User> findByStatusAndCategory(String status, String category) {
         return userRepository.findByStatusAndCategory(status, category);
