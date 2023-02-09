@@ -17,11 +17,9 @@ public class Dialog implements Serializable {
     @Id
     private UserActivity state;
 
-    private Message message;
 
-    public Dialog(UserActivity state, Message message) {
+    public Dialog(UserActivity state) {
         this.state = state;
-        this.message = message;
     }
 
     public void nextDialogState(String command) {
@@ -31,7 +29,7 @@ public class Dialog implements Serializable {
                 state.getClass().getSimpleName());
     }
 
-    public <T extends Serializable> BotApiMethod getKeyBoard() {
+    public <T extends Serializable> BotApiMethod getKeyBoard(Message message) {
         return state.getKeyBoard(message, state.getText(message));
     }
 
@@ -47,7 +45,7 @@ public class Dialog implements Serializable {
         state = state.backDialogState();
     }
 
-    public String getContent() {
+    public String getContent(Message message) {
         return this.state.getText(message);
     }
 

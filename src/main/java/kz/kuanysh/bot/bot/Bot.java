@@ -2,10 +2,10 @@ package kz.kuanysh.bot.bot;
 
 import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.chain.DialogStateChain;
-import kz.kuanysh.bot.chain.chains.CategoryDialogChain;
+import kz.kuanysh.bot.chain.chains.GetNameDialogChain;
 import kz.kuanysh.bot.chain.chains.ChoiceDialogChiang;
 import kz.kuanysh.bot.chain.chains.StartDialogChain;
-import kz.kuanysh.bot.chain.chains.StatusDialogChain;
+import kz.kuanysh.bot.chain.chains.CategoryDialogChain;
 import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
@@ -21,8 +21,6 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.HashMap;
 
 @Slf4j
 @Component
@@ -41,9 +39,9 @@ public class Bot extends TelegramLongPollingBot {
         this.botConfig = botConfig;
         this.userService = userService;
 
-        DialogStateChain categoryChain = new CategoryDialogChain(null);
-        DialogStateChain statusChain = new StatusDialogChain(categoryChain);
-        DialogStateChain choiceChain = new ChoiceDialogChiang(statusChain);
+        DialogStateChain getNumChain = new GetNameDialogChain(null);
+        DialogStateChain categoryDialogChain = new CategoryDialogChain(getNumChain);
+        DialogStateChain choiceChain = new ChoiceDialogChiang(categoryDialogChain);
         this.dialogChain = new StartDialogChain(choiceChain);
     }
 

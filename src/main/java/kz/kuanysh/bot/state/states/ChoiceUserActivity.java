@@ -25,7 +25,7 @@ public class ChoiceUserActivity implements UserActivity<String> {
 
     @Override
     public UserActivity nextDialogState(String command) {
-        return new StatusJobUserActivity(command);
+        return new CategoryActivity(command);
     }
 
     @Override

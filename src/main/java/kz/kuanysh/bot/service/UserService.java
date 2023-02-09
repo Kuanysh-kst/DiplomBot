@@ -27,8 +27,9 @@ public class UserService {
     public Dialog findDialog(Message message) {
         Long chatId = message.getChatId();
         if (getUserById(chatId).getDialog() == null) {
-            return new Dialog(new StartUserActivity(), message);
-        }{
+            return new Dialog(new StartUserActivity());
+        }
+        {
             return getUserById(chatId).getDialog();
         }
     }
@@ -38,7 +39,9 @@ public class UserService {
         var user = getUserById(chatId);
         user.setDialog(dialog);
         userRepository.save(user);
-        log.info("User with Id:" + message.getChatId() + " dialogHashMap saved: " + user.getStatus());
+        log.info("User with Id: {}  dialogState saved:{} ",
+                message.getChatId(),
+                user.getDialog().getState().getClass().getSimpleName());
     }
 
     public User getUserById(Long chatId) {

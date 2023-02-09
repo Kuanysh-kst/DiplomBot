@@ -11,19 +11,23 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.io.Serializable;
 import java.util.List;
 
-public class CategoryActivity implements UserActivity {
+public class CategoryActivity implements UserActivity<String> {
 
     private final String status;
-    private final String category;
+
+    public CategoryActivity(String status) {
+        this.status = status;
+    }
 
 
-    List<String> workNames() {
+   List<String> workNames() {
         return List.of(
                 "стройтельные работы",
                 "работа грузчиком",
                 "работа по доставке",
                 "работа в кафе",
-                "клининг работы");
+                "клининг работы",
+                "назад");
     }
 
     List<String> callBackWorkNames() {
@@ -32,58 +36,33 @@ public class CategoryActivity implements UserActivity {
                 "/workLoader",
                 "/delivery work",
                 "/workCafe",
-                "/cleaningWork"
+                "/cleaningWork",
+                "/back"
         );
     }
-    public CategoryActivity(String status, String category) {
-        this.status = status;
-        this.category = category;
-    }
-
     @Override
-    public UserActivity nextDialogState(Object command) {
-        return null;
+    public UserActivity nextDialogState(String command) {
+        return new GetNumActivity(status, command);
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new StatusJobUserActivity(status);
+        return new ChoiceUserActivity();
     }
 
     @Override
     public String getText(Message message) {
-        return "Выберите категорию ";
+        return "Выберите категорию для работы";
     }
 
     @Override
-    public BotApiMethod<Serializable> getKeyBoard(Message message,String text) {
-                InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> keyboard;
+    public <T extends Serializable> BotApiMethod getKeyBoard(Message message, String text) {
+       InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
-        keyboard = InlineListButton.listButtons(workNames(), callBackWorkNames());
-        keyboard.add(InlineListButton.backButton("nextBack"));
-
+        List<List<InlineKeyboardButton>> keyboard = InlineListButton.listButtons(workNames(),callBackWorkNames());
         inlineKeyboardMarkup.setKeyboard(keyboard);
+
         return PatternKeyboard.sendEdit(message, text, inlineKeyboardMarkup);
     }
 
-//    @Override
-//    public Dialog createDialog() {
-//        return new FindWorkerDialog();
-//    }
-//
-//    @Override
-//    public Keyboard createKeyBoard() {
-//        return new FindJobKeyboard();
-//    }
-//
-//    @Override
-//    public void doEvent(UserService userService, Message message , String text) {
-//        userService.saveUserStatus(message , text);
-//    }
-//
-//    @Override
-//    public void execute(BotApiMethod<Serializable> response, SendBotMessageServiceImp sendBotMessageServiceImp) {
-//        sendBotMessageServiceImp.sendMessageSerializable(response);
-//    }
 }
