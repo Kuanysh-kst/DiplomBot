@@ -22,11 +22,11 @@ public class Dialog implements Serializable {
         this.state = state;
     }
 
-    public void nextDialogState(String command) {
+    public void nextDialogState() {
         var previousState = state;
-        state = state.nextDialogState(command);
-        log.info("Changing state from {} to {}", previousState.getClass().getSimpleName(),
-                state.getClass().getSimpleName());
+        state = state.nextDialogState();
+//        log.info("Changing state from {} to {}", previousState.getClass().getSimpleName(),
+//                state.getClass().getSimpleName());
     }
 
     public <T extends Serializable> BotApiMethod getKeyBoard(Message message,String command) {
@@ -34,11 +34,11 @@ public class Dialog implements Serializable {
     }
 
     public void nextDialogState(Contact contact) {
-        state = state.nextDialogState(contact);
+        state = state.nextDialogState();
     }
 
     public void nextDialogState(Location location) {
-        state = state.nextDialogState(location);
+        state = state.nextDialogState();
     }
 
     public void backDialogState() {

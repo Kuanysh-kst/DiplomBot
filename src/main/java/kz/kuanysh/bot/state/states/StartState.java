@@ -11,10 +11,10 @@ import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
 
 import java.util.ArrayList;
 
-public class StartUserActivity implements UserActivity<String> {
+public class StartState implements UserActivity {
     @Override
-    public UserActivity nextDialogState(String command) {
-        return new ChoiceUserActivity();
+    public UserActivity nextDialogState() {
+        return new ChoiceState();
     }
 
     @Override

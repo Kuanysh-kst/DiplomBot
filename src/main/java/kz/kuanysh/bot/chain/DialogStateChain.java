@@ -19,14 +19,14 @@ public abstract class DialogStateChain {
         this.nextChain = nextChain;
     }
 
-    public void processState(Message message, Dialog context,String command, UserService userService, SendBotMessageServiceImp executeService) {
-        if (shouldProcessState(context.getState())) {
-            log.info("shouldProcessState in factory {} in {}", context.getClass().getSimpleName(), context.getState().getClass().getSimpleName());
-             doProcess(message, context,command, userService,executeService);
+    public void processState(Message message, Dialog state,String command, UserService userService, SendBotMessageServiceImp execute) {
+        if (shouldProcessState(state.getState())) {
+            log.info("shouldProcessState in factory {} in {}", state.getClass().getSimpleName(), state.getState().getClass().getSimpleName());
+             doProcess(message, state,command, userService,execute);
         } else if (nextChain != null) {
-           nextChain.processState(message, context,command, userService, executeService);
+           nextChain.processState(message, state,command, userService, execute);
         } else {
-            throw new IllegalStateException(context.getClass().getSimpleName());
+            throw new IllegalStateException(state.getState().getClass().getSimpleName());
         }
     }
 

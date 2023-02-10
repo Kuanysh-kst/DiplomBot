@@ -6,12 +6,9 @@ import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
-import kz.kuanysh.bot.state.states.ChoiceUserActivity;
+import kz.kuanysh.bot.state.states.ChoiceState;
 import lombok.extern.slf4j.Slf4j;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
-
-import java.io.Serializable;
 
 @Slf4j
 public class ChoiceDialogChiang extends DialogStateChain {
@@ -26,7 +23,7 @@ public class ChoiceDialogChiang extends DialogStateChain {
             var response = context.getKeyBoard(message,command);
             executeService.sendMessageSerializable(response);
 
-            context.nextDialogState(message.getText());
+            context.nextDialogState();
             userService.saveDialog(message, context);
 
         } else {
@@ -38,7 +35,7 @@ public class ChoiceDialogChiang extends DialogStateChain {
 
     @Override
     protected boolean shouldProcessState(UserActivity userActivity) {
-        return userActivity instanceof ChoiceUserActivity;
+        return userActivity instanceof ChoiceState;
     }
 
 

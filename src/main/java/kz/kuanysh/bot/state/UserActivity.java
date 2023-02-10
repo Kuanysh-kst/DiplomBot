@@ -5,7 +5,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.io.Serializable;
 
-public interface UserActivity<T> extends Serializable {
+public interface UserActivity extends Serializable {
 //    Dialog createDialog();
 //
 //    Keyboard createKeyBoard();
@@ -14,7 +14,7 @@ public interface UserActivity<T> extends Serializable {
 //
 //    void execute(BotApiMethod<Serializable> response, SendBotMessageServiceImp sendBotMessageServiceImp);
 
-    UserActivity nextDialogState(T command);
+    UserActivity nextDialogState();
 
     UserActivity backDialogState();
 

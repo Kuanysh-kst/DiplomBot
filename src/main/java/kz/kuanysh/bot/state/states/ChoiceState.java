@@ -10,11 +10,11 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import java.util.List;
 
-public class ChoiceUserActivity implements UserActivity<String> {
+public class ChoiceState implements UserActivity {
     public List<String> listChoice() {
         return List.of("найти работу",
                 "найти сотрудника",
-                "назад");
+                "назад в главное меню");
     }
 
     public List<String> listChoiceCallBack() {
@@ -24,13 +24,13 @@ public class ChoiceUserActivity implements UserActivity<String> {
     }
 
     @Override
-    public UserActivity nextDialogState(String command) {
-        return new CategoryActivity(command);
+    public UserActivity nextDialogState() {
+        return new CategoryState();
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new StartUserActivity();
+        return new StartState();
     }
 
     @Override

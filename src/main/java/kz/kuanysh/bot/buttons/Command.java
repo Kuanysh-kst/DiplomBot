@@ -12,4 +12,10 @@ public class Command {
                 "/cleaningWork"
         ).contains(command);
     }
+
+    public static Boolean listChoiceCallBack(String command) {
+        return List.of("/findjob",
+                "/findworker"
+               ).contains(command);
+    }
 }

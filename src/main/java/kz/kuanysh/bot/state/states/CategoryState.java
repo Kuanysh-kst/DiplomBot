@@ -11,13 +11,11 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.io.Serializable;
 import java.util.List;
 
-public class CategoryActivity implements UserActivity<String> {
+public class CategoryState implements UserActivity{
 
-    private final String status;
 
-    public CategoryActivity(String status) {
-        this.status = status;
-    }
+
+
 
 
    List<String> workNames() {
@@ -41,13 +39,13 @@ public class CategoryActivity implements UserActivity<String> {
         );
     }
     @Override
-    public UserActivity nextDialogState(String command) {
-        return new GetNumActivity(status, command);
+    public UserActivity nextDialogState() {
+        return new AboutState();
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new ChoiceUserActivity();
+        return new ChoiceState();
     }
 
     @Override

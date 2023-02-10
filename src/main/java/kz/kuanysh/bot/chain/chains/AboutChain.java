@@ -7,19 +7,21 @@ import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
-import kz.kuanysh.bot.state.states.ChoiceState;
 import kz.kuanysh.bot.state.states.CategoryState;
+import kz.kuanysh.bot.state.states.AboutState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class CategoryDialogChain extends DialogStateChain {
+public class AboutChain extends DialogStateChain {
 
-    public CategoryDialogChain(DialogStateChain nextChain) {
+
+    public AboutChain(DialogStateChain nextChain) {
         super(nextChain);
     }
 
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
-        if (Command.listChoiceCallBack(command)) {
+
+        if (Command.callBackWorkNames(command)) {
             var response = state.getKeyBoard(message,command);
             execute.sendMessageSerializable(response);
 
@@ -28,7 +30,7 @@ public class CategoryDialogChain extends DialogStateChain {
 
         } else if (command.equals("/back")) {
             state.backDialogState();
-            Dialog backState = new Dialog(new ChoiceState());
+            Dialog backState = new Dialog(new CategoryState());
             state.backDialogState();
 
             var response = state.getKeyBoard(message,command);
@@ -44,6 +46,6 @@ public class CategoryDialogChain extends DialogStateChain {
 
     @Override
     protected boolean shouldProcessState(UserActivity userActivity) {
-        return userActivity instanceof CategoryState;
+        return userActivity instanceof AboutState;
     }
 }

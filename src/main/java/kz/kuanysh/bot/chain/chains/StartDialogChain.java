@@ -6,11 +6,9 @@ import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
-import kz.kuanysh.bot.state.states.StartUserActivity;
+import kz.kuanysh.bot.state.states.StartState;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.objects.Message;
-
-import java.io.Serializable;
 
 @Slf4j
 public class StartDialogChain extends DialogStateChain {
@@ -25,7 +23,7 @@ public class StartDialogChain extends DialogStateChain {
             var response = context.getKeyBoard(message,command);
             execute.sendMessageSerializable(response);
 
-            context.nextDialogState(message.getText());
+            context.nextDialogState();
             userService.saveDialog(message, context);
 
         } else {
@@ -36,6 +34,6 @@ public class StartDialogChain extends DialogStateChain {
 
     @Override
     protected boolean shouldProcessState(UserActivity userActivity) {
-        return userActivity instanceof StartUserActivity;
+        return userActivity instanceof StartState;
     }
 }
