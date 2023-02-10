@@ -1,7 +1,7 @@
 package kz.kuanysh.bot.chain.chains;
 
 import kz.kuanysh.bot.buttons.PatternKeyboard;
-import kz.kuanysh.bot.chain.DialogStateChain;
+import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
@@ -11,9 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Slf4j
-public class StartDialogChain extends DialogStateChain {
+public class StartDialogChain extends DialogChain {
 
-    public StartDialogChain(DialogStateChain nextChain) {
+    public StartDialogChain(DialogChain nextChain) {
         super(nextChain);
     }
 
@@ -27,7 +27,7 @@ public class StartDialogChain extends DialogStateChain {
             userService.saveDialog(message, context);
 
         } else {
-            var response = PatternKeyboard.sendText(message.getChatId(), "Нейзвестная команда");
+            var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
             execute.sendMessage(response);
         }
     }

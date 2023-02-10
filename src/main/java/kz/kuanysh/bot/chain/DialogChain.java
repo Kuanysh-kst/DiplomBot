@@ -5,17 +5,14 @@ import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
 import lombok.extern.slf4j.Slf4j;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-import java.io.Serializable;
-
 @Slf4j
-public abstract class DialogStateChain {
+public abstract class DialogChain {
 
-    private final DialogStateChain nextChain;
+    private final DialogChain nextChain;
 
-    protected DialogStateChain(DialogStateChain nextChain) {
+    protected DialogChain(DialogChain nextChain) {
         this.nextChain = nextChain;
     }
 

@@ -11,12 +11,12 @@ public class FinishState implements UserActivity {
 
     @Override
     public UserActivity nextDialogState() {
-        return new StartState();
+        return null;
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new PhotoState();
+        return new ResultState();
     }
 
     @Override

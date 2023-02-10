@@ -11,20 +11,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoState implements UserActivity {
+public class ResultState implements UserActivity {
+
     @Override
     public UserActivity nextDialogState() {
-        return new ContactState();
+        return new FinishState();
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new AboutState();
+        return new LocationState();
     }
 
     @Override
     public String getText(Message message) {
-        return "Поделитесь фото для просмотра профиля \uD83C\uDFC4\u200D♂️";
+        return "Результат \uD83D\uDCE0: ";
     }
 
     @Override
@@ -38,8 +39,8 @@ public class PhotoState implements UserActivity {
                 .callbackData("/back")
                 .build();
         InlineKeyboardButton skip = InlineKeyboardButton.builder()
-                .text("пропустить")
-                .callbackData("/skip")
+                .text("получить результат")
+                .callbackData("/result")
                 .build();
         row1.add(button);
         row2.add(skip);

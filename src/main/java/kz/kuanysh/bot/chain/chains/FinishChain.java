@@ -1,19 +1,19 @@
 package kz.kuanysh.bot.chain.chains;
 
 import kz.kuanysh.bot.buttons.PatternKeyboard;
-import kz.kuanysh.bot.chain.DialogStateChain;
+import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
 import kz.kuanysh.bot.state.states.FinishState;
-import kz.kuanysh.bot.state.states.AboutState;
 import kz.kuanysh.bot.state.states.PhotoState;
+import kz.kuanysh.bot.state.states.ResultState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class FinishChain extends DialogStateChain {
+public class FinishChain extends DialogChain {
 
-    public FinishChain(DialogStateChain nextChain) {
+    public FinishChain(DialogChain nextChain) {
         super(nextChain);
     }
 
@@ -28,7 +28,7 @@ public class FinishChain extends DialogStateChain {
 
         } else if (command.equals("/back")) {
             state.backDialogState();
-            Dialog backState = new Dialog(new PhotoState());
+            Dialog backState = new Dialog(new ResultState());
             state.backDialogState();
 
             var response = state.getKeyBoard(message, command);
@@ -38,7 +38,7 @@ public class FinishChain extends DialogStateChain {
             userService.saveDialog(message, backState);
         } else if (message.hasText()) {
 
-            var response = PatternKeyboard.sendText(message.getChatId(), "Нейзвестная команда");
+            var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
             execute.sendMessage(response);
         }
     }
