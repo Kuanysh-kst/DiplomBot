@@ -20,7 +20,7 @@ public class PhotoChain extends DialogChain {
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
        if (command.equals("/back")) {
             state.backDialogState();
-            Dialog backState = new Dialog(new AboutState());
+            Dialog backState = new Dialog(state.getState());
             state.backDialogState();
 
             var response = state.getKeyBoard(message, command);

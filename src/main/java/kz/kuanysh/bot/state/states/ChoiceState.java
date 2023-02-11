@@ -10,7 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 
 import java.util.List;
 
-public class ChoiceState implements UserActivity {
+public class ChoiceState implements UserActivity<String> {
     public List<String> listChoice() {
         return List.of("найти работу",
                 "найти сотрудника",
@@ -24,8 +24,8 @@ public class ChoiceState implements UserActivity {
     }
 
     @Override
-    public UserActivity nextDialogState() {
-        return new CategoryState();
+    public UserActivity nextDialogState(String par) {
+        return new CategoryState(par);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ChoiceState implements UserActivity {
     }
 
     @Override
-    public BotApiMethod getKeyBoard(Message message, String text,String command) {
+    public BotApiMethod getKeyBoard(Message message, String text, String command) {
 
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 

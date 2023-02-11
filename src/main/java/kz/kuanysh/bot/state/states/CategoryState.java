@@ -11,14 +11,16 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.io.Serializable;
 import java.util.List;
 
-public class CategoryState implements UserActivity{
+public class CategoryState implements UserActivity<String> {
+
+    private final String choice;
+
+    public CategoryState(String choice) {
+        this.choice = choice;
+    }
 
 
-
-
-
-
-   List<String> workNames() {
+    List<String> workNames() {
         return List.of(
                 "стройтельные работы",
                 "работа грузчиком",
@@ -38,9 +40,10 @@ public class CategoryState implements UserActivity{
                 "/back"
         );
     }
+
     @Override
-    public UserActivity nextDialogState() {
-        return new AboutState();
+    public UserActivity nextDialogState(String par) {
+        return new AboutState(choice, par);
     }
 
     @Override
@@ -54,10 +57,10 @@ public class CategoryState implements UserActivity{
     }
 
     @Override
-    public <T extends Serializable> BotApiMethod getKeyBoard(Message message, String text,String command) {
-       InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+    public <T extends Serializable> BotApiMethod getKeyBoard(Message message, String text, String command) {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
-        List<List<InlineKeyboardButton>> keyboard = InlineListButton.listButtons(workNames(),callBackWorkNames());
+        List<List<InlineKeyboardButton>> keyboard = InlineListButton.listButtons(workNames(), callBackWorkNames());
         inlineKeyboardMarkup.setKeyboard(keyboard);
 
         return PatternKeyboard.sendEdit(message, text, inlineKeyboardMarkup);

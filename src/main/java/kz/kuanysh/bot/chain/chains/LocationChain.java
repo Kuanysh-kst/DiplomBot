@@ -6,7 +6,6 @@ import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
-import kz.kuanysh.bot.state.states.AboutState;
 import kz.kuanysh.bot.state.states.ContactState;
 import kz.kuanysh.bot.state.states.LocationState;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -27,7 +26,7 @@ public class LocationChain extends DialogChain {
             userService.saveDialog(message, state);
         } else if (command.equals("/back")) {
             state.backDialogState();
-            Dialog backState = new Dialog(new ContactState());
+            Dialog backState = new Dialog(state.getState());
             state.backDialogState();
 
             var response = state.getKeyBoard(message, command);

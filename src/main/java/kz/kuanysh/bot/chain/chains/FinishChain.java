@@ -7,7 +7,6 @@ import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
 import kz.kuanysh.bot.state.states.FinishState;
-import kz.kuanysh.bot.state.states.PhotoState;
 import kz.kuanysh.bot.state.states.ResultState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
@@ -28,7 +27,7 @@ public class FinishChain extends DialogChain {
 
         } else if (command.equals("/back")) {
             state.backDialogState();
-            Dialog backState = new Dialog(new ResultState());
+            Dialog backState = new Dialog(state.getState());
             state.backDialogState();
 
             var response = state.getKeyBoard(message, command);

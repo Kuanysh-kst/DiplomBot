@@ -28,7 +28,7 @@ public class CategoryDialogChain extends DialogChain {
 
         } else if (command.equals("/back")) {
             state.backDialogState();
-            Dialog backState = new Dialog(new ChoiceState());
+            Dialog backState = new Dialog(state.getState());
             state.backDialogState();
 
             var response = state.getKeyBoard(message,command);

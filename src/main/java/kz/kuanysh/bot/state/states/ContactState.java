@@ -1,30 +1,38 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.buttons.PatternKeyboard;
-import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Contact;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-public class ContactState implements UserActivity {
+public class ContactState implements UserActivity<Contact> {
+    private final String choice;
+    private final String category;
+    private final String about;
+    private final InputFile photo;
+
+    public ContactState(String choice, String category, String about, InputFile photo) {
+        this.choice = choice;
+        this.category = category;
+        this.about = about;
+        this.photo = photo;
+    }
+
     @Override
-    public UserActivity nextDialogState() {
-        return new LocationState();
+    public UserActivity nextDialogState(Contact par) {
+        return new LocationState(choice, category, about, photo, par);
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new PhotoState();
+        return new PhotoState(choice, category, about);
     }
 
     @Override

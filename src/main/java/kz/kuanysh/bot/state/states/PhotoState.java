@@ -3,23 +3,33 @@ package kz.kuanysh.bot.state.states;
 import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoState implements UserActivity {
+public class PhotoState implements UserActivity<InputFile> {
+    private final String choice;
+    private final String category;
+    private final String about;
+
+    public PhotoState(String choice, String category, String about) {
+        this.choice = choice;
+        this.category = category;
+        this.about = about;
+    }
+
     @Override
-    public UserActivity nextDialogState() {
-        return new ContactState();
+    public UserActivity nextDialogState(InputFile par) {
+        return new ContactState(choice, category, about, par);
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new AboutState();
+        return new AboutState(choice,category);
     }
 
     @Override
