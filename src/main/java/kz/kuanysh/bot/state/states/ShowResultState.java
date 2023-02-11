@@ -13,26 +13,27 @@ import java.util.List;
 
 public class ShowResultState implements UserActivity<String> {
 
-    public class ResultState implements UserActivity<List<User>> {
     private final String choice;
     private final String category;
     private final String about;
     private final InputFile photo;
     private final Contact contact;
     private final Location location;
+    private final List<User> list;
 
-        public ResultState(String choice, String category, String about, InputFile photo, Contact contact, Location location) {
-            this.choice = choice;
-            this.category = category;
-            this.about = about;
-            this.photo = photo;
-            this.contact = contact;
-            this.location = location;
-        }
+    public ShowResultState(String choice, String category, String about, InputFile photo, Contact contact, Location location, List<User> list) {
+        this.choice = choice;
+        this.category = category;
+        this.about = about;
+        this.photo = photo;
+        this.contact = contact;
+        this.location = location;
+        this.list = list;
+    }
 
-        @Override
-    public UserActivity nextDialogState(List<User> par) {
-        return new FinishState();
+    @Override
+    public UserActivity nextDialogState(String par) {
+        return new FinishState(choice, category, about, photo, contact, location, list);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class ShowResultState implements UserActivity<String> {
 
     @Override
     public String getText(Message message) {
-        return "";
+        return "it's show result state";
     }
 
     @Override

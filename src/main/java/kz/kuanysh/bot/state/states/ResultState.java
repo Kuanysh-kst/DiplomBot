@@ -1,9 +1,13 @@
 package kz.kuanysh.bot.state.states;
 
 import kz.kuanysh.bot.buttons.PatternKeyboard;
+import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.objects.*;
+import org.telegram.telegrambots.meta.api.objects.Contact;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.Location;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
@@ -29,7 +33,7 @@ public class ResultState implements UserActivity<List<User>> {
 
     @Override
     public UserActivity nextDialogState(List<User> par) {
-        return new ShowResultState();
+        return new ShowResultState(choice, category, about, photo, contact, location, par);
     }
 
     @Override
