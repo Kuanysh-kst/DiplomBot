@@ -13,22 +13,20 @@ import java.util.List;
 
 public class AboutState implements UserActivity<String> {
 
-    private final String category;
     private final String choice;
 
-    public AboutState(String choice, String category) {
+    public AboutState(String choice) {
         this.choice = choice;
-        this.category = category;
     }
 
     @Override
     public UserActivity nextDialogState(String par) {
-        return new PhotoState(choice, category, par);
+        return new PhotoState(choice,  par);
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new CategoryState(choice);
+        return new CategoryState();
     }
 
     @Override

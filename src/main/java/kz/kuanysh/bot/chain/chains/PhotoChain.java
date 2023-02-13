@@ -32,7 +32,7 @@ public class PhotoChain extends DialogChain {
             var response = state.getKeyBoard(message, command);
             execute.sendMessageSerializable(response);
 
-            state.nextDialogState();
+            state.nextDialogState(command);
             userService.saveDialog(message, state);
 
         }

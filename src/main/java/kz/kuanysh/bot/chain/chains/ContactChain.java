@@ -18,11 +18,17 @@ public class ContactChain extends DialogChain {
 
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
-        if (message.hasPhoto() || command.equals("/skip")) {
+        if (message.hasPhoto()) {
             var response = state.getKeyBoard(message, command);
             execute.sendMessageSerializable(response);
 
-            state.nextDialogState();
+            state.nextDialogState(message.getPhoto());
+            userService.saveDialog(message, state);
+        } else if (command.equals("/skip")) {
+            var response = state.getKeyBoard(message, command);
+            execute.sendMessageSerializable(response);
+
+            state.nextDialogState(null);
             userService.saveDialog(message, state);
         } else if (command.equals("/back")) {
             state.backDialogState();

@@ -6,33 +6,33 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class ContactState implements UserActivity<Contact> {
+public class ContactState implements UserActivity<List<PhotoSize>> {
     private final String choice;
     private final String category;
     private final String about;
-    private final InputFile photo;
 
-    public ContactState(String choice, String category, String about, InputFile photo) {
+    public ContactState(String choice, String category, String about) {
         this.choice = choice;
         this.category = category;
         this.about = about;
-        this.photo = photo;
     }
 
     @Override
-    public UserActivity nextDialogState(Contact par) {
-        return new LocationState(choice, category, about, photo, par);
+    public UserActivity nextDialogState(List<PhotoSize> par) {
+        return new LocationState(choice, category, about,  par);
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new PhotoState(choice, category, about);
+        return new PhotoState(choice, category);
     }
 
     @Override

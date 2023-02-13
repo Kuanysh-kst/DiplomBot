@@ -3,39 +3,35 @@ package kz.kuanysh.bot.state.states;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Contact;
-import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Location;
-import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.*;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class LocationState implements UserActivity<Location> {
+public class LocationState implements UserActivity<Contact> {
     private final String choice;
     private final String category;
     private final String about;
-    private final InputFile photo;
-    private final Contact contact;
+    private final List<PhotoSize> photo;
 
-    public LocationState(String choice, String category, String about, InputFile photo, Contact contact) {
+    public LocationState(String choice, String category, String about, List<PhotoSize> photo) {
         this.choice = choice;
         this.category = category;
         this.about = about;
         this.photo = photo;
-        this.contact = contact;
     }
 
     @Override
-    public UserActivity nextDialogState(Location par) {
-        return new ResultState(choice, category, about, photo, contact, par);
+    public UserActivity nextDialogState(Contact par) {
+        return new ResultState(choice, category, about, photo,  par);
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new ContactState(choice, category, about, photo);
+        return new ContactState(choice, category, about);
     }
 
     @Override

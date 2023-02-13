@@ -22,7 +22,7 @@ public class ResultChain extends DialogChain {
             var response = state.getKeyBoard(message, command);
             execute.sendMessageSerializable(response);
 
-            state.nextDialogState();
+            state.nextDialogState(message.getLocation());
             userService.saveDialog(message, state);
         } else if (command.equals("/back")) {
             state.backDialogState();

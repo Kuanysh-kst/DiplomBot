@@ -22,7 +22,7 @@ public class LocationChain extends DialogChain {
             var response = state.getKeyBoard(message, command);
             execute.sendMessageSerializable(response);
 
-            state.nextDialogState();
+            state.nextDialogState(message.getContact());
             userService.saveDialog(message, state);
         } else if (command.equals("/back")) {
             state.backDialogState();

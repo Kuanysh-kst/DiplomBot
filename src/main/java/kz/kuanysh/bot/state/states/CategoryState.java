@@ -13,13 +13,6 @@ import java.util.List;
 
 public class CategoryState implements UserActivity<String> {
 
-    private final String choice;
-
-    public CategoryState(String choice) {
-        this.choice = choice;
-    }
-
-
     List<String> workNames() {
         return List.of(
                 "стройтельные работы",
@@ -43,7 +36,7 @@ public class CategoryState implements UserActivity<String> {
 
     @Override
     public UserActivity nextDialogState(String par) {
-        return new AboutState(choice, par);
+        return new AboutState( par);
     }
 
     @Override

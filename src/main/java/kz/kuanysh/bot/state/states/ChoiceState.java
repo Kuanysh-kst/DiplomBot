@@ -25,8 +25,9 @@ public class ChoiceState implements UserActivity<String> {
 
     @Override
     public UserActivity nextDialogState(String par) {
-        return new CategoryState(par);
+        return new CategoryState();
     }
+
 
     @Override
     public UserActivity backDialogState() {
@@ -52,25 +53,4 @@ public class ChoiceState implements UserActivity<String> {
             return PatternKeyboard.sendInline(message.getChatId(), text, inlineKeyboardMarkup);
         }
     }
-
-
-//    @Override
-//    public Dialog createDialog() {
-//        return new ChoiceDialog();
-//    }
-//
-//    @Override
-//    public Keyboard createKeyBoard() {
-//        return new ChoiceKeyboard();
-//    }
-//
-//    @Override
-//    public void doEvent(UserService userService, Message message , String text) {
-//        userService.saveUserInBase(message);
-//    }
-//
-//    @Override
-//    public void execute(BotApiMethod<Serializable> response, SendBotMessageServiceImp sendBotMessageServiceImp) {
-//        sendBotMessageServiceImp.sendMessageSerializable(response);
-//    }
 }

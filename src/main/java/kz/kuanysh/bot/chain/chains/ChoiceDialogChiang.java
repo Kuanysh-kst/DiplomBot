@@ -23,7 +23,7 @@ public class ChoiceDialogChiang extends DialogChain {
             var response = context.getKeyBoard(message,command);
             executeService.sendMessageSerializable(response);
 
-            context.nextDialogState();
+            context.nextDialogState(command);
             userService.saveDialog(message, context);
 
         } else {

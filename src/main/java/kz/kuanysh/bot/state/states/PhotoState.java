@@ -3,38 +3,45 @@ package kz.kuanysh.bot.state.states;
 import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PhotoState implements UserActivity<InputFile> {
+public class PhotoState implements UserActivity<String> {
     private final String choice;
     private final String category;
-    private final String about;
 
-    public PhotoState(String choice, String category, String about) {
+    public PhotoState(String choice, String category) {
         this.choice = choice;
         this.category = category;
-        this.about = about;
     }
 
     @Override
-    public UserActivity nextDialogState(InputFile par) {
-        return new ContactState(choice, category, about, par);
+    public UserActivity nextDialogState(String par) {
+        return new ContactState(choice, category,  par);
     }
+
 
     @Override
     public UserActivity backDialogState() {
-        return new AboutState(choice,category);
+        return new AboutState(choice);
     }
 
     @Override
     public String getText(Message message) {
         return "Поделитесь фото для просмотра профиля \uD83C\uDFC4\u200D♂️";
+    }
+
+    public static void main(String[] args) {
+        Message message = null;
+        System.out.println(message.getPhoto().getClass().getSimpleName()
+);
     }
 
     @Override
