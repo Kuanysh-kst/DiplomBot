@@ -35,7 +35,7 @@ public class ResultChain extends DialogChain {
 
             userService.saveDialog(message, backState);
         } else {
-            var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
+            var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду!!! \uD83D\uDC7E");
             execute.sendMessage(response);
         }
     }

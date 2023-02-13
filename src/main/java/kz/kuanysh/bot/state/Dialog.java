@@ -1,5 +1,6 @@
 package kz.kuanysh.bot.state;
 
+import kz.kuanysh.bot.state.states.ShowResultState;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
@@ -11,6 +12,8 @@ import java.io.Serializable;
 @Slf4j
 @Data
 public class Dialog<T> implements Serializable {
+
+    private ShowResultState showResultState;
 
     @Id
     private UserActivity state;
@@ -25,7 +28,6 @@ public class Dialog<T> implements Serializable {
         log.info("Current state:{}",state.getClass().getSimpleName());
     }
 
-
     public BotApiMethod getKeyBoard(Message message,String command) {
         return state.getKeyBoard(message, state.getText(message),command);
     }
@@ -36,5 +38,13 @@ public class Dialog<T> implements Serializable {
 
     public UserActivity getState() {
         return state;
+    }
+
+    public void setResultDialog(ShowResultState showResultState){
+        this.showResultState = showResultState;
+    }
+
+    public ShowResultState getResultDialog(){
+        return this.showResultState;
     }
 }

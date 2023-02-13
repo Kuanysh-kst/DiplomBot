@@ -5,6 +5,7 @@ import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
+import kz.kuanysh.bot.state.states.ShowResultState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class ShowResultChain extends DialogChain {
@@ -20,6 +21,6 @@ public class ShowResultChain extends DialogChain {
 
     @Override
     protected boolean shouldProcessState(UserActivity userActivity) {
-        return false;
+        return userActivity instanceof ShowResultState;
     }
 }

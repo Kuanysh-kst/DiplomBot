@@ -37,7 +37,8 @@ public class Bot extends TelegramLongPollingBot {
         this.userService = userService;
 
         DialogChain finish = new FinishChain(null);
-        DialogChain result = new ResultChain(finish);
+        DialogChain showResult = new ShowResultChain(finish);
+        DialogChain result = new ResultChain(showResult);
         DialogChain location = new LocationChain(result);
         DialogChain contact = new ContactChain(location);
         DialogChain photo = new PhotoChain(contact);

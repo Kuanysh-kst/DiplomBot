@@ -34,7 +34,7 @@ public class FinishState implements UserActivity<String> {
 
     @Override
     public UserActivity backDialogState() {
-        return new ResultState(choice, category, about, photo, contact);
+        return new ShowResultState(choice, category, about, photo, contact,location);
     }
 
     @Override
