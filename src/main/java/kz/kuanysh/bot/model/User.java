@@ -8,6 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,7 @@ public class User {
     private String choice;
     private String category;
     private String about;
-    private List<PhotoSize> photo;
+    private File file;
     private Contact contact;
     private Location location;
     private Dialog dialog;
@@ -40,7 +41,7 @@ public class User {
                 ", registeredAt=" + registeredAt + '\'' +
                 ", status=" + choice + '\'' +
                 ", about=" + about + '\'' +
-                ", photo=" + photo + '\'' +
+                ", file=" + file + '\'' +
                 ", contact=" + contact + '\'' +
                 ", location=" + location + '\'' +
                 ", dialog=" + dialog + '\'' +

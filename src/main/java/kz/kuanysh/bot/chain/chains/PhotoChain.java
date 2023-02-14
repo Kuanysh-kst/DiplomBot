@@ -20,19 +20,18 @@ public class PhotoChain extends DialogChain {
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
        if (command.equals("/back")) {
             state.backDialogState();
-            Dialog backState = new Dialog(state.getState());
+           userService.saveDialog(message, state);
+
             state.backDialogState();
 
             var response = state.getKeyBoard(message, command);
 
             execute.sendMessageSerializable(response);
-
-            userService.saveDialog(message, backState);
-        } else if (command.equals("/skip")|| message.hasText()) {
+        } else if (command.equals("/skip")) {
             var response = state.getKeyBoard(message, command);
             execute.sendMessageSerializable(response);
 
-            state.nextDialogState(command);
+            state.nextDialogState();
             userService.saveDialog(message, state);
 
         }else if (message.hasText()){
@@ -41,7 +40,7 @@ public class PhotoChain extends DialogChain {
 
             state.setAbout(command);
 
-            state.nextDialogState(command);
+            state.nextDialogState();
             userService.saveDialog(message, state);
        }
     }

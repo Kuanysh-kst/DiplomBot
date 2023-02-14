@@ -21,10 +21,10 @@ public class ShowResultChain extends DialogChain {
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         if (command.equals("/result")){
             userService.saveUserParameters(message,state);
-            List<User> list = userService.findByStatusAndCategory(message);
+//            List<User> list = userService.findByChoiceAndCategory(message);
 
-            var response = state.getKeyBoard(message, command);
-            execute.sendMessageSerializable(response);
+//            var response = state.getKeyBoard(message, command);
+//            execute.sendMessageSerializable(response);
 
         }
     }

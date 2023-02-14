@@ -23,7 +23,7 @@ public class StartDialogChain extends DialogChain {
             var response = context.getKeyBoard(message,command);
             execute.sendMessageSerializable(response);
 
-            context.nextDialogState(command);
+            context.nextDialogState();
             userService.saveDialog(message, context);
 
         } else {

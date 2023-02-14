@@ -11,29 +11,15 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultState implements UserActivity<Location> {
-    private final String choice;
-    private final String category;
-    private final String about;
-    private final List<PhotoSize> photo;
-    private final Contact contact;
-
-    public ResultState(String choice, String category, String about, List<PhotoSize> photo, Contact contact) {
-        this.choice = choice;
-        this.category = category;
-        this.about = about;
-        this.photo = photo;
-        this.contact = contact;
-    }
-
+public class ResultState implements UserActivity {
     @Override
-    public UserActivity nextDialogState(Location par) {
-        return new ShowResultState(choice, category, about, photo, contact, par);
+    public UserActivity nextDialogState() {
+        return new ShowResultState();
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new LocationState(choice, category, about, photo);
+        return new LocationState();
     }
 
     @Override

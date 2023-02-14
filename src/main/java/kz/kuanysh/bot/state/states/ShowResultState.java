@@ -8,32 +8,18 @@ import org.telegram.telegrambots.meta.api.objects.*;
 import java.io.Serializable;
 import java.util.List;
 
-public class ShowResultState implements UserActivity<List<User>> {
+public class ShowResultState implements UserActivity {
 
-    private final String choice;
-    private final String category;
-    private final String about;
-    private final List<PhotoSize> photo;
-    private final Contact contact;
-    private final Location location;
 
-    public ShowResultState(String choice, String category, String about, List<PhotoSize> photo, Contact contact, Location location) {
-        this.choice = choice;
-        this.category = category;
-        this.about = about;
-        this.photo = photo;
-        this.contact = contact;
-        this.location = location;
-    }
 
     @Override
-    public UserActivity nextDialogState(List<User> par) {
-        return new FinishState(choice, category, about, photo, contact, location,par);
+    public UserActivity nextDialogState() {
+        return new FinishState();
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new ResultState(choice, category, about, photo, contact);
+        return new ResultState();
     }
 
     @Override

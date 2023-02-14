@@ -24,23 +24,22 @@ public class LocationChain extends DialogChain {
 
             state.setContact(message.getContact());
 
-            state.nextDialogState(message.getContact());
+            state.nextDialogState();
             userService.saveDialog(message, state);
         }else if (command.equals("/skip")){
                     var response = state.getKeyBoard(message, command);
             execute.sendMessageSerializable(response);
-            state.nextDialogState(message.getContact());
+            state.nextDialogState();
             userService.saveDialog(message, state);
         }else if (command.equals("/back")) {
             state.backDialogState();
-            Dialog backState = new Dialog(state.getState());
+            userService.saveDialog(message, state);
+
             state.backDialogState();
 
             var response = state.getKeyBoard(message, command);
 
             execute.sendMessageSerializable(response);
-
-            userService.saveDialog(message, backState);
         } else {
             var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
             execute.sendMessage(response);

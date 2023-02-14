@@ -14,25 +14,16 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactState implements UserActivity<List<PhotoSize>> {
-    private final String choice;
-    private final String category;
-    private final String about;
-
-    public ContactState(String choice, String category, String about) {
-        this.choice = choice;
-        this.category = category;
-        this.about = about;
-    }
+public class ContactState implements UserActivity {
 
     @Override
-    public UserActivity nextDialogState(List<PhotoSize> par) {
-        return new LocationState(choice, category, about,  par);
+    public UserActivity nextDialogState() {
+        return new LocationState();
     }
 
     @Override
     public UserActivity backDialogState() {
-        return new PhotoState(choice, category);
+        return new PhotoState();
     }
 
     @Override

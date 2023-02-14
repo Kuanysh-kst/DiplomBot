@@ -5,8 +5,8 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.io.Serializable;
 
-public interface UserActivity<T> extends Serializable {
-    UserActivity nextDialogState(T par);
+public interface UserActivity extends Serializable {
+    UserActivity nextDialogState();
 
     UserActivity backDialogState();
 

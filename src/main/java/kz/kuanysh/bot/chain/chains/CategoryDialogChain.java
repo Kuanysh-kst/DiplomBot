@@ -25,19 +25,19 @@ public class CategoryDialogChain extends DialogChain {
 
             state.setChoice(command);
 
-            state.nextDialogState(command);
+            state.nextDialogState();
             userService.saveDialog(message, state);
 
         } else if (command.equals("/back")) {
             state.backDialogState();
-            Dialog backState = new Dialog(state.getState());
+            userService.saveDialog(message, state);
+
             state.backDialogState();
 
             var response = state.getKeyBoard(message,command);
 
             execute.sendMessageSerializable(response);
 
-            userService.saveDialog(message, backState);
         } else {
             var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
             execute.sendMessage(response);

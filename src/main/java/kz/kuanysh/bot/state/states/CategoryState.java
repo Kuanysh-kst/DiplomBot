@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.io.Serializable;
 import java.util.List;
 
-public class CategoryState implements UserActivity<String> {
+public class CategoryState implements UserActivity {
 
     List<String> workNames() {
         return List.of(
@@ -35,8 +35,8 @@ public class CategoryState implements UserActivity<String> {
     }
 
     @Override
-    public UserActivity nextDialogState(String par) {
-        return new AboutState( par);
+    public UserActivity nextDialogState() {
+        return new AboutState( );
     }
 
     @Override

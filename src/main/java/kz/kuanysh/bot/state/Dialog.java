@@ -9,20 +9,20 @@ import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Slf4j
-public class Dialog<T> implements Serializable {
+public class Dialog implements Serializable {
 
     private String choice;
     private String category;
     private String about;
-    private List<PhotoSize> photo;
+    private File file;
     private Contact contact;
     private Location location;
-    private List<User> list;
     private UserActivity state;
 
 
@@ -30,8 +30,8 @@ public class Dialog<T> implements Serializable {
         this.state = state;
     }
 
-    public void nextDialogState(T par) {
-        state = state.nextDialogState(par);
+    public void nextDialogState() {
+        state = state.nextDialogState();
         log.info("Current state:{}", state.getClass().getSimpleName());
     }
 

@@ -64,21 +64,24 @@ public class UserService {
         }
     }
 
-        public void saveUserParameters(Message message,Dialog state) {
-        if (userRepository.findById(message.getChatId()).isEmpty()) {
-            var chatId = message.getChatId();
-            User user = new User();
-            user.setChatId(chatId);
-            user.setChoice(state.getChoice());
-            user.setCategory(state.getCategory());
-            user.setAbout(state.getAbout());
-            user.setPhoto(state.getPhoto());
-            user.setContact(state.getContact());
-            user.setLocation(state.getLocation());
+    public void saveUserParameters(Message message, Dialog state) {
+        var chatId = message.getChatId();
+        var chat = message.getChat();
+        User user = new User();
+        user.setChatId(chatId);
+        user.setFirstName(chat.getFirstName());
+        user.setLastName(chat.getLastName());
+        user.setUserName(chat.getUserName());
+        user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
+        user.setChoice(state.getChoice());
+        user.setCategory(state.getCategory());
+        user.setAbout(state.getAbout());
+        user.setFile(state.getFile());
+        user.setContact(state.getContact());
+        user.setLocation(state.getLocation());
 
-            userRepository.save(user);
-            log.info("user saved: " + user);
-        }
+        userRepository.save(user);
+        log.info("user saved: " + user);
     }
 
     public Optional<User> findById(Long chatId) {
@@ -102,15 +105,15 @@ public class UserService {
     }
 
 
-    public List<User> findByStatusAndCategory(Message message) {
+    public List<User> findByChoiceAndCategory(Message message) {
         User user = getUserById(message.getChatId());
         String choice = user.getChoice();
         String category = user.getCategory();
 
         if (choice.equals("/findjob")) {
-            return userRepository.findByStatusAndCategory("/findworker", category);
+            return userRepository.findByChoiceAndCategory("/findworker", category);
         } else {
-            return userRepository.findByStatusAndCategory("/findjob", category);
+            return userRepository.findByChoiceAndCategory("/findjob", category);
         }
     }
 

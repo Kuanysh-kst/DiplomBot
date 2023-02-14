@@ -11,17 +11,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AboutState implements UserActivity<String> {
+public class AboutState implements UserActivity {
 
-    private final String choice;
 
-    public AboutState(String choice) {
-        this.choice = choice;
-    }
 
     @Override
-    public UserActivity nextDialogState(String par) {
-        return new PhotoState(choice,  par);
+    public UserActivity nextDialogState() {
+        return new PhotoState();
     }
 
     @Override
