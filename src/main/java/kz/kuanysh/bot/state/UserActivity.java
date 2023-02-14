@@ -13,4 +13,6 @@ public interface UserActivity<T> extends Serializable {
     String getText(Message message);
 
     <T extends Serializable> BotApiMethod<Serializable> getKeyBoard(Message message,String text,String command);
+
+
 }

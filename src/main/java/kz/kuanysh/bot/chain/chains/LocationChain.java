@@ -18,13 +18,20 @@ public class LocationChain extends DialogChain {
 
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
-        if (message.hasContact() || command.equals("/skip")) {
+        if (message.hasContact() ) {
             var response = state.getKeyBoard(message, command);
             execute.sendMessageSerializable(response);
 
+            state.setContact(message.getContact());
+
             state.nextDialogState(message.getContact());
             userService.saveDialog(message, state);
-        } else if (command.equals("/back")) {
+        }else if (command.equals("/skip")){
+                    var response = state.getKeyBoard(message, command);
+            execute.sendMessageSerializable(response);
+            state.nextDialogState(message.getContact());
+            userService.saveDialog(message, state);
+        }else if (command.equals("/back")) {
             state.backDialogState();
             Dialog backState = new Dialog(state.getState());
             state.backDialogState();

@@ -1,21 +1,28 @@
 package kz.kuanysh.bot.state;
 
-import kz.kuanysh.bot.state.states.ShowResultState;
+import kz.kuanysh.bot.model.User;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.objects.Contact;
+import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 
-import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.List;
 
-@Slf4j
 @Data
+@Slf4j
 public class Dialog<T> implements Serializable {
 
-    private ShowResultState showResultState;
-
-    @Id
+    private String choice;
+    private String category;
+    private String about;
+    private List<PhotoSize> photo;
+    private Contact contact;
+    private Location location;
+    private List<User> list;
     private UserActivity state;
 
 
@@ -25,11 +32,11 @@ public class Dialog<T> implements Serializable {
 
     public void nextDialogState(T par) {
         state = state.nextDialogState(par);
-        log.info("Current state:{}",state.getClass().getSimpleName());
+        log.info("Current state:{}", state.getClass().getSimpleName());
     }
 
-    public BotApiMethod getKeyBoard(Message message,String command) {
-        return state.getKeyBoard(message, state.getText(message),command);
+    public BotApiMethod getKeyBoard(Message message, String command) {
+        return state.getKeyBoard(message, state.getText(message), command);
     }
 
     public void backDialogState() {
@@ -40,11 +47,5 @@ public class Dialog<T> implements Serializable {
         return state;
     }
 
-    public void setResultDialog(ShowResultState showResultState){
-        this.showResultState = showResultState;
-    }
 
-    public ShowResultState getResultDialog(){
-        return this.showResultState;
-    }
 }

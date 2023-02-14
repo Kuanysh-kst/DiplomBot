@@ -22,6 +22,8 @@ public class ContactChain extends DialogChain {
             var response = state.getKeyBoard(message, command);
             execute.sendMessageSerializable(response);
 
+            state.setPhoto(message.getPhoto());
+
             state.nextDialogState(message.getPhoto());
             userService.saveDialog(message, state);
         } else if (command.equals("/skip")) {

@@ -35,7 +35,15 @@ public class PhotoChain extends DialogChain {
             state.nextDialogState(command);
             userService.saveDialog(message, state);
 
-        }
+        }else if (message.hasText()){
+            var response = state.getKeyBoard(message, command);
+            execute.sendMessageSerializable(response);
+
+            state.setAbout(command);
+
+            state.nextDialogState(command);
+            userService.saveDialog(message, state);
+       }
     }
 
     @Override

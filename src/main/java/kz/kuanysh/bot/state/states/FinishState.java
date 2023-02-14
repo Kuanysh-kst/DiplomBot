@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.*;
 import java.io.Serializable;
 import java.util.List;
 
-public class FinishState implements UserActivity<String> {
+public class FinishState implements UserActivity<String>{
     private final String choice;
     private final String category;
     private final String about;
@@ -46,4 +46,5 @@ public class FinishState implements UserActivity<String> {
     public BotApiMethod<Serializable> getKeyBoard(Message message, String text, String command) {
         return null;
     }
+
 }

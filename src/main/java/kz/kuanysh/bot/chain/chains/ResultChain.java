@@ -18,13 +18,21 @@ public class ResultChain extends DialogChain {
 
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
-        if (message.hasLocation() || command.equals("/skip")) {
+        if (message.hasLocation() ) {
+            var response = state.getKeyBoard(message, command);
+            execute.sendMessageSerializable(response);
+
+            state.setLocation(message.getLocation());
+
+            state.nextDialogState(message.getLocation());
+            userService.saveDialog(message, state);
+        } else if (command.equals("/skip")){
             var response = state.getKeyBoard(message, command);
             execute.sendMessageSerializable(response);
 
             state.nextDialogState(message.getLocation());
             userService.saveDialog(message, state);
-        } else if (command.equals("/back")) {
+        }else if (command.equals("/back")) {
             state.backDialogState();
             Dialog backState = new Dialog(state.getState());
             state.backDialogState();

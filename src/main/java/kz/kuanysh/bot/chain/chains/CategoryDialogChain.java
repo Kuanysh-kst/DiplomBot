@@ -23,6 +23,8 @@ public class CategoryDialogChain extends DialogChain {
             var response = state.getKeyBoard(message,command);
             execute.sendMessageSerializable(response);
 
+            state.setChoice(command);
+
             state.nextDialogState(command);
             userService.saveDialog(message, state);
 

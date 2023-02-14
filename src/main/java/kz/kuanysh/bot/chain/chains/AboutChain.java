@@ -25,6 +25,8 @@ public class AboutChain extends DialogChain {
             var response = state.getKeyBoard(message,command);
             execute.sendMessageSerializable(response);
 
+            state.setCategory(command);
+
             state.nextDialogState(command);
             userService.saveDialog(message, state);
 

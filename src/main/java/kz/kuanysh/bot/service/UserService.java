@@ -39,9 +39,6 @@ public class UserService {
         var user = getUserById(chatId);
         user.setDialog(dialog);
         userRepository.save(user);
-//        log.info("User with Id: {}  dialogState saved:{} ",
-//                message.getChatId(),
-//                user.getDialog().getState().getClass().getSimpleName());
     }
 
     public User getUserById(Long chatId) {
@@ -62,7 +59,23 @@ public class UserService {
             user.setLastName(chat.getLastName());
             user.setUserName(chat.getUserName());
             user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
-            user.setContact(contact);
+            userRepository.save(user);
+            log.info("user saved: " + user);
+        }
+    }
+
+        public void saveUserParameters(Message message,Dialog state) {
+        if (userRepository.findById(message.getChatId()).isEmpty()) {
+            var chatId = message.getChatId();
+            User user = new User();
+            user.setChatId(chatId);
+            user.setChoice(state.getChoice());
+            user.setCategory(state.getCategory());
+            user.setAbout(state.getAbout());
+            user.setPhoto(state.getPhoto());
+            user.setContact(state.getContact());
+            user.setLocation(state.getLocation());
+
             userRepository.save(user);
             log.info("user saved: " + user);
         }
@@ -70,14 +83,6 @@ public class UserService {
 
     public Optional<User> findById(Long chatId) {
         return userRepository.findById(chatId);
-    }
-
-    public void saveUserStatus(Message message, String text) {
-        var chatId = message.getChatId();
-        var user = getUserById(chatId);
-        user.setStatus(text);
-        userRepository.save(user);
-        log.info("User with Id:" + message.getChatId() + " status saved: " + user.getStatus());
     }
 
     public void saveUserContact(Message message) {
@@ -97,8 +102,16 @@ public class UserService {
     }
 
 
-    public List<User> findByStatusAndCategory(String status, String category) {
-        return userRepository.findByStatusAndCategory(status, category);
+    public List<User> findByStatusAndCategory(Message message) {
+        User user = getUserById(message.getChatId());
+        String choice = user.getChoice();
+        String category = user.getCategory();
+
+        if (choice.equals("/findjob")) {
+            return userRepository.findByStatusAndCategory("/findworker", category);
+        } else {
+            return userRepository.findByStatusAndCategory("/findjob", category);
+        }
     }
 
     public List<User> findAll() {
