@@ -79,7 +79,7 @@ public class UserService {
         user.setFile(state.getFile());
         user.setContact(state.getContact());
         user.setLocation(state.getLocation());
-
+        user.setDialog(state);
         userRepository.save(user);
         log.info("user saved: " + user);
     }
@@ -87,23 +87,6 @@ public class UserService {
     public Optional<User> findById(Long chatId) {
         return userRepository.findById(chatId);
     }
-
-    public void saveUserContact(Message message) {
-        var chatId = message.getChatId();
-        var user = getUserById(chatId);
-        user.setContact(message.getContact());
-        userRepository.save(user);
-        log.info("User with Id:" + message.getChatId() + " contact saved: " + user.getContact());
-    }
-
-    public void saveUserCategory(Message message, String text) {
-        var chatId = message.getChatId();
-        var user = getUserById(chatId);
-        user.setCategory(text);
-        userRepository.save(user);
-        log.info("User with Id:" + message.getChatId() + " category saved: " + user.getCategory());
-    }
-
 
     public List<User> findByChoiceAndCategory(Message message) {
         User user = getUserById(message.getChatId());
