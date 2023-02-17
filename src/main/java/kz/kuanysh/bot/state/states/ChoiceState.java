@@ -2,8 +2,8 @@ package kz.kuanysh.bot.state.states;
 
 import kz.kuanysh.bot.buttons.InlineListButton;
 import kz.kuanysh.bot.buttons.PatternKeyboard;
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -41,16 +41,19 @@ public class ChoiceState implements UserActivity {
     }
 
     @Override
-    public BotApiMethod getKeyBoard(Message message, String text, String command) {
-
+    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
         List<List<InlineKeyboardButton>> keyboard = InlineListButton.listButtons(listChoice(), listChoiceCallBack());
         inlineKeyboardMarkup.setKeyboard(keyboard);
         if (command.equals("/back")) {
-            return PatternKeyboard.sendEdit(message, text, inlineKeyboardMarkup);
+            execute.sendMessageSerializable(PatternKeyboard.sendEdit(message, text, inlineKeyboardMarkup)
+            );
+
         } else {
-            return PatternKeyboard.sendInline(message.getChatId(), text, inlineKeyboardMarkup);
+            execute.sendMessage(PatternKeyboard.sendInline(message.getChatId(), text, inlineKeyboardMarkup));
         }
     }
 }
+
+

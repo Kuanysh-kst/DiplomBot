@@ -1,15 +1,14 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.model.User;
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class ShowResultState implements UserActivity {
-
 
 
     @Override
@@ -28,7 +27,8 @@ public class ShowResultState implements UserActivity {
     }
 
     @Override
-    public <T extends Serializable> BotApiMethod<Serializable> getKeyBoard(Message message, String text, String command) {
-        return null;
+    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
     }
+
+
 }

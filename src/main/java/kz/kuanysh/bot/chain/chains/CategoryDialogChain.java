@@ -7,7 +7,6 @@ import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
-import kz.kuanysh.bot.state.states.ChoiceState;
 import kz.kuanysh.bot.state.states.CategoryState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
@@ -20,8 +19,8 @@ public class CategoryDialogChain extends DialogChain {
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         if (Command.listChoiceCallBack(command)) {
-            var response = state.getKeyBoard(message,command);
-            execute.sendMessageSerializable(response);
+            state.executeMessage(message, command, execute);
+
 
             state.setChoice(command);
 
@@ -33,10 +32,7 @@ public class CategoryDialogChain extends DialogChain {
             userService.saveDialog(message, state);
 
             state.backDialogState();
-
-            var response = state.getKeyBoard(message,command);
-
-            execute.sendMessageSerializable(response);
+            state.executeMessage(message, command, execute);
 
         } else {
             var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");

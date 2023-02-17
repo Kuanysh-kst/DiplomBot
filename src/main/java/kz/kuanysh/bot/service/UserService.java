@@ -28,8 +28,7 @@ public class UserService {
         Long chatId = message.getChatId();
         if (getUserById(chatId).getDialog() == null) {
             return new Dialog(new StartState());
-        }
-        {
+        } else {
             return getUserById(chatId).getDialog();
         }
     }

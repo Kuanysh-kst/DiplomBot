@@ -66,6 +66,12 @@ public class Bot extends TelegramLongPollingBot {
             String command = message.getText();
             Dialog dialog = userService.findDialog(message);
             dialogChain.processState(message, dialog, command, userService, new SendBotMessageServiceImp(this));
+        } else if (update.hasMessage() && update.getMessage().hasPhoto()) {
+            userService.saveUserInBase(update.getMessage());
+            Message message = update.getMessage();
+            String command = message.getText();
+            Dialog dialog = userService.findDialog(message);
+            dialogChain.processState(message, dialog, command, userService, new SendBotMessageServiceImp(this));
         } else if (update.hasCallbackQuery()) {
             Message message = update.getCallbackQuery().getMessage();
             String command = update.getCallbackQuery().getData();

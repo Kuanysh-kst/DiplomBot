@@ -6,9 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendContact;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.Serializable;
@@ -40,8 +43,22 @@ public class SendBotMessageServiceImp implements SendBotMessageService {
             log.error("Error occurred: " + e);
         }
     }
-    public void sendPhoto(PartialBotApiMethod<Message> response){
 
+    public String getPhotoUrl(PhotoSize photo) {
+        try {
+            return bot.execute(new GetFile(photo.getFileId())).getFileUrl(bot.getBotToken());
+        } catch (TelegramApiException e) {
+            log.info("Error occurred: " + e);
+        }
+        return null;
+    }
+
+    public void sendPhoto(SendPhoto response) {
+        try {
+            bot.execute(response);
+        } catch (TelegramApiException e) {
+            log.error("Error occurred: " + e);
+        }
     }
 
 }

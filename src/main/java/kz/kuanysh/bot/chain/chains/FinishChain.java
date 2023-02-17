@@ -7,7 +7,6 @@ import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
 import kz.kuanysh.bot.state.states.FinishState;
-import kz.kuanysh.bot.state.states.ResultState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class FinishChain extends DialogChain {
@@ -19,8 +18,7 @@ public class FinishChain extends DialogChain {
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         if (command.equals("/skip")) {
-            var response = state.getKeyBoard(message, command);
-            execute.sendMessageSerializable(response);
+            state.executeMessage(message, command, execute);
 
             state.nextDialogState();
             userService.saveDialog(message, state);
@@ -31,9 +29,7 @@ public class FinishChain extends DialogChain {
 
             state.backDialogState();
 
-            var response = state.getKeyBoard(message, command);
-
-            execute.sendMessageSerializable(response);
+            state.executeMessage(message, command, execute);
         } else if (message.hasText()) {
 
             var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");

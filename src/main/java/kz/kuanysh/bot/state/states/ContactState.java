@@ -1,5 +1,6 @@
 package kz.kuanysh.bot.state.states;
 
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -32,7 +33,7 @@ public class ContactState implements UserActivity {
     }
 
     @Override
-    public BotApiMethod<Message> getKeyBoard(Message message, String text, String command) {
+    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
 
         ReplyKeyboardMarkup replyMarkup = new ReplyKeyboardMarkup();
         replyMarkup.setOneTimeKeyboard(true);
@@ -54,10 +55,10 @@ public class ContactState implements UserActivity {
         replyMarkup.setResizeKeyboard(true);
         replyMarkup.setKeyboard(keyboard);
 
-        return SendMessage.builder()
+        execute.sendMessage(SendMessage.builder()
                 .chatId(message.getChatId().toString())
                 .replyMarkup(replyMarkup)
                 .text(text)
-                .build();
+                .build());
     }
 }

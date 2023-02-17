@@ -2,6 +2,7 @@ package kz.kuanysh.bot.state.states;
 
 import kz.kuanysh.bot.buttons.InlineListButton;
 import kz.kuanysh.bot.buttons.PatternKeyboard;
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -36,7 +37,7 @@ public class CategoryState implements UserActivity {
 
     @Override
     public UserActivity nextDialogState() {
-        return new AboutState( );
+        return new AboutState();
     }
 
     @Override
@@ -50,13 +51,12 @@ public class CategoryState implements UserActivity {
     }
 
     @Override
-    public <T extends Serializable> BotApiMethod getKeyBoard(Message message, String text, String command) {
+    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
         List<List<InlineKeyboardButton>> keyboard = InlineListButton.listButtons(workNames(), callBackWorkNames());
         inlineKeyboardMarkup.setKeyboard(keyboard);
 
-        return PatternKeyboard.sendEdit(message, text, inlineKeyboardMarkup);
+        execute.sendMessageSerializable(PatternKeyboard.sendEdit(message, text, inlineKeyboardMarkup));
     }
-
 }

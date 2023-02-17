@@ -1,5 +1,6 @@
 package kz.kuanysh.bot.state.states;
 
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -25,15 +26,15 @@ public class StartState implements UserActivity {
 
     @Override
     public String getText(Message message) {
-        return  "Привет " + message.getChat().getFirstName()
+        return "Привет " + message.getChat().getFirstName()
                 + " \uD83E\uDD20, это бот для поиска работы и найма сотрудников, \n" +
                 "бот может работать со следующими командами \n" +
                 "/help : для ознакомления";
     }
 
     @Override
-    public BotApiMethod<Message> getKeyBoard(Message message ,String text,String command) {
-                WebAppInfo webAppInfo = new WebAppInfo();
+    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
+        WebAppInfo webAppInfo = new WebAppInfo();
         webAppInfo.setUrl("https://hh.kz/");
         ReplyKeyboardMarkup replyMarkup = new ReplyKeyboardMarkup();
         replyMarkup.setOneTimeKeyboard(true);
@@ -51,31 +52,12 @@ public class StartState implements UserActivity {
         keyboard.add(secondRow);
         replyMarkup.setResizeKeyboard(true);
         replyMarkup.setKeyboard(keyboard);
-        return SendMessage.builder()
+        execute.sendMessage(SendMessage.builder()
                 .chatId(message.getChatId().toString())
                 .replyMarkup(replyMarkup)
                 .text(text)
-                .build();
+                .build());
+
     }
-//
-//    @Override
-//    public Dialog createDialog() {
-//        return new StartDialog();
-//    }
-//
-//    @Override
-//    public Keyboard createKeyBoard() {
-//        return new StartKeyboard();
-//    }
-//
-//    @Override
-//    public void doEvent(UserService userService, Message message, String text) {
-//        userService.saveUserInBase(message);
-//    }
-//
-//    @Override
-//    public void execute(BotApiMethod<Serializable> response, SendBotMessageServiceImp sendBotMessageServiceImp) {
-//        sendBotMessageServiceImp.sendMessageSerializable(response);
-//    }
 }
 

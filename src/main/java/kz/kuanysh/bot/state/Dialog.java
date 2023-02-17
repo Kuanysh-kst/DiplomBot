@@ -1,17 +1,14 @@
 package kz.kuanysh.bot.state;
 
-import kz.kuanysh.bot.model.User;
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @Slf4j
@@ -35,8 +32,8 @@ public class Dialog implements Serializable {
         log.info("Current state:{}", state.getClass().getSimpleName());
     }
 
-    public BotApiMethod getKeyBoard(Message message, String command) {
-        return state.getKeyBoard(message, state.getText(message), command);
+    public void executeMessage(Message message, String command, SendBotMessageServiceImp execute) {
+        state.executeMessage(message, state.getText(message), command, execute);
     }
 
     public void backDialogState() {

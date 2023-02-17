@@ -1,6 +1,7 @@
 package kz.kuanysh.bot.state.states;
 
 import kz.kuanysh.bot.buttons.PatternKeyboard;
+import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -32,14 +33,8 @@ public class PhotoState implements UserActivity {
         return "Поделитесь фото для просмотра профиля \uD83C\uDFC4\u200D♂️";
     }
 
-    public static void main(String[] args) {
-        Message message = null;
-        System.out.println(message.getPhoto().getClass().getSimpleName()
-);
-    }
-
     @Override
-    public BotApiMethod<Message> getKeyBoard(Message message, String text, String command) {
+    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         List<InlineKeyboardButton> row1 = new ArrayList<>();
@@ -58,6 +53,6 @@ public class PhotoState implements UserActivity {
         keyboard.add(row1);
 
         inlineKeyboardMarkup.setKeyboard(keyboard);
-        return PatternKeyboard.sendInline(message.getChatId(), text, inlineKeyboardMarkup);
+        execute.sendMessage(PatternKeyboard.sendInline(message.getChatId(), text, inlineKeyboardMarkup));
     }
 }

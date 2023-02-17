@@ -7,7 +7,8 @@ import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
 import kz.kuanysh.bot.state.states.ShowResultState;
-import org.telegram.telegrambots.meta.api.methods.send.SendContact;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.util.List;
@@ -25,27 +26,24 @@ public class ShowResultChain extends DialogChain {
             userService.saveUserParameters(message, state);
             List<User> list = userService.findByChoiceAndCategory(message);
             Optional<User> userOp = list.stream().findFirst();
-            if (userOp.isPresent()){
+            if (userOp.isPresent()) {
                 User user = userOp.get();
-                var response = user.getContact();
-                SendContact sendContact = SendContact.builder()
+                var response = user.getFile();
+                InputFile inputFile = new InputFile(response);
+                SendPhoto sendPhoto = SendPhoto.builder()
                         .chatId(message.getChatId().toString())
-                        .phoneNumber(response.getPhoneNumber())
-                        .lastName(response.getLastName())
-                        .firstName(response.getFirstName())
+                        .photo(inputFile)
+                        .caption(user.getFirstName())
                         .build();
-                execute.sendMessage(sendContact);
+                execute.sendPhoto(sendPhoto);
             }
-
 
         } else if (command.equals("/back")) {
             state.backDialogState();
             userService.saveDialog(message, state);
             state.backDialogState();
 
-            var response = state.getKeyBoard(message, command);
-
-            execute.sendMessageSerializable(response);
+             state.executeMessage(message, command,execute);
         }
     }
 

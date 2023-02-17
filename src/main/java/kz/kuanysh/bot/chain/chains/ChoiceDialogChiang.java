@@ -18,17 +18,16 @@ public class ChoiceDialogChiang extends DialogChain {
     }
 
     @Override
-    protected void doProcess(Message message, Dialog context,String command, UserService userService, SendBotMessageServiceImp executeService) {
+    protected void doProcess(Message message, Dialog state,String command, UserService userService, SendBotMessageServiceImp execute) {
         if (command.equals("next")) {
-            var response = context.getKeyBoard(message,command);
-            executeService.sendMessageSerializable(response);
+            state.executeMessage(message, command, execute);
 
-            context.nextDialogState();
-            userService.saveDialog(message, context);
+            state.nextDialogState();
+            userService.saveDialog(message, state);
 
         } else {
             var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
-            executeService.sendMessage(response);
+            execute.sendMessage(response);
         }
     }
 

@@ -21,8 +21,8 @@ public class AboutChain extends DialogChain {
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
 
         if (Command.callBackWorkNames(command)) {
-            var response = state.getKeyBoard(message,command);
-            execute.sendMessageSerializable(response);
+            state.executeMessage(message, command, execute);
+;
             state.nextDialogState();
 
             state.setCategory(command);
@@ -32,10 +32,8 @@ public class AboutChain extends DialogChain {
             userService.saveDialog(message, state);
 
             state.backDialogState();
+            state.executeMessage(message, command, execute);
 
-            var response = state.getKeyBoard(message,command);
-
-            execute.sendMessageSerializable(response);
         } else {
             var response = PatternKeyboard.sendText(message.getChatId(), "Я About ещё не знаю как ответить на эту команду \uD83D\uDC7E");
             execute.sendMessage(response);

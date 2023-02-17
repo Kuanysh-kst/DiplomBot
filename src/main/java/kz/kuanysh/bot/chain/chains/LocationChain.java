@@ -6,7 +6,6 @@ import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
-import kz.kuanysh.bot.state.states.ContactState;
 import kz.kuanysh.bot.state.states.LocationState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
@@ -19,16 +18,15 @@ public class LocationChain extends DialogChain {
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         if (message.hasContact() ) {
-            var response = state.getKeyBoard(message, command);
-            execute.sendMessageSerializable(response);
+            state.executeMessage(message, command, execute);
 
             state.setContact(message.getContact());
 
             state.nextDialogState();
             userService.saveDialog(message, state);
         }else if (command.equals("/skip")){
-                    var response = state.getKeyBoard(message, command);
-            execute.sendMessageSerializable(response);
+            state.executeMessage(message, command, execute);
+
             state.nextDialogState();
             userService.saveDialog(message, state);
         }else if (command.equals("/back")) {
@@ -36,10 +34,8 @@ public class LocationChain extends DialogChain {
             userService.saveDialog(message, state);
 
             state.backDialogState();
+            state.executeMessage(message, command, execute);
 
-            var response = state.getKeyBoard(message, command);
-
-            execute.sendMessageSerializable(response);
         } else {
             var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
             execute.sendMessage(response);

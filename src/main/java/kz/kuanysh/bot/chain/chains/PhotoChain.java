@@ -1,12 +1,10 @@
 package kz.kuanysh.bot.chain.chains;
 
-import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
-import kz.kuanysh.bot.state.states.AboutState;
 import kz.kuanysh.bot.state.states.PhotoState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
@@ -18,31 +16,29 @@ public class PhotoChain extends DialogChain {
 
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
-       if (command.equals("/back")) {
+        if (command.equals("/back")) {
             state.backDialogState();
-           userService.saveDialog(message, state);
+            userService.saveDialog(message, state);
 
             state.backDialogState();
+            state.executeMessage(message, command, execute);
 
-            var response = state.getKeyBoard(message, command);
 
-            execute.sendMessageSerializable(response);
         } else if (command.equals("/skip")) {
-            var response = state.getKeyBoard(message, command);
-            execute.sendMessageSerializable(response);
+            state.executeMessage(message, command, execute);
 
             state.nextDialogState();
             userService.saveDialog(message, state);
 
-        }else if (message.hasText()){
-            var response = state.getKeyBoard(message, command);
-            execute.sendMessageSerializable(response);
+        } else if (message.hasText()) {
+            state.executeMessage(message, command, execute);
+
 
             state.setAbout(command);
 
             state.nextDialogState();
             userService.saveDialog(message, state);
-       }
+        }
     }
 
     @Override

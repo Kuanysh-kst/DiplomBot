@@ -18,13 +18,12 @@ public class StartDialogChain extends DialogChain {
     }
 
     @Override
-    protected void doProcess(Message message, Dialog context, String command, UserService userService, SendBotMessageServiceImp execute) {
+    protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         if (command.equals("/start")) {
-            var response = context.getKeyBoard(message,command);
-            execute.sendMessageSerializable(response);
+            state.executeMessage(message, command, execute);
 
-            context.nextDialogState();
-            userService.saveDialog(message, context);
+            state.nextDialogState();
+            userService.saveDialog(message, state);
 
         } else {
             var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
