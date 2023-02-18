@@ -1,5 +1,7 @@
 package kz.kuanysh.bot.chain.chains;
 
+import kz.kuanysh.bot.buttons.Markup;
+import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
@@ -11,9 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
+import java.io.File;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 public class ShowResultChain extends DialogChain {
@@ -28,65 +31,69 @@ public class ShowResultChain extends DialogChain {
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         int val = this.index;
 
-        if (command.equals("/result")) {
-            this.index = 0;
-            userService.saveUserParameters(message, state);
-            List<User> list = userService.findByChoiceAndCategory(message);
-            Optional<User> userOp = list.stream().findFirst();
+        switch (command) {
+            case "/result": {
+                this.index = 0;
+                userService.saveUserParameters(message, state);
+                List<User> userList = userService.findByChoiceAndCategory(message);
+                if (userList.isEmpty()) {
+                    String notFound = "notFound";
+                    File file = new File("not_found.jpg");
+                    InputFile inputFile = new InputFile(file);
+                    var response = PatternKeyboard.sendPhoto(message, notFound, inputFile, Markup.emptySlide());
+                    execute.sendPhoto(response);
+                }else {
+                    indexHandler(state, userList, message, execute, Markup.rightSlide(), index);
+                }
 
-            if (userOp.isPresent()) {
-                User user = userOp.get();
-
-                var response = user.getFile();
-                InputFile inputFile = new InputFile(response);
-                SendPhoto sendPhoto = SendPhoto.builder()
-                        .chatId(message.getChatId().toString())
-                        .photo(inputFile)
-                        .caption(user.getFirstName())
-                        .build();
-                execute.sendPhoto(sendPhoto);
+                break;
             }
+            case "/next": {
+                val++;
+                List<User> userList = userService.findByChoiceAndCategory(message);
+                if (val == userList.size() - 1) {
+                    this.index++;
+                    indexHandler(state, userList, message, execute, Markup.leftSlide(), index);
+                } else if (val < userList.size() && val >= 0) {
+                    this.index++;
+                    indexHandler(state, userList, message, execute, Markup.rightLeftSlide(), index);
+                }
 
-        } else if (command.equals("/next") ) {
-            val++;
-            List<User> userList = userService.findByChoiceAndCategory(message);
-            if (val < userList.size() && val >= 0) {
-                this.index++;
-                state.setUserIndex(+1);
-
-                User user = userList.get(index);
-                var response = user.getFile();
-                InputFile inputFile = new InputFile(response);
-                SendPhoto sendPhoto = SendPhoto.builder()
-                        .chatId(message.getChatId().toString())
-                        .photo(inputFile)
-                        .caption(user.getFirstName())
-                        .build();
-                execute.sendPhoto(sendPhoto);
+                break;
             }
+            case "/prev": {
+                val--;
+                List<User> userList = userService.findByChoiceAndCategory(message);
+                if (val == 0) {
+                    this.index--;
+                    indexHandler(state, userList, message, execute, Markup.rightSlide(), index);
+                } else if (val < userList.size() && val >= 0) {
+                    this.index--;
+                    indexHandler(state, userList, message, execute, Markup.rightLeftSlide(), index);
+                }
 
-        } else if (command.equals("/prev")) {
-            List<User> userList = userService.findByChoiceAndCategory(message);
-            val--;
-            if (val < userList.size() && val >= 0) {
-                --this.index;
-                User user = userList.get(index);
-                var response = user.getFile();
-                InputFile inputFile = new InputFile(response);
-                SendPhoto sendPhoto = SendPhoto.builder()
-                        .chatId(message.getChatId().toString())
-                        .photo(inputFile)
-                        .caption(user.getFirstName())
-                        .build();
-                execute.sendPhoto(sendPhoto);
+                break;
             }
-        } else if (command.equals("/back")) {
-            state.backDialogState();
-            userService.saveDialog(message, state);
-            state.backDialogState();
+            case "/back":
+                state.backDialogState();
+                userService.saveDialog(message, state);
+                state.backDialogState();
 
-            state.executeMessage(message, command, execute);
+                state.executeMessage(message, command, execute);
+                break;
         }
+    }
+
+    private void indexHandler(Dialog state, List<User> userList, Message message, SendBotMessageServiceImp execute, InlineKeyboardMarkup markup, int index) {
+        User user = userList.get(index);
+        var response = user.getFile();
+        InputFile inputFile = new InputFile(response);
+        SendPhoto sendPhoto = PatternKeyboard.sendPhoto(message, state.getText(message), inputFile, markup);
+        execute.sendPhoto(sendPhoto);
+    }
+
+    private void indexHandler(Message message, SendBotMessageServiceImp execute, InlineKeyboardMarkup markup) {
+
     }
 
     @Override

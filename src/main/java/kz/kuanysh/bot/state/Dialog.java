@@ -40,6 +40,10 @@ public class Dialog implements Serializable {
         state.executeMessage(message, state.getText(message), command, execute);
     }
 
+    public String getText(Message message){
+        return state.getText(message);
+    }
+
     public void backDialogState() {
         state = state.backDialogState();
     }

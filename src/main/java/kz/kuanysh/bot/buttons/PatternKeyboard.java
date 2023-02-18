@@ -5,16 +5,17 @@ import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
 public class PatternKeyboard {
-        public static PartialBotApiMethod<Message> sendPhoto(Message message,String text, String imageUrl) {
-        InputFile photo = new InputFile(String.valueOf(imageUrl));
+        public static SendPhoto sendPhoto(Message message, String text,InputFile inputFile ,InlineKeyboardMarkup markup ) {
         return SendPhoto.builder()
-                .photo(photo)
+                .replyMarkup(markup)
+                .photo(inputFile)
                 .chatId(message.getChatId().toString())
                 .caption(text)
                 .build();
