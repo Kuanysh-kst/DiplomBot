@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Comparator;
 import java.util.List;
+
 @Slf4j
 public class PhotoHandler {
 
@@ -25,12 +26,12 @@ public class PhotoHandler {
         if (photo != null) {
             try {
                 String fileUrl = execute.getPhotoUrl(photo);
-                URL url  = new URL(fileUrl);
-                File file = new File("photo_"+message.getChatId()+".jpg");
-                FileUtils.copyURLToFile(url,file);
+                URL url = new URL(fileUrl);
+                File file = new File("src/main/resources/Img/photo_" + message.getChatId() + ".jpg");
+                FileUtils.copyURLToFile(url, file);
                 state.setFile(file);
                 log.info("Photo is saved");
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

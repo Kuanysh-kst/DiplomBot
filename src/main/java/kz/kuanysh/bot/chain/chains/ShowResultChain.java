@@ -38,7 +38,7 @@ public class ShowResultChain extends DialogChain {
                 List<User> userList = userService.findByChoiceAndCategory(message);
                 if (userList.isEmpty()) {
                     String notFound = "notFound";
-                    File file = new File("not_found.jpg");
+                    File file = new File("src/main/resources/Img/not_found_users.jpg");
                     InputFile inputFile = new InputFile(file);
                     var response = PatternKeyboard.sendPhoto(message, notFound, inputFile, Markup.emptySlide());
                     execute.sendPhoto(response);

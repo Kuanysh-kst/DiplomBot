@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f849323b-9126-4f6c-9880-be17e28e6a64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/not_found.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/photo.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/photo1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/photo_928437440.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/Markup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Img/not_found_users.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/executionHistory/executionHistory.bin" afterDir="false" />
@@ -19,13 +15,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/buttons/PatternKeyboard.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/buttons/PatternKeyboard.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/ShowResultChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/ShowResultChain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/state/Dialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/state/Dialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/photo/PhotoHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/photo/PhotoHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/Img/somePeopPic.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/PatternKeyboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/PatternKeyboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/not_found.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/photo_928437440.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/ShowResultChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/ShowResultChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/state/Dialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/state/Dialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/photo/PhotoHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/photo/PhotoHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Img/somePeopPic.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +86,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/kuanysh/projects/DiplomBot",
+    "last_opened_file_path": "/home/kuanysh/projects/DiplomBot/src/main/resources/Img",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -97,8 +95,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/main/resources/Img" />
+      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
