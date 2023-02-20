@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.PartialBotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendContact;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -58,6 +59,18 @@ public class SendBotMessageServiceImp implements SendBotMessageService {
             bot.execute(response);
         } catch (TelegramApiException e) {
             log.error("Error occurred: " + e);
+        }
+    }
+
+    public void deleteMessageById(Message message, Integer messageId) {
+        DeleteMessage deleteMessage = DeleteMessage.builder()
+                .chatId(message.getChatId().toString())
+                .messageId(messageId)
+                .build();
+        try {
+            bot.execute(deleteMessage);
+        } catch (TelegramApiException e) {
+            log.error("Error occurred:" + e);
         }
     }
 

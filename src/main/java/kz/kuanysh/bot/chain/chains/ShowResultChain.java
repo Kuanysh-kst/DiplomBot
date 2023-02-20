@@ -25,6 +25,8 @@ import java.util.List;
 public class ShowResultChain extends DialogChain {
 
     private int index;
+    private List<User> currentUsersList;
+
 
     public ShowResultChain(DialogChain nextChain) {
         super(nextChain);
@@ -35,7 +37,7 @@ public class ShowResultChain extends DialogChain {
         int val = this.index;
 
         switch (command) {
-            case "/goToMenu":   {
+            case "/goToMenu": {
                 state.setState(new ChoiceState());
                 state.executeMessage(message, command, execute);
 
@@ -64,43 +66,45 @@ public class ShowResultChain extends DialogChain {
             case "/result": {
                 this.index = 0;
                 userService.saveUserParameters(message, state);
-                List<User> userList = userService.findByChoiceAndCategory(message);
-                if (userList.isEmpty()) {
+                this.currentUsersList = userService.findByChoiceAndCategory(message);
+                if (currentUsersList.isEmpty()) {
                     String notFound = "Упс , по вашему запросу нет результата \uD83E\uDEE4, вы можете ожидать отклика или удалить настройки своего профиля";
-                    File file = new File("src/main/resources/Img/not_found_users.jpg");
+                    File file = new File("src/main/resources/Img/not_found_users.jpeg");
                     InputFile inputFile = new InputFile(file);
                     var response = PatternKeyboard.sendPhoto(message, notFound, inputFile, Markup.emptySlide());
                     execute.sendPhoto(response);
-                } else if (userList.size() == 1) {
-                    sendMedia(state, userList, message, execute, Markup.oneSlide(), index);
+                } else if (currentUsersList.size() == 1) {
+                    sendMedia(state, currentUsersList, message, execute, Markup.oneSlide(), index);
                 } else {
-                    sendMedia(state, userList, message, execute, Markup.rightSlide(), index);
+                    sendMedia(state, currentUsersList, message, execute, Markup.rightSlide(), index);
                 }
 
                 break;
             }
             case "/next": {
                 val++;
-                List<User> userList = userService.findByChoiceAndCategory(message);
-                if (val == userList.size() - 1) {
+                if (val == currentUsersList.size() - 1) {
                     this.index++;
-                    sendMedia(state, userList, message, execute, Markup.leftSlide(), index);
-                } else if (val < userList.size() && val >= 0) {
+
+                    sendMedia(state, currentUsersList, message, execute, Markup.leftSlide(), index);
+                } else if (val < currentUsersList.size() && val >= 0) {
                     this.index++;
-                    sendMedia(state, userList, message, execute, Markup.rightLeftSlide(), index);
+
+                    sendMedia(state, currentUsersList, message, execute, Markup.rightLeftSlide(), index);
                 }
 
                 break;
             }
             case "/prev": {
                 val--;
-                List<User> userList = userService.findByChoiceAndCategory(message);
                 if (val == 0) {
                     this.index--;
-                    sendMedia(state, userList, message, execute, Markup.rightSlide(), index);
-                } else if (val < userList.size() && val >= 0) {
+
+                    sendMedia(state, currentUsersList, message, execute, Markup.rightSlide(), index);
+                } else if (val < currentUsersList.size() && val >= 0) {
                     this.index--;
-                    sendMedia(state, userList, message, execute, Markup.rightLeftSlide(), index);
+
+                    sendMedia(state, currentUsersList, message, execute, Markup.rightLeftSlide(), index);
                 }
 
                 break;
