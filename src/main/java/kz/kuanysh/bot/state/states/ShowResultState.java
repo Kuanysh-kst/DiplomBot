@@ -13,7 +13,7 @@ public class ShowResultState implements UserActivity {
 
     @Override
     public UserActivity nextDialogState() {
-        return new FinishState();
+        return new CategoryState();
     }
 
     @Override

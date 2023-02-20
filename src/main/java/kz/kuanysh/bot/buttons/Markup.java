@@ -73,4 +73,18 @@ public class Markup {
         markup.setKeyboard(List.of(List.of(toStart)));
         return markup;
     }
+
+    public static InlineKeyboardMarkup oneSlide() {
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        InlineKeyboardButton getContact = InlineKeyboardButton.builder()
+                .text("Получить контакт")
+                .callbackData("/getContact")
+                .build();
+        InlineKeyboardButton toStart = InlineKeyboardButton.builder()
+                .text("назад в меню")
+                .callbackData("/goToMenu")
+                .build();
+        markup.setKeyboard(List.of(List.of(getContact), List.of(toStart)));
+        return markup;
+    }
 }

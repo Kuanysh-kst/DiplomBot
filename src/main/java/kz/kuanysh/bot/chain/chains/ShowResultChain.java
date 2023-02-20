@@ -8,9 +8,12 @@ import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
+import kz.kuanysh.bot.state.states.ChoiceState;
 import kz.kuanysh.bot.state.states.ShowResultState;
 import lombok.extern.slf4j.Slf4j;
+import org.telegram.telegrambots.meta.api.methods.send.SendContact;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -32,18 +35,46 @@ public class ShowResultChain extends DialogChain {
         int val = this.index;
 
         switch (command) {
+            case "/goToMenu":   {
+                state.setState(new ChoiceState());
+                state.executeMessage(message, command, execute);
+
+                state.nextDialogState();
+                userService.saveDialog(message, state);
+                break;
+            }
+            case "/getContact": {
+                List<User> userList = userService.findByChoiceAndCategory(message);
+                Contact currentContact = userList.get(index).getContact();
+                if (currentContact == null) {
+                    var response = PatternKeyboard.sendText(message.getChatId(), "Упс контакт не существует \uD83D\uDC7E");
+                    execute.sendMessage(response);
+                } else {
+                    var response = SendContact.builder()
+                            .chatId(message.getChatId().toString())
+                            .phoneNumber(currentContact.getPhoneNumber())
+                            .firstName(currentContact.getFirstName())
+                            .lastName(currentContact.getLastName())
+                            .build();
+                    execute.sendMessage(response);
+                }
+
+                break;
+            }
             case "/result": {
                 this.index = 0;
                 userService.saveUserParameters(message, state);
                 List<User> userList = userService.findByChoiceAndCategory(message);
                 if (userList.isEmpty()) {
-                    String notFound = "notFound";
+                    String notFound = "Упс , по вашему запросу нет результата \uD83E\uDEE4, вы можете ожидать отклика или удалить настройки своего профиля";
                     File file = new File("src/main/resources/Img/not_found_users.jpg");
                     InputFile inputFile = new InputFile(file);
                     var response = PatternKeyboard.sendPhoto(message, notFound, inputFile, Markup.emptySlide());
                     execute.sendPhoto(response);
-                }else {
-                    indexHandler(state, userList, message, execute, Markup.rightSlide(), index);
+                } else if (userList.size() == 1) {
+                    sendMedia(state, userList, message, execute, Markup.oneSlide(), index);
+                } else {
+                    sendMedia(state, userList, message, execute, Markup.rightSlide(), index);
                 }
 
                 break;
@@ -53,10 +84,10 @@ public class ShowResultChain extends DialogChain {
                 List<User> userList = userService.findByChoiceAndCategory(message);
                 if (val == userList.size() - 1) {
                     this.index++;
-                    indexHandler(state, userList, message, execute, Markup.leftSlide(), index);
+                    sendMedia(state, userList, message, execute, Markup.leftSlide(), index);
                 } else if (val < userList.size() && val >= 0) {
                     this.index++;
-                    indexHandler(state, userList, message, execute, Markup.rightLeftSlide(), index);
+                    sendMedia(state, userList, message, execute, Markup.rightLeftSlide(), index);
                 }
 
                 break;
@@ -66,10 +97,10 @@ public class ShowResultChain extends DialogChain {
                 List<User> userList = userService.findByChoiceAndCategory(message);
                 if (val == 0) {
                     this.index--;
-                    indexHandler(state, userList, message, execute, Markup.rightSlide(), index);
+                    sendMedia(state, userList, message, execute, Markup.rightSlide(), index);
                 } else if (val < userList.size() && val >= 0) {
                     this.index--;
-                    indexHandler(state, userList, message, execute, Markup.rightLeftSlide(), index);
+                    sendMedia(state, userList, message, execute, Markup.rightLeftSlide(), index);
                 }
 
                 break;
@@ -84,7 +115,7 @@ public class ShowResultChain extends DialogChain {
         }
     }
 
-    private void indexHandler(Dialog state, List<User> userList, Message message, SendBotMessageServiceImp execute, InlineKeyboardMarkup markup, int index) {
+    private void sendMedia(Dialog state, List<User> userList, Message message, SendBotMessageServiceImp execute, InlineKeyboardMarkup markup, int index) {
         User user = userList.get(index);
         var response = user.getFile();
         InputFile inputFile = new InputFile(response);
@@ -92,9 +123,6 @@ public class ShowResultChain extends DialogChain {
         execute.sendPhoto(sendPhoto);
     }
 
-    private void indexHandler(Message message, SendBotMessageServiceImp execute, InlineKeyboardMarkup markup) {
-
-    }
 
     @Override
     protected boolean shouldProcessState(UserActivity userActivity) {
