@@ -1,6 +1,6 @@
 package kz.kuanysh.bot.chain.chains;
 
-import kz.kuanysh.bot.buttons.Markup;
+import kz.kuanysh.bot.buttons.SliderMarkup;
 import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.model.User;
@@ -8,15 +8,14 @@ import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import kz.kuanysh.bot.state.UserActivity;
-import kz.kuanysh.bot.state.states.ChoiceState;
 import kz.kuanysh.bot.state.states.ShowResultState;
+import kz.kuanysh.bot.state.states.StartState;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendContact;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 
 import java.io.File;
 import java.util.List;
@@ -37,15 +36,15 @@ public class ShowResultChain extends DialogChain {
         int val = this.index;
 
         switch (command) {
-            case "/goToMenu": {
-                state.setState(new ChoiceState());
+            case "вернуться к выбору": {
+                state.setState(new StartState());
                 state.executeMessage(message, command, execute);
 
                 state.nextDialogState();
                 userService.saveDialog(message, state);
                 break;
             }
-            case "/getContact": {
+            case "получить контакт": {
                 List<User> userList = userService.findByChoiceAndCategory(message);
                 Contact currentContact = userList.get(index).getContact();
                 if (currentContact == null) {
@@ -69,44 +68,42 @@ public class ShowResultChain extends DialogChain {
                 this.currentUsersList = userService.findByChoiceAndCategory(message);
                 if (currentUsersList.isEmpty()) {
                     String notFound = "Упс , по вашему запросу нет результата \uD83E\uDEE4, вы можете ожидать отклика или удалить настройки своего профиля";
-                    File file = new File("src/main/resources/Img/not_found_users.jpeg");
-                    InputFile inputFile = new InputFile(file);
-                    var response = PatternKeyboard.sendPhoto(message, notFound, inputFile, Markup.emptySlide());
+                    InputFile inputFile = new InputFile(new File("src/main/resources/Img/not_found_users.jpeg"));
+                    var response = PatternKeyboard.sendPhoto(message, notFound, inputFile, SliderMarkup.emptySlide());
+
                     execute.sendPhoto(response);
                 } else if (currentUsersList.size() == 1) {
-                    sendMedia(state, currentUsersList, message, execute, Markup.oneSlide(), index);
+                    var oneFoundFile = new InputFile(currentUsersList.get(index).getFile());
+                    var response = PatternKeyboard.sendPhoto(message, state.getText(message), oneFoundFile, SliderMarkup.oneSlide());
+
+                    execute.sendPhoto(response);
                 } else {
-                    sendMedia(state, currentUsersList, message, execute, Markup.rightSlide(), index);
+                    var foundFile = new InputFile(currentUsersList.get(index).getFile());
+                    var response = PatternKeyboard.sendPhoto(message, state.getText(message), foundFile, SliderMarkup.rightLeftSlide());
+                    execute.sendPhoto(response);
                 }
-
                 break;
             }
-            case "/next": {
+            case ">>": {
                 val++;
-                if (val == currentUsersList.size() - 1) {
+                if (val < currentUsersList.size()) {
                     this.index++;
 
-                    sendMedia(state, currentUsersList, message, execute, Markup.leftSlide(), index);
-                } else if (val < currentUsersList.size() && val >= 0) {
-                    this.index++;
-
-                    sendMedia(state, currentUsersList, message, execute, Markup.rightLeftSlide(), index);
+                    sendMedia(state, currentUsersList, message, execute, index);
+                } else {
+                    execute.sendMessage(PatternKeyboard.sendText(message.getChatId(), "Это конец списка"));
                 }
-
                 break;
             }
-            case "/prev": {
+            case "<<": {
                 val--;
-                if (val == 0) {
+                if (val >= 0) {
                     this.index--;
 
-                    sendMedia(state, currentUsersList, message, execute, Markup.rightSlide(), index);
-                } else if (val < currentUsersList.size() && val >= 0) {
-                    this.index--;
-
-                    sendMedia(state, currentUsersList, message, execute, Markup.rightLeftSlide(), index);
+                    sendMedia(state, currentUsersList, message, execute, index);
+                } else {
+                    execute.sendMessage(PatternKeyboard.sendText(message.getChatId(), "Это начало списка"));
                 }
-
                 break;
             }
             case "/back":
@@ -119,11 +116,10 @@ public class ShowResultChain extends DialogChain {
         }
     }
 
-    private void sendMedia(Dialog state, List<User> userList, Message message, SendBotMessageServiceImp execute, InlineKeyboardMarkup markup, int index) {
+    private void sendMedia(Dialog state, List<User> userList, Message message, SendBotMessageServiceImp execute, int index) {
         User user = userList.get(index);
-        var response = user.getFile();
-        InputFile inputFile = new InputFile(response);
-        SendPhoto sendPhoto = PatternKeyboard.sendPhoto(message, state.getText(message), inputFile, markup);
+        InputFile inputFile = new InputFile(user.getFile());
+        SendPhoto sendPhoto = PatternKeyboard.sendPhoto(message, state.getText(message), inputFile);
         execute.sendPhoto(sendPhoto);
     }
 

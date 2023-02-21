@@ -8,14 +8,21 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageMe
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.media.InputMediaPhoto;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
 public class PatternKeyboard {
-    public static SendPhoto sendPhoto(Message message, String text, InputFile inputFile, InlineKeyboardMarkup markup) {
+    public static SendPhoto sendPhoto(Message message, String text, InputFile inputFile, ReplyKeyboardMarkup markup) {
         return SendPhoto.builder()
                 .replyMarkup(markup)
+                .photo(inputFile)
+                .chatId(message.getChatId().toString())
+                .caption(text)
+                .build();
+    }
+
+    public static SendPhoto sendPhoto(Message message, String text, InputFile inputFile) {
+        return SendPhoto.builder()
                 .photo(inputFile)
                 .chatId(message.getChatId().toString())
                 .caption(text)

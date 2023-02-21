@@ -2,8 +2,6 @@ package kz.kuanysh.bot.state.states;
 
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.*;
 
 import java.io.Serializable;
@@ -28,6 +26,7 @@ public class ShowResultState implements UserActivity {
 
     @Override
     public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
+
     }
 
 
