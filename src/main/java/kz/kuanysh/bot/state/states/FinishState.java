@@ -3,11 +3,7 @@ package kz.kuanysh.bot.state.states;
 import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.objects.*;
-
-import java.io.Serializable;
-import java.util.List;
+import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class FinishState implements UserActivity{
 
@@ -24,7 +20,7 @@ public class FinishState implements UserActivity{
     }
 
     @Override
-    public String getText(Message message) {
+    public String getText(Message message, User user) {
         return null;
     }
 

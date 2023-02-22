@@ -1,6 +1,5 @@
 package kz.kuanysh.bot.state;
 
-import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -10,8 +9,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
 
 @Data
 @Slf4j

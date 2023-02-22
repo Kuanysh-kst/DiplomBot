@@ -1,19 +1,15 @@
 package kz.kuanysh.bot.state.states;
 
+import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Contact;
-import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ContactState implements UserActivity {
 
@@ -28,7 +24,7 @@ public class ContactState implements UserActivity {
     }
 
     @Override
-    public String getText(Message message) {
+    public String getText(Message message, User user) {
         return "Для дальнейшего пойска нужен ваш контак \uD83D\uDCDE";
     }
 

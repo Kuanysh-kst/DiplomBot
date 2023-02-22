@@ -7,8 +7,10 @@ import kz.kuanysh.bot.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Contact;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
+import java.io.File;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
@@ -50,9 +52,9 @@ public class UserService {
         if (userRepository.findById(message.getChatId()).isEmpty()) {
             var chatId = message.getChatId();
             var chat = message.getChat();
-            Contact contact = message.getContact();
-
+            var photoInMessage =  new File("src/main/resources/Img/default.jpeg");
             User user = new User();
+            user.setFile(photoInMessage);
             user.setChatId(chatId);
             user.setFirstName(chat.getFirstName());
             user.setLastName(chat.getLastName());
@@ -66,7 +68,7 @@ public class UserService {
     public void saveUserParameters(Message message, Dialog state) {
         var chatId = message.getChatId();
         var chat = message.getChat();
-        User user = new User();
+        User user = getUserById(chatId);
         user.setChatId(chatId);
         user.setFirstName(chat.getFirstName());
         user.setLastName(chat.getLastName());

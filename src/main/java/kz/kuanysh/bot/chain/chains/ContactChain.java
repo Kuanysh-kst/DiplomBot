@@ -21,7 +21,7 @@ public class ContactChain extends DialogChain {
         if (message.hasPhoto()) {
             state.executeMessage(message, command, execute);
 
-            PhotoHandler.savePhoto(execute,message,state);
+            PhotoHandler.savePhotoInFile(execute,message,state);
             state.nextDialogState();
             userService.saveDialog(message, state);
         } else if (command.equals("/skip")) {

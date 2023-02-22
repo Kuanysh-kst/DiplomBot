@@ -2,14 +2,13 @@ package kz.kuanysh.bot.state.states;
 
 import kz.kuanysh.bot.buttons.InlineListButton;
 import kz.kuanysh.bot.buttons.PatternKeyboard;
+import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.io.Serializable;
 import java.util.List;
 
 public class CategoryState implements UserActivity {
@@ -46,7 +45,7 @@ public class CategoryState implements UserActivity {
     }
 
     @Override
-    public String getText(Message message) {
+    public String getText(Message message, User user) {
         return "Выберите категорию для работы";
     }
 

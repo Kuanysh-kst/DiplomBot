@@ -1,16 +1,15 @@
 package kz.kuanysh.bot.state.states;
 
+import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.*;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LocationState implements UserActivity {
 
@@ -26,7 +25,7 @@ public class LocationState implements UserActivity {
     }
 
     @Override
-    public String getText(Message message) {
+    public String getText(Message message, User user) {
         return "Вы можето поделится свойм местоположением для других соискателей \uD83D\uDDFA";
     }
 

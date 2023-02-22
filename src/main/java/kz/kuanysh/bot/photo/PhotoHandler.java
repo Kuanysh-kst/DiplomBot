@@ -1,7 +1,6 @@
 package kz.kuanysh.bot.photo;
 
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
-import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
@@ -17,7 +16,7 @@ import java.util.List;
 @Slf4j
 public class PhotoHandler {
 
-    public static void savePhoto(SendBotMessageServiceImp execute, Message message, Dialog state) {
+    public static void savePhotoInFile(SendBotMessageServiceImp execute, Message message, Dialog state) {
 
         List<PhotoSize> photos = message.getPhoto();
         PhotoSize photo = photos.stream()
@@ -36,4 +35,6 @@ public class PhotoHandler {
             }
         }
     }
+
+
 }

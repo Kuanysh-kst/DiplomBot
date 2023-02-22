@@ -4,8 +4,7 @@ import kz.kuanysh.bot.buttons.PatternKeyboard;
 import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.objects.*;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
@@ -24,7 +23,7 @@ public class ResultState implements UserActivity {
     }
 
     @Override
-    public String getText(Message message) {
+    public String getText(Message message, User user) {
         return "Результат основан на ваших данных \n " +
                 "подробнее о лицах которые вам пришли " +
                 "вы можете узнать через кнопку  show \uD83D\uDCE0: ";
