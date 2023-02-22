@@ -1,7 +1,6 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.buttons.PatternKeyboard;
-import kz.kuanysh.bot.model.User;
+import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -24,7 +23,7 @@ public class AboutState implements UserActivity {
     }
 
     @Override
-    public String getText(Message message, User user) {
+    public String getText(Message message) {
         return "Напишите о себе \uD83E\uDD2A, это важно для ознакомления";
     }
 
@@ -48,6 +47,6 @@ public class AboutState implements UserActivity {
         keyboard.add(row1);
 
         inlineKeyboardMarkup.setKeyboard(keyboard);
-        execute.sendMessageSerializable(PatternKeyboard.sendEdit(message, text, inlineKeyboardMarkup));
+        execute.sendMessageSerializable(SendModels.sendEdit(message, text, inlineKeyboardMarkup));
     }
 }

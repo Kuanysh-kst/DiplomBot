@@ -1,7 +1,6 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.buttons.PatternKeyboard;
-import kz.kuanysh.bot.model.User;
+import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -26,7 +25,7 @@ public class PhotoState implements UserActivity {
     }
 
     @Override
-    public String getText(Message message, User user) {
+    public String getText(Message message) {
         return "Поделитесь фото для просмотра профиля \uD83C\uDFC4\u200D♂️";
     }
 
@@ -50,6 +49,6 @@ public class PhotoState implements UserActivity {
         keyboard.add(row1);
 
         inlineKeyboardMarkup.setKeyboard(keyboard);
-        execute.sendMessage(PatternKeyboard.sendInline(message.getChatId(), text, inlineKeyboardMarkup));
+        execute.sendMessage(SendModels.sendInline(message.getChatId(), text, inlineKeyboardMarkup));
     }
 }

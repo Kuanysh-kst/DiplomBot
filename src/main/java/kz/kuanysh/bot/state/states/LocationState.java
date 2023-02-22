@@ -1,6 +1,5 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -25,7 +24,7 @@ public class LocationState implements UserActivity {
     }
 
     @Override
-    public String getText(Message message, User user) {
+    public String getText(Message message) {
         return "Вы можето поделится свойм местоположением для других соискателей \uD83D\uDDFA";
     }
 

@@ -1,8 +1,9 @@
 package kz.kuanysh.bot.chain.chains;
 
 import kz.kuanysh.bot.buttons.SliderMarkup;
-import kz.kuanysh.bot.buttons.PatternKeyboard;
+import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
+import kz.kuanysh.bot.chain.interfaces.CreateAboutText;
 import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
@@ -12,10 +13,10 @@ import kz.kuanysh.bot.state.states.ShowResultState;
 import kz.kuanysh.bot.state.states.StartState;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendContact;
-import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
 import java.io.File;
 import java.util.List;
@@ -26,6 +27,7 @@ public class ShowResultChain extends DialogChain {
     private int index;
     private List<User> currentUsersList;
 
+    CreateAboutText text = (user) -> "Пользоваетель под именем " + user.getFirstName() + ", написал о себе следуещее: \n" + user.getAbout();
 
     public ShowResultChain(DialogChain nextChain) {
         super(nextChain);
@@ -35,74 +37,57 @@ public class ShowResultChain extends DialogChain {
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         int val = this.index;
 
+
         switch (command) {
             case "вернуться к выбору": {
                 state.setState(new StartState());
-                state.executeMessage(message, command, execute);
+                state.sendKeyBoard(message, command, execute);
 
                 state.nextDialogState();
                 userService.saveDialog(message, state);
                 break;
             }
             case "получить контакт": {
-                List<User> userList = userService.findByChoiceAndCategory(message);
-                Contact currentContact = userList.get(index).getContact();
+                Contact currentContact = currentUsersList.get(index).getContact();
                 if (currentContact == null) {
-                    var response = PatternKeyboard.sendText(message.getChatId(), "Упс контакт не существует \uD83D\uDC7E");
+                    var response = SendModels.sendText(message.getChatId(), "Упс контакт не существует \uD83D\uDC7E");
                     execute.sendMessage(response);
                 } else {
-                    var response = SendContact.builder()
-                            .chatId(message.getChatId().toString())
-                            .phoneNumber(currentContact.getPhoneNumber())
-                            .firstName(currentContact.getFirstName())
-                            .lastName(currentContact.getLastName())
-                            .build();
-                    execute.sendMessage(response);
+                    execute.sendMessage(SendModels.sendContact(message,currentContact));
                 }
-
                 break;
             }
             case "/result": {
                 this.index = 0;
                 userService.saveUserParameters(message, state);
                 this.currentUsersList = userService.findByChoiceAndCategory(message);
+
                 if (currentUsersList.isEmpty()) {
                     String notFound = "Упс , по вашему запросу нет результата \uD83E\uDEE4, вы можете ожидать отклика или удалить настройки своего профиля";
                     InputFile inputFile = new InputFile(new File("src/main/resources/Img/not_found_users.jpeg"));
-                    var response = PatternKeyboard.sendPhoto(message, notFound, inputFile, SliderMarkup.emptySlide());
-
-                    execute.sendPhoto(response);
-                } else if (currentUsersList.size() == 1) {
-                    var oneFoundFile = new InputFile(currentUsersList.get(index).getFile());
-                    var response = PatternKeyboard.sendPhoto(message, state.getText(message), oneFoundFile, SliderMarkup.oneSlide());
-
+                    var response = SendModels.sendPhoto(message, notFound, inputFile, SliderMarkup.emptySlide());
                     execute.sendPhoto(response);
                 } else {
-                    var foundFile = new InputFile(currentUsersList.get(index).getFile());
-                    var response = PatternKeyboard.sendPhoto(message, state.getText(message), foundFile, SliderMarkup.rightLeftSlide());
-                    execute.sendPhoto(response);
+                    var markupType = currentUsersList.size() == 1 ? SliderMarkup.oneSlide() : SliderMarkup.rightLeftSlide();
+                    var aboutText = currentUsersList.size() == 1 ? text.getAboutText(currentUsersList.get(0)) : text.getAboutText(currentUsersList.get(index));
+                    var photoFile = new InputFile(currentUsersList.get(index).getFile());
+                    sendMedia(message, execute, aboutText, photoFile, markupType);
                 }
                 break;
             }
             case ">>": {
-                val++;
-                if (val < currentUsersList.size()) {
-                    this.index++;
-
-                    sendMedia(state, currentUsersList, message, execute, index);
+                if (++val < currentUsersList.size()) {
+                    sendMedia(message, execute, ++index);
                 } else {
-                    execute.sendMessage(PatternKeyboard.sendText(message.getChatId(), "Это конец списка"));
+                    execute.sendMessage(SendModels.sendText(message.getChatId(), "Это конец списка"));
                 }
                 break;
             }
             case "<<": {
-                val--;
-                if (val >= 0) {
-                    this.index--;
-
-                    sendMedia(state, currentUsersList, message, execute, index);
+                if (--val >= 0) {
+                    sendMedia(message, execute, --index);
                 } else {
-                    execute.sendMessage(PatternKeyboard.sendText(message.getChatId(), "Это начало списка"));
+                    execute.sendMessage(SendModels.sendText(message.getChatId(), "Это начало списка"));
                 }
                 break;
             }
@@ -110,19 +95,22 @@ public class ShowResultChain extends DialogChain {
                 state.backDialogState();
                 userService.saveDialog(message, state);
                 state.backDialogState();
-
-                state.executeMessage(message, command, execute);
+                state.sendKeyBoard(message, command, execute);
                 break;
         }
     }
 
-    private void sendMedia(Dialog state, List<User> userList, Message message, SendBotMessageServiceImp execute, int index) {
-        User user = userList.get(index);
-        InputFile inputFile = new InputFile(user.getFile());
-        SendPhoto sendPhoto = PatternKeyboard.sendPhoto(message, state.getText(message), inputFile);
-        execute.sendPhoto(sendPhoto);
+    private void sendMedia(Message message, SendBotMessageServiceImp execute, String about, InputFile photoFile, ReplyKeyboardMarkup markup) {
+        var response = SendModels.sendPhoto(message, about, photoFile, markup);
+        execute.sendPhoto(response);
     }
 
+    private void sendMedia(Message message, SendBotMessageServiceImp execute, int index) {
+        User user = currentUsersList.get(index);
+        var inputFile = new InputFile(user.getFile());
+        var response = SendModels.sendPhoto(message, text.getAboutText(user), inputFile);
+        execute.sendPhoto(response);
+    }
 
     @Override
     protected boolean shouldProcessState(UserActivity userActivity) {

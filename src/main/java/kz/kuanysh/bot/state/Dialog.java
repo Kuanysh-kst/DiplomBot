@@ -33,7 +33,7 @@ public class Dialog implements Serializable {
         log.info("Current state:{}", state.getClass().getSimpleName());
     }
 
-    public void executeMessage(Message message, String command, SendBotMessageServiceImp execute) {
+    public void sendKeyBoard(Message message, String command, SendBotMessageServiceImp execute) {
         state.executeMessage(message, state.getText(message), command, execute);
     }
 

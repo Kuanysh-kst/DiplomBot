@@ -1,6 +1,5 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -25,7 +24,7 @@ public class StartState implements UserActivity {
     }
 
     @Override
-    public String getText(Message message, User user) {
+    public String getText(Message message) {
         return "Привет " + message.getChat().getFirstName()
                 + " \uD83E\uDD20, это бот для поиска работы и найма сотрудников, \n" +
                 "бот может работать со следующими командами \n" +

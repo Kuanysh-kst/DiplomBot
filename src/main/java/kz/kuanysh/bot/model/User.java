@@ -12,6 +12,7 @@ import java.io.File;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity(name = "usersDataTable")
@@ -30,6 +31,10 @@ public class User {
     private Contact contact;
     private Location location;
     private Dialog dialog;
+
+    public String getAbout() {
+        return Objects.requireNonNullElse(about, "....");
+    }
 
     @Override
     public String toString() {

@@ -1,17 +1,17 @@
 package kz.kuanysh.bot.buttons;
 
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
-import org.telegram.telegrambots.meta.api.methods.ParseMode;
+import org.telegram.telegrambots.meta.api.methods.send.SendContact;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageMedia;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
+import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
-public class PatternKeyboard {
+public class SendModels {
     public static SendPhoto sendPhoto(Message message, String text, InputFile inputFile, ReplyKeyboardMarkup markup) {
         return SendPhoto.builder()
                 .replyMarkup(markup)
@@ -26,6 +26,14 @@ public class PatternKeyboard {
                 .photo(inputFile)
                 .chatId(message.getChatId().toString())
                 .caption(text)
+                .build();
+    }
+    public static SendContact sendContact(Message message, Contact contact){
+        return SendContact.builder()
+                .chatId(message.getChatId().toString())
+                .phoneNumber(contact.getPhoneNumber())
+                .firstName(contact.getFirstName())
+                .lastName(contact.getLastName())
                 .build();
     }
 

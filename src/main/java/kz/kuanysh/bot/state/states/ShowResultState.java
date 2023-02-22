@@ -1,9 +1,8 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.*;
 
 public class ShowResultState implements UserActivity {
 
@@ -19,7 +18,7 @@ public class ShowResultState implements UserActivity {
     }
 
     @Override
-    public String getText(Message message, User user) {
+    public String getText(Message message) {
         return "it's show result state";
     }
 

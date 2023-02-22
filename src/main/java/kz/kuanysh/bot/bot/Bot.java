@@ -1,6 +1,6 @@
 package kz.kuanysh.bot.bot;
 
-import kz.kuanysh.bot.buttons.PatternKeyboard;
+import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.chain.chains.*;
 import kz.kuanysh.bot.config.BotConfig;
@@ -99,7 +99,7 @@ public class Bot extends TelegramLongPollingBot {
         for (Ads ad : ads) {
             for (User user : users) {
                 try {
-                    execute(PatternKeyboard.sendText(user.getChatId(), ad.getAd()));
+                    execute(SendModels.sendText(user.getChatId(), ad.getAd()));
                 } catch (TelegramApiException e) {
                     log.error("Error occurred: " + e.getMessage());
                 }

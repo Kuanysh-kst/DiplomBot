@@ -1,10 +1,9 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.buttons.PatternKeyboard;
-import kz.kuanysh.bot.model.User;
+import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.*;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
@@ -23,7 +22,7 @@ public class ResultState implements UserActivity {
     }
 
     @Override
-    public String getText(Message message, User user) {
+    public String getText(Message message) {
         return "Результат основан на ваших данных \n " +
                 "подробнее о лицах которые вам пришли " +
                 "вы можете узнать через кнопку  show \uD83D\uDCE0: ";
@@ -49,6 +48,6 @@ public class ResultState implements UserActivity {
         keyboard.add(row1);
 
         inlineKeyboardMarkup.setKeyboard(keyboard);
-        execute.sendMessage(PatternKeyboard.sendInline(message.getChatId(), text, inlineKeyboardMarkup));
+        execute.sendMessage(SendModels.sendInline(message.getChatId(), text, inlineKeyboardMarkup));
     }
 }

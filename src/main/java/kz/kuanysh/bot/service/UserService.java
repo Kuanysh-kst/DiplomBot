@@ -49,16 +49,13 @@ public class UserService {
 
 
     public void saveUserInBase(Message message) {
-        if (userRepository.findById(message.getChatId()).isEmpty()) {
-            var chatId = message.getChatId();
-            var chat = message.getChat();
-            var photoInMessage =  new File("src/main/resources/Img/default.jpeg");
+        if (!userRepository.existsById(message.getChatId())) {
             User user = new User();
-            user.setFile(photoInMessage);
-            user.setChatId(chatId);
-            user.setFirstName(chat.getFirstName());
-            user.setLastName(chat.getLastName());
-            user.setUserName(chat.getUserName());
+            user.setFile(new File("src/main/resources/Img/default.jpeg"));
+            user.setChatId(message.getChatId());
+            user.setFirstName(message.getChat().getFirstName());
+            user.setLastName(message.getChat().getLastName());
+            user.setUserName(message.getChat().getUserName());
             user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
             userRepository.save(user);
             log.info("user saved: " + user);

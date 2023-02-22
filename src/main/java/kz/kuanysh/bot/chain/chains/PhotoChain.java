@@ -21,17 +21,17 @@ public class PhotoChain extends DialogChain {
             userService.saveDialog(message, state);
 
             state.backDialogState();
-            state.executeMessage(message, command, execute);
+            state.sendKeyBoard(message, command, execute);
 
 
         } else if (command.equals("/skip")) {
-            state.executeMessage(message, command, execute);
+            state.sendKeyBoard(message, command, execute);
 
             state.nextDialogState();
             userService.saveDialog(message, state);
 
         } else if (message.hasText()) {
-            state.executeMessage(message, command, execute);
+            state.sendKeyBoard(message, command, execute);
 
 
             state.setAbout(command);

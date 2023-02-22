@@ -1,7 +1,7 @@
 package kz.kuanysh.bot.chain.chains;
 
 import kz.kuanysh.bot.buttons.Command;
-import kz.kuanysh.bot.buttons.PatternKeyboard;
+import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
@@ -19,7 +19,7 @@ public class CategoryDialogChain extends DialogChain {
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         if (Command.listChoiceCallBack(command)) {
-            state.executeMessage(message, command, execute);
+            state.sendKeyBoard(message, command, execute);
 
 
             state.setChoice(command);
@@ -32,10 +32,10 @@ public class CategoryDialogChain extends DialogChain {
             userService.saveDialog(message, state);
 
             state.backDialogState();
-            state.executeMessage(message, command, execute);
+            state.sendKeyBoard(message, command, execute);
 
         } else {
-            var response = PatternKeyboard.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
+            var response = SendModels.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
             execute.sendMessage(response);
         }
     }

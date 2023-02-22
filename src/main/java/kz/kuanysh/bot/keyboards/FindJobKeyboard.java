@@ -1,6 +1,6 @@
 package kz.kuanysh.bot.keyboards;
 
-import kz.kuanysh.bot.buttons.PatternKeyboard;
+import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.buttons.InlineListButton;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -39,6 +39,6 @@ public class FindJobKeyboard implements Keyboard {
         keyboard.add(InlineListButton.backButton("nextBack"));
 
         inlineKeyboardMarkup.setKeyboard(keyboard);
-        return PatternKeyboard.sendEdit(message, content, inlineKeyboardMarkup);
+        return SendModels.sendEdit(message, content, inlineKeyboardMarkup);
     }
 }
