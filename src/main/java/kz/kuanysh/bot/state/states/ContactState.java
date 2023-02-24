@@ -1,5 +1,6 @@
 package kz.kuanysh.bot.state.states;
 
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -36,11 +37,11 @@ public class ContactState implements UserActivity {
         KeyboardRow firstRow = new KeyboardRow();
         KeyboardRow secondRow = new KeyboardRow();
         KeyboardButton contact = KeyboardButton.builder()
-                .text("setContact")
+                .text(Commands.SET_CONTACT.getText())
                 .requestContact(true)
                 .build();
         KeyboardButton back = KeyboardButton.builder()
-                .text("/back")
+                .text(Commands.BACK.getText())
                 .build();
         firstRow.add(contact);
         secondRow.add(back);

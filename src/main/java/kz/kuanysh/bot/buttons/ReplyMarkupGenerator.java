@@ -25,4 +25,18 @@ public class ReplyMarkupGenerator {
         keyboardMarkup.setKeyboard(keyboard);
         return keyboardMarkup;
     }
+
+    public static ReplyKeyboardMarkup createListKeyboard(List<List<KeyboardButton>> buttons, boolean isOneTime) {
+        List<KeyboardRow> keyboardRows = new ArrayList<>();
+
+        for(List<KeyboardButton> rowButtons :buttons){
+            KeyboardRow keyboardRow = new KeyboardRow();
+            keyboardRow.addAll(rowButtons);
+            keyboardRows.add(keyboardRow);
+        }
+        ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
+        markup.setOneTimeKeyboard(isOneTime);
+        markup.setKeyboard(keyboardRows);
+        return markup;
+    }
 }

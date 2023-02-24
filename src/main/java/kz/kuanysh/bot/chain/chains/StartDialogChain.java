@@ -20,7 +20,7 @@ public class StartDialogChain extends DialogChain {
 
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
-        if (command.equals(Commands.START.getCommand())) {
+        if (command.equals(Commands.START.getText())) {
             state.sendKeyBoard(message, command, execute);
 
             state.nextDialogState();

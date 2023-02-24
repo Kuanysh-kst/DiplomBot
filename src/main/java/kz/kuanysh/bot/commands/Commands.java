@@ -1,29 +1,32 @@
 package kz.kuanysh.bot.commands;
 
 public enum Commands {
-    START("/start",false),
-    NEXT("Далее",false),
-    SET_CONTACT("Установить контакт", true),
-    INTEGRATION("Реклама \uD83E\uDD41",false),
-    FIND_WORKER("/findworker",false),
-    FIND_JOB("/findjob",false),
-    BACK("/back",false),
+    SKIP("пропустить","/skip"),
+    SET_CONTACT("Установить контакт", "/setContact"),
+    START("/start","/start"),
+    SET_LOCATION("указать местоположение","/setLocation"),
+    NEXT("Далее","/next"),
+    INTEGRATION("Реклама \uD83E\uDD41","/integration"),
+    FIND_WORKER("найти сотрудника","/findworker"),
+    FIND_JOB("найти работу","/findjob"),
+    BACK("назад","/back"),
+    GO_TO_MENU("назад в главное меню","/goToMenu"),
+    GET_RESULT("получить результат","/result"),
     ;
 
-    private final String command;
+    private final String text;
 
-    private final boolean request;
-
-    public String getCommand() {
-        return command;
+    private final String callBackText;
+    public String getText() {
+        return text;
     }
 
-    public boolean getRequest() {
-        return request;
+    public String getCallback() {
+        return this.callBackText;
     }
 
-    Commands(String command, boolean request) {
-        this.command = command;
-        this.request = request;
+    Commands(String text, String callBackText) {
+        this.text = text;
+        this.callBackText = callBackText;
     }
 }

@@ -13,15 +13,15 @@ import java.util.List;
 
 public class ChoiceState implements UserActivity {
     public List<String> listChoice() {
-        return List.of("найти работу",
-                "найти сотрудника",
-                "назад в главное меню");
+        return List.of(Commands.FIND_JOB.getText(),
+                Commands.FIND_WORKER.getText(),
+                Commands.BACK.getText());
     }
 
     public List<String> listChoiceCallBack() {
-        return List.of(Commands.FIND_JOB.getCommand(),
-                Commands.FIND_WORKER.getCommand(),
-                Commands.BACK.getCommand());
+        return List.of(Commands.FIND_JOB.getCallback(),
+                Commands.FIND_WORKER.getCallback(),
+                Commands.BACK.getCallback());
     }
 
     @Override

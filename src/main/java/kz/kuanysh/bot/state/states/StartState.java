@@ -41,13 +41,13 @@ public class StartState implements UserActivity {
         var keyboard = new ArrayList<KeyboardRow>();
         KeyboardRow firstRow = new KeyboardRow();
         KeyboardRow secondRow = new KeyboardRow();
-        firstRow.add(Commands.NEXT.getCommand());
+        firstRow.add(Commands.NEXT.getText());
         KeyboardButton about = KeyboardButton.builder()
-                .text(Commands.SET_CONTACT.getCommand())
+                .text(Commands.SET_CONTACT.getText())
                 .requestContact(true)
                 .build();
         secondRow.add(about);
-        secondRow.add(Commands.INTEGRATION.getCommand());
+        secondRow.add(Commands.INTEGRATION.getText());
         keyboard.add(firstRow);
         keyboard.add(secondRow);
         replyMarkup.setResizeKeyboard(true);

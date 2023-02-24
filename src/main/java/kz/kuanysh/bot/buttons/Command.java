@@ -16,8 +16,8 @@ public class Command {
     }
 
     public static Boolean listChoiceCallBack(String command) {
-        return List.of(Commands.FIND_JOB.getCommand(),
-                Commands.FIND_WORKER.getCommand()
+        return List.of(Commands.FIND_JOB.getCallback(),
+                Commands.FIND_WORKER.getCallback()
                ).contains(command);
     }
 }

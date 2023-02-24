@@ -3,6 +3,7 @@ package kz.kuanysh.bot.chain.chains;
 import kz.kuanysh.bot.buttons.Command;
 import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
@@ -27,7 +28,7 @@ public class CategoryDialogChain extends DialogChain {
             state.nextDialogState();
             userService.saveDialog(message, state);
 
-        } else if (command.equals("/back")) {
+        } else if (command.equals(Commands.BACK.getCallback())) {
             state.backDialogState();
             userService.saveDialog(message, state);
 

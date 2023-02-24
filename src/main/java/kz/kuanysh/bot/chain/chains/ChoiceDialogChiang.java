@@ -20,7 +20,7 @@ public class ChoiceDialogChiang extends DialogChain {
 
     @Override
     protected void doProcess(Message message, Dialog state,String command, UserService userService, SendBotMessageServiceImp execute) {
-        if (command.equals(Commands.NEXT.getCommand())) {
+        if (command.equals(Commands.NEXT.getText())) {
             state.sendKeyBoard(message, command, execute);
 
             state.nextDialogState();
