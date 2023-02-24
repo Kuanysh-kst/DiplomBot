@@ -1,5 +1,7 @@
 package kz.kuanysh.bot.buttons;
 
+import kz.kuanysh.bot.commands.Commands;
+
 import java.util.List;
 
 public class Command {
@@ -14,8 +16,8 @@ public class Command {
     }
 
     public static Boolean listChoiceCallBack(String command) {
-        return List.of("/findjob",
-                "/findworker"
+        return List.of(Commands.FIND_JOB.getCommand(),
+                Commands.FIND_WORKER.getCommand()
                ).contains(command);
     }
 }

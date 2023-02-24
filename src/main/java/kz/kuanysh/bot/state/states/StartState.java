@@ -1,5 +1,6 @@
 package kz.kuanysh.bot.state.states;
 
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -40,13 +41,13 @@ public class StartState implements UserActivity {
         var keyboard = new ArrayList<KeyboardRow>();
         KeyboardRow firstRow = new KeyboardRow();
         KeyboardRow secondRow = new KeyboardRow();
-        firstRow.add("next");
+        firstRow.add(Commands.NEXT.getCommand());
         KeyboardButton about = KeyboardButton.builder()
-                .text("setContact")
+                .text(Commands.SET_CONTACT.getCommand())
                 .requestContact(true)
                 .build();
         secondRow.add(about);
-        secondRow.add("Реклама \uD83E\uDD41");
+        secondRow.add(Commands.INTEGRATION.getCommand());
         keyboard.add(firstRow);
         keyboard.add(secondRow);
         replyMarkup.setResizeKeyboard(true);

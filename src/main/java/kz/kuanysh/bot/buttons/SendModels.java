@@ -37,30 +37,6 @@ public class SendModels {
                 .build();
     }
 
-
-    public static SendPhoto sendEditPhoto(Message message, String text, InputFile inputFile, InlineKeyboardMarkup markup) {
-        return SendPhoto.builder()
-                .replyMarkup(markup)
-                .photo(inputFile)
-                .chatId(message.getChatId().toString())
-                .caption(text)
-                .build();
-    }
-
-    public static BotApiMethod<Message> sendNotCorrect(Message message) {
-        return SendMessage.builder()
-                .chatId(message.getChatId().toString())
-                .text("Please enter the correct value!")
-                .build();
-    }
-
-    public static BotApiMethod<Message> sendText(Message message, String text) {
-        return SendMessage.builder()
-                .chatId(message.getChatId().toString())
-                .text(text)
-                .build();
-    }
-
     public static BotApiMethod<Message> sendText(Long chatId, String text) {
         return SendMessage.builder()
                 .chatId(chatId.toString())
@@ -68,11 +44,18 @@ public class SendModels {
                 .build();
     }
 
-    public static BotApiMethod<Message> sendInline(Long chatId, String text, InlineKeyboardMarkup inlineKeyboardMarkup) {
+    public static BotApiMethod<Message> sendMessage(Long chatId, String text, InlineKeyboardMarkup inlineKeyboardMarkup) {
         return SendMessage.builder()
                 .chatId(chatId.toString())
                 .text(text)
                 .replyMarkup(inlineKeyboardMarkup)
+                .build();
+    }
+    public static BotApiMethod<Message> sendMessage(Long chatId, String text, ReplyKeyboardMarkup markup) {
+        return SendMessage.builder()
+                .chatId(chatId.toString())
+                .text(text)
+                .replyMarkup(markup)
                 .build();
     }
 
@@ -82,14 +65,6 @@ public class SendModels {
                 .messageId(message.getMessageId())
                 .text(text)
                 .replyMarkup(inlineKeyboardMarkup)
-                .build();
-    }
-
-    public static BotApiMethod<Message> sendReply(Long chatId, String text, ReplyKeyboardMarkup replyKeyboardMarkup) {
-        return SendMessage.builder()
-                .chatId(chatId.toString())
-                .replyMarkup(replyKeyboardMarkup)
-                .text(text)
                 .build();
     }
 }

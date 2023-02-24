@@ -2,6 +2,7 @@ package kz.kuanysh.bot.chain.chains;
 
 import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
@@ -19,7 +20,7 @@ public class ChoiceDialogChiang extends DialogChain {
 
     @Override
     protected void doProcess(Message message, Dialog state,String command, UserService userService, SendBotMessageServiceImp execute) {
-        if (command.equals("next")) {
+        if (command.equals(Commands.NEXT.getCommand())) {
             state.sendKeyBoard(message, command, execute);
 
             state.nextDialogState();

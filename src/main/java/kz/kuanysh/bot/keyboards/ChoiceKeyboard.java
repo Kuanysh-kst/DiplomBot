@@ -29,7 +29,7 @@ public class ChoiceKeyboard implements Keyboard {
         List<List<InlineKeyboardButton>> keyboard = InlineListButton.listButtons(listChoice(),listChoiceCallBack());
         inlineKeyboardMarkup.setKeyboard(keyboard);
 
-        return SendModels.sendInline(message.getChatId(), content, inlineKeyboardMarkup);
+        return SendModels.sendMessage(message.getChatId(), content, inlineKeyboardMarkup);
 
     }
 }

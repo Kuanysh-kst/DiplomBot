@@ -19,6 +19,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+
 @Slf4j
 @Component
 public class Bot extends TelegramLongPollingBot {
@@ -60,14 +61,14 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+        userService.saveUserInBase(update);
+
         if (update.hasMessage() && update.getMessage().hasText()) {
-            userService.saveUserInBase(update.getMessage());
             Message message = update.getMessage();
             String command = message.getText();
             Dialog dialog = userService.findDialog(message);
             dialogChain.processState(message, dialog, command, userService, new SendBotMessageServiceImp(this));
         } else if (update.hasMessage() && update.getMessage().hasPhoto()) {
-            userService.saveUserInBase(update.getMessage());
             Message message = update.getMessage();
             String command = message.getText();
             Dialog dialog = userService.findDialog(message);

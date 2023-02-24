@@ -1,6 +1,6 @@
 package kz.kuanysh.bot.chain.chains;
 
-import kz.kuanysh.bot.buttons.SliderMarkup;
+import kz.kuanysh.bot.buttons.keyboards.SliderMarkup;
 import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.chain.interfaces.CreateAboutText;
@@ -12,7 +12,6 @@ import kz.kuanysh.bot.state.UserActivity;
 import kz.kuanysh.bot.state.states.ShowResultState;
 import kz.kuanysh.bot.state.states.StartState;
 import lombok.extern.slf4j.Slf4j;
-import org.telegram.telegrambots.meta.api.methods.send.SendContact;
 import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -26,7 +25,6 @@ public class ShowResultChain extends DialogChain {
 
     private int index;
     private List<User> currentUsersList;
-
     CreateAboutText text = (user) -> "Пользоваетель под именем " + user.getFirstName() + ", написал о себе следуещее: \n" + user.getAbout();
 
     public ShowResultChain(DialogChain nextChain) {
@@ -37,12 +35,10 @@ public class ShowResultChain extends DialogChain {
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         int val = this.index;
 
-
         switch (command) {
             case "вернуться к выбору": {
                 state.setState(new StartState());
                 state.sendKeyBoard(message, command, execute);
-
                 state.nextDialogState();
                 userService.saveDialog(message, state);
                 break;
@@ -53,7 +49,7 @@ public class ShowResultChain extends DialogChain {
                     var response = SendModels.sendText(message.getChatId(), "Упс контакт не существует \uD83D\uDC7E");
                     execute.sendMessage(response);
                 } else {
-                    execute.sendMessage(SendModels.sendContact(message,currentContact));
+                    execute.sendMessage(SendModels.sendContact(message, currentContact));
                 }
                 break;
             }

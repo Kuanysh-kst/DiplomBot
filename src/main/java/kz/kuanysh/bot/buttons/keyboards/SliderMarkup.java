@@ -1,10 +1,9 @@
-package kz.kuanysh.bot.buttons;
+package kz.kuanysh.bot.buttons.keyboards;
 
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
-
-import java.util.ArrayList;
 import java.util.List;
+
+import static kz.kuanysh.bot.buttons.ReplyMarkupGenerator.createKeyboard;
 
 public class SliderMarkup {
 
@@ -23,21 +22,4 @@ public class SliderMarkup {
         return createKeyboard(list,true);
     }
 
-    private static ReplyKeyboardMarkup createKeyboard(List<List<String>> buttons, boolean isOneTime) {
-        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
-        keyboardMarkup.setResizeKeyboard(true);
-        keyboardMarkup.setOneTimeKeyboard(isOneTime);
-
-        List<KeyboardRow> keyboard = new ArrayList<>();
-        for (List<String> row : buttons) {
-            KeyboardRow keyboardRow = new KeyboardRow();
-            for (String button : row) {
-                keyboardRow.add(button);
-            }
-            keyboard.add(keyboardRow);
-        }
-
-        keyboardMarkup.setKeyboard(keyboard);
-        return keyboardMarkup;
-    }
 }

@@ -2,6 +2,7 @@ package kz.kuanysh.bot.state.states;
 
 import kz.kuanysh.bot.buttons.InlineListButton;
 import kz.kuanysh.bot.buttons.SendModels;
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -18,9 +19,9 @@ public class ChoiceState implements UserActivity {
     }
 
     public List<String> listChoiceCallBack() {
-        return List.of("/findjob",
-                "/findworker",
-                "/back");
+        return List.of(Commands.FIND_JOB.getCommand(),
+                Commands.FIND_WORKER.getCommand(),
+                Commands.BACK.getCommand());
     }
 
     @Override
@@ -51,7 +52,7 @@ public class ChoiceState implements UserActivity {
             );
 
         } else {
-            execute.sendMessage(SendModels.sendInline(message.getChatId(), text, inlineKeyboardMarkup));
+            execute.sendMessage(SendModels.sendMessage(message.getChatId(), text, inlineKeyboardMarkup));
         }
     }
 }

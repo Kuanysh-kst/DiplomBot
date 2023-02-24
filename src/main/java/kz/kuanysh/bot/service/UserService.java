@@ -6,9 +6,8 @@ import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.objects.Contact;
-import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.File;
 import java.sql.Timestamp;
@@ -48,17 +47,15 @@ public class UserService {
     }
 
 
-    public void saveUserInBase(Message message) {
-        if (!userRepository.existsById(message.getChatId())) {
-            User user = new User();
-            user.setFile(new File("src/main/resources/Img/default.jpeg"));
-            user.setChatId(message.getChatId());
-            user.setFirstName(message.getChat().getFirstName());
-            user.setLastName(message.getChat().getLastName());
-            user.setUserName(message.getChat().getUserName());
-            user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
-            userRepository.save(user);
-            log.info("user saved: " + user);
+    public void saveUserInBase(Update update) {
+        if (update.hasMessage() && !userRepository.existsById(update.getMessage().getChatId())){
+            Message message = update.getMessage();
+
+            setParameters(message);
+        }else if (update.hasCallbackQuery() && !userRepository.existsById(update.getCallbackQuery().getMessage().getChatId())){
+            Message message = update.getCallbackQuery().getMessage();
+
+            setParameters(message);
         }
     }
 
@@ -97,8 +94,19 @@ public class UserService {
             return userRepository.findByChoiceAndCategory("/findjob", category);
         }
     }
-
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    private void setParameters(Message message){
+        User user = new User();
+        user.setFile(new File("src/main/resources/Img/default.jpeg"));
+        user.setChatId(message.getChatId());
+        user.setFirstName(message.getChat().getFirstName());
+        user.setLastName(message.getChat().getLastName());
+        user.setUserName(message.getChat().getUserName());
+        user.setRegisteredAt(new Timestamp(System.currentTimeMillis()));
+        userRepository.save(user);
+        log.info("user saved: " + user);
     }
 }

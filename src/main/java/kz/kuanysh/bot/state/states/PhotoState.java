@@ -49,6 +49,6 @@ public class PhotoState implements UserActivity {
         keyboard.add(row1);
 
         inlineKeyboardMarkup.setKeyboard(keyboard);
-        execute.sendMessage(SendModels.sendInline(message.getChatId(), text, inlineKeyboardMarkup));
+        execute.sendMessage(SendModels.sendMessage(message.getChatId(), text, inlineKeyboardMarkup));
     }
 }
