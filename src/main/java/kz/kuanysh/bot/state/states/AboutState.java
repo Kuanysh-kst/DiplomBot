@@ -1,12 +1,11 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.buttons.SendModels;
-import kz.kuanysh.bot.service.SendBotMessageServiceImp;
+import kz.kuanysh.bot.buttons.InlineListGenerator;
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-import java.util.ArrayList;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import java.util.List;
 
 public class AboutState implements UserActivity {
@@ -28,25 +27,17 @@ public class AboutState implements UserActivity {
     }
 
     @Override
-    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-        List<InlineKeyboardButton> row1 = new ArrayList<>();
-        List<InlineKeyboardButton> row2 = new ArrayList<>();
-        InlineKeyboardButton button = InlineKeyboardButton.builder()
-                .text("назад")
-                .callbackData("/back")
-                .build();
-        InlineKeyboardButton skip = InlineKeyboardButton.builder()
-                .text("пропустить")
-                .callbackData("/skip")
-                .build();
-        row1.add(button);
-        row2.add(skip);
-        keyboard.add(row2);
-        keyboard.add(row1);
-
-        inlineKeyboardMarkup.setKeyboard(keyboard);
-        execute.sendMessageSerializable(SendModels.sendEdit(message, text, inlineKeyboardMarkup));
+    public ReplyKeyboard getMarkup() {
+        List<String> text = List.of(
+                Commands.SKIP.getText(),
+                Commands.BACK.getText()
+        );
+        List<String> callback = List.of(
+                Commands.SKIP.getCallback(),
+                Commands.BACK.getCallback()
+        );
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        markup.setKeyboard(InlineListGenerator.listButtons(text,callback));
+        return markup;
     }
 }

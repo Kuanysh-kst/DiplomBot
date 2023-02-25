@@ -37,6 +37,7 @@ public class ReplyMarkupGenerator {
         ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
         markup.setOneTimeKeyboard(isOneTime);
         markup.setKeyboard(keyboardRows);
+        markup.setResizeKeyboard(true);
         return markup;
     }
 }

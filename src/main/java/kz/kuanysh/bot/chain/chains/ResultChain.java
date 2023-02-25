@@ -18,27 +18,26 @@ public class ResultChain extends DialogChain {
 
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
-        if (message.hasLocation() ) {
-            state.sendKeyBoard(message, command,execute);
+        if (message.hasLocation()) {
+            execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
 
             state.setLocation(message.getLocation());
 
             state.nextDialogState();
             userService.saveDialog(message, state);
-        } else if (command.equals(Commands.SKIP.getText())){
-            state.sendKeyBoard(message, command,execute);
+        } else if (command.equals(Commands.SKIP.getText())) {
+            execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
             state.nextDialogState();
             userService.saveDialog(message, state);
-        }else if (command.equals(Commands.BACK.getText())) {
+        } else if (command.equals(Commands.BACK.getText())) {
             state.backDialogState();
             userService.saveDialog(message, state);
             state.backDialogState();
 
-            state.sendKeyBoard(message, command,execute);
-
+            execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
         } else {
             var response = SendModels.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду!!! \uD83D\uDC7E");
-            execute.sendMessage(response);
+            execute.sendBotApiMethod(response);
         }
     }
 

@@ -1,7 +1,7 @@
 package kz.kuanysh.bot.state;
 
-import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 import java.io.Serializable;
 
@@ -12,7 +12,6 @@ public interface UserActivity extends Serializable {
 
     String getText(Message message);
 
-    void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute);
-
+    ReplyKeyboard getMarkup();
 
 }

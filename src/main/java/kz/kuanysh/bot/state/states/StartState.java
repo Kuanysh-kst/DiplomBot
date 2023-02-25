@@ -1,18 +1,14 @@
 package kz.kuanysh.bot.state.states;
 
+import kz.kuanysh.bot.buttons.ReplyMarkupGenerator;
 import kz.kuanysh.bot.commands.Commands;
-import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
-import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
+import java.util.List;
 
-import java.util.ArrayList;
-
-public class StartState implements UserActivity {
+public class StartState implements UserActivity{
     @Override
     public UserActivity nextDialogState() {
         return new ChoiceState();
@@ -33,31 +29,19 @@ public class StartState implements UserActivity {
     }
 
     @Override
-    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
-        WebAppInfo webAppInfo = new WebAppInfo();
-        webAppInfo.setUrl("https://hh.kz/");
-        ReplyKeyboardMarkup replyMarkup = new ReplyKeyboardMarkup();
-        replyMarkup.setOneTimeKeyboard(true);
-        var keyboard = new ArrayList<KeyboardRow>();
-        KeyboardRow firstRow = new KeyboardRow();
-        KeyboardRow secondRow = new KeyboardRow();
-        firstRow.add(Commands.NEXT.getText());
-        KeyboardButton about = KeyboardButton.builder()
+    public ReplyKeyboardMarkup getMarkup() {
+        KeyboardButton next = KeyboardButton.builder()
+                .text(Commands.NEXT.getText())
+                .build();
+        KeyboardButton contact = KeyboardButton.builder()
                 .text(Commands.SET_CONTACT.getText())
                 .requestContact(true)
                 .build();
-        secondRow.add(about);
-        secondRow.add(Commands.INTEGRATION.getText());
-        keyboard.add(firstRow);
-        keyboard.add(secondRow);
-        replyMarkup.setResizeKeyboard(true);
-        replyMarkup.setKeyboard(keyboard);
-        execute.sendMessage(SendMessage.builder()
-                .chatId(message.getChatId().toString())
-                .replyMarkup(replyMarkup)
-                .text(text)
-                .build());
-
+        KeyboardButton ad = KeyboardButton.builder()
+                .text(Commands.INTEGRATION.getText())
+                .build();
+        List<List<KeyboardButton>> list = List.of(List.of(next), List.of(contact,ad));
+        return ReplyMarkupGenerator.createListKeyboard(list, true);
     }
 }
 

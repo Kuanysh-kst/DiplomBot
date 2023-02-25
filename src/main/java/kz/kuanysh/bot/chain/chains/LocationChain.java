@@ -19,14 +19,14 @@ public class LocationChain extends DialogChain {
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         if (message.hasContact() ) {
-            state.sendKeyBoard(message, command, execute);
+            execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
 
             state.setContact(message.getContact());
 
             state.nextDialogState();
             userService.saveDialog(message, state);
         }else if (command.equals(Commands.SKIP.getText())){
-            state.sendKeyBoard(message, command, execute);
+            execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
 
             state.nextDialogState();
             userService.saveDialog(message, state);
@@ -35,11 +35,11 @@ public class LocationChain extends DialogChain {
             userService.saveDialog(message, state);
 
             state.backDialogState();
-            state.sendKeyBoard(message, command, execute);
+            execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
 
         } else {
             var response = SendModels.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
-            execute.sendMessage(response);
+            execute.sendBotApiMethod(response);
         }
 
     }

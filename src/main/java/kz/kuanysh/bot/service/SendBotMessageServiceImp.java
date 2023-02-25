@@ -35,7 +35,7 @@ public class SendBotMessageServiceImp implements SendBotMessageService {
         }
     }
 
-    public void sendMessage(BotApiMethod<Message> response) {
+    public void sendBotApiMethod(BotApiMethod<Message> response) {
         try {
             bot.execute(response);
         } catch (TelegramApiException e) {

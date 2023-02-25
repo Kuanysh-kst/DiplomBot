@@ -1,13 +1,11 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.buttons.SendModels;
-import kz.kuanysh.bot.service.SendBotMessageServiceImp;
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoState implements UserActivity {
@@ -30,25 +28,19 @@ public class PhotoState implements UserActivity {
     }
 
     @Override
-    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-        List<InlineKeyboardButton> row1 = new ArrayList<>();
-        List<InlineKeyboardButton> row2 = new ArrayList<>();
-        InlineKeyboardButton button = InlineKeyboardButton.builder()
-                .text("назад")
-                .callbackData("/back")
-                .build();
+    public InlineKeyboardMarkup getMarkup() {
         InlineKeyboardButton skip = InlineKeyboardButton.builder()
-                .text("пропустить")
-                .callbackData("/skip")
+                .text(Commands.SKIP.getText())
+                .callbackData(Commands.SKIP.getCallback())
                 .build();
-        row1.add(button);
-        row2.add(skip);
-        keyboard.add(row2);
-        keyboard.add(row1);
-
-        inlineKeyboardMarkup.setKeyboard(keyboard);
-        execute.sendMessage(SendModels.sendMessage(message.getChatId(), text, inlineKeyboardMarkup));
+        InlineKeyboardButton back = InlineKeyboardButton.builder()
+                .text(Commands.BACK.getText())
+                .callbackData(Commands.BACK.getCallback())
+                .build();
+        List<List<InlineKeyboardButton>> keyboard = List.of(List.of(skip), List.of(back));
+        InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
+        markup.setKeyboard(keyboard);
+        return markup;
     }
+
 }

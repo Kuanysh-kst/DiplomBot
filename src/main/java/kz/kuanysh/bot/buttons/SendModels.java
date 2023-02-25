@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
 public class SendModels {
@@ -44,16 +45,9 @@ public class SendModels {
                 .build();
     }
 
-    public static BotApiMethod<Message> sendMessage(Long chatId, String text, InlineKeyboardMarkup inlineKeyboardMarkup) {
+    public static BotApiMethod<Message> sendMessage(Message message, String text, ReplyKeyboard markup) {
         return SendMessage.builder()
-                .chatId(chatId.toString())
-                .text(text)
-                .replyMarkup(inlineKeyboardMarkup)
-                .build();
-    }
-    public static BotApiMethod<Message> sendMessage(Long chatId, String text, ReplyKeyboardMarkup markup) {
-        return SendMessage.builder()
-                .chatId(chatId.toString())
+                .chatId(message.getChatId().toString())
                 .text(text)
                 .replyMarkup(markup)
                 .build();

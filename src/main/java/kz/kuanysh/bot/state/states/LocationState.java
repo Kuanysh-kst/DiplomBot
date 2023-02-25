@@ -1,10 +1,13 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.buttons.SendModels;
-import kz.kuanysh.bot.buttons.keyboards.LocationMarkup;
-import kz.kuanysh.bot.service.SendBotMessageServiceImp;
+import kz.kuanysh.bot.buttons.ReplyMarkupGenerator;
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
+
+import java.util.List;
 
 public class LocationState implements UserActivity {
 
@@ -25,7 +28,18 @@ public class LocationState implements UserActivity {
     }
 
     @Override
-    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
-        execute.sendMessage(SendModels.sendMessage(message.getChatId(),text, LocationMarkup.ResultMarkup()));
+    public ReplyKeyboardMarkup getMarkup() {
+        KeyboardButton location = KeyboardButton.builder()
+                .text(Commands.SET_LOCATION.getText())
+                .requestLocation(true)
+                .build();
+        KeyboardButton skip = KeyboardButton.builder()
+                .text(Commands.SKIP.getText())
+                .build();
+        KeyboardButton back = KeyboardButton.builder()
+                .text(Commands.BACK.getText())
+                .build();
+        List<List<KeyboardButton>> list = List.of(List.of(location, skip), List.of(back));
+        return ReplyMarkupGenerator.createListKeyboard(list, true);
     }
 }

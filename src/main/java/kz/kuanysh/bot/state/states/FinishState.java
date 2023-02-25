@@ -1,12 +1,10 @@
 package kz.kuanysh.bot.state.states;
 
-import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.state.UserActivity;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 public class FinishState implements UserActivity{
-
-
 
     @Override
     public UserActivity nextDialogState() {
@@ -24,9 +22,7 @@ public class FinishState implements UserActivity{
     }
 
     @Override
-    public void executeMessage(Message message, String text, String command, SendBotMessageServiceImp execute) {
-
+    public ReplyKeyboard getMarkup() {
+        return null;
     }
-
-
 }

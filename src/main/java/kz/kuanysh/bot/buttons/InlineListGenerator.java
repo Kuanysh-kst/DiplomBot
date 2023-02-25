@@ -1,12 +1,13 @@
 package kz.kuanysh.bot.buttons;
 
+import kz.kuanysh.bot.commands.Commands;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InlineListButton extends InlineKeyboardMarkup {
+public class InlineListGenerator extends InlineKeyboardMarkup {
 
     public static List<List<InlineKeyboardButton>> listButtons(List<String> buttonNames, List<String> callBackNames) {
 
@@ -19,16 +20,15 @@ public class InlineListButton extends InlineKeyboardMarkup {
             button.setCallbackData(callBackNames.get(i));
             row.add(button);
             keyboard.add(row);
-
         }
         return keyboard;
     }
 
-    public static List<InlineKeyboardButton> backButton(String callBack) {
+    public static List<InlineKeyboardButton> backButton() {
         List<InlineKeyboardButton> row = new ArrayList<>();
         InlineKeyboardButton button = InlineKeyboardButton.builder()
-                .text("Назад")
-                .callbackData(callBack)
+                .text(Commands.BACK.getText())
+                .callbackData(Commands.BACK.getCallback())
                 .build();
         row.add(button);
         return row;

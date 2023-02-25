@@ -1,5 +1,7 @@
 package kz.kuanysh.bot.commands;
 
+import java.util.List;
+
 public enum Commands {
     SKIP("пропустить","/skip"),
     SET_CONTACT("Установить контакт", "/setContact"),
@@ -12,8 +14,12 @@ public enum Commands {
     BACK("назад","/back"),
     GO_TO_MENU("назад в главное меню","/goToMenu"),
     GET_RESULT("получить результат","/result"),
+    CONSTRUCTION_WORK("стройтельные работы","/constructionWork"),
+    WORK_LOADER("работа грузчиком","/workLoader"),
+    DELIVERY_WORK( "работа по доставке","/delivery work"),
+    WORK_CAFE("работа в кафе","/workCafe"),
+    CLEANING_WORK("клининг работы","/cleaningWork"),
     ;
-
     private final String text;
 
     private final String callBackText;

@@ -1,6 +1,8 @@
 package kz.kuanysh.bot.chain.chains;
 
+import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
@@ -16,23 +18,21 @@ public class PhotoChain extends DialogChain {
 
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
-        if (command.equals("/back")) {
+        if (command.equals(Commands.BACK.getCallback())) {
             state.backDialogState();
             userService.saveDialog(message, state);
 
             state.backDialogState();
-            state.sendKeyBoard(message, command, execute);
+            execute.sendBotApiMethod(SendModels.sendMessage(message,state.getText(message), state.getMarkup()));
 
-
-        } else if (command.equals("/skip")) {
-            state.sendKeyBoard(message, command, execute);
+        } else if (command.equals(Commands.SKIP.getCallback())) {
+            execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
 
             state.nextDialogState();
             userService.saveDialog(message, state);
 
         } else if (message.hasText()) {
-            state.sendKeyBoard(message, command, execute);
-
+            execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
 
             state.setAbout(command);
 

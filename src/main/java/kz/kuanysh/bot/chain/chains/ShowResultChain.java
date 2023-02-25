@@ -36,9 +36,9 @@ public class ShowResultChain extends DialogChain {
         int val = this.index;
 
         switch (command) {
-            case "вернуться к выбору": {
+            case "/goToMenu": {
                 state.setState(new StartState());
-                state.sendKeyBoard(message, command, execute);
+                execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
                 state.nextDialogState();
                 userService.saveDialog(message, state);
                 break;
@@ -47,9 +47,9 @@ public class ShowResultChain extends DialogChain {
                 Contact currentContact = currentUsersList.get(index).getContact();
                 if (currentContact == null) {
                     var response = SendModels.sendText(message.getChatId(), "Упс контакт не существует \uD83D\uDC7E");
-                    execute.sendMessage(response);
+                    execute.sendBotApiMethod(response);
                 } else {
-                    execute.sendMessage(SendModels.sendContact(message, currentContact));
+                    execute.sendBotApiMethod(SendModels.sendContact(message, currentContact));
                 }
                 break;
             }
@@ -75,7 +75,7 @@ public class ShowResultChain extends DialogChain {
                 if (++val < currentUsersList.size()) {
                     sendMedia(message, execute, ++index);
                 } else {
-                    execute.sendMessage(SendModels.sendText(message.getChatId(), "Это конец списка"));
+                    execute.sendBotApiMethod(SendModels.sendText(message.getChatId(), "Это конец списка"));
                 }
                 break;
             }
@@ -83,7 +83,7 @@ public class ShowResultChain extends DialogChain {
                 if (--val >= 0) {
                     sendMedia(message, execute, --index);
                 } else {
-                    execute.sendMessage(SendModels.sendText(message.getChatId(), "Это начало списка"));
+                    execute.sendBotApiMethod(SendModels.sendText(message.getChatId(), "Это начало списка"));
                 }
                 break;
             }
@@ -91,7 +91,7 @@ public class ShowResultChain extends DialogChain {
                 state.backDialogState();
                 userService.saveDialog(message, state);
                 state.backDialogState();
-                state.sendKeyBoard(message, command, execute);
+                execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
                 break;
         }
     }

@@ -1,11 +1,11 @@
 package kz.kuanysh.bot.state;
 
-import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.Location;
 import org.telegram.telegrambots.meta.api.objects.Message;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 import java.io.File;
 import java.io.Serializable;
@@ -32,9 +32,8 @@ public class Dialog implements Serializable {
         state = state.nextDialogState();
         log.info("Current state:{}", state.getClass().getSimpleName());
     }
-
-    public void sendKeyBoard(Message message, String command, SendBotMessageServiceImp execute) {
-        state.executeMessage(message, state.getText(message), command, execute);
+    public ReplyKeyboard getMarkup(){
+        return state.getMarkup();
     }
 
     public String getText(Message message){

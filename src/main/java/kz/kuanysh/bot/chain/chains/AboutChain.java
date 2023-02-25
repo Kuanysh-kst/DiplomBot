@@ -21,8 +21,8 @@ public class AboutChain extends DialogChain {
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
 
         if (Command.callBackWorkNames(command)) {
-            state.sendKeyBoard(message, command, execute);
-;
+            execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
+
             state.nextDialogState();
 
             state.setCategory(command);
@@ -32,11 +32,11 @@ public class AboutChain extends DialogChain {
             userService.saveDialog(message, state);
 
             state.backDialogState();
-            state.sendKeyBoard(message, command, execute);
+            execute.sendBotApiMethod(SendModels.sendMessage(message,state.getText(message), state.getMarkup()));
 
         } else {
             var response = SendModels.sendText(message.getChatId(), "Я About ещё не знаю как ответить на эту команду \uD83D\uDC7E");
-            execute.sendMessage(response);
+            execute.sendBotApiMethod(response);
         }
     }
 
