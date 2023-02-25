@@ -36,7 +36,7 @@ public class ShowResultChain extends DialogChain {
         int val = this.index;
 
         switch (command) {
-            case "/goToMenu": {
+            case "назад в главное меню": {
                 state.setState(new StartState());
                 execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
                 state.nextDialogState();
@@ -59,9 +59,8 @@ public class ShowResultChain extends DialogChain {
                 this.currentUsersList = userService.findByChoiceAndCategory(message);
 
                 if (currentUsersList.isEmpty()) {
-                    String notFound = "Упс , по вашему запросу нет результата \uD83E\uDEE4, вы можете ожидать отклика или удалить настройки своего профиля";
                     InputFile inputFile = new InputFile(new File("src/main/resources/Img/not_found_users.jpeg"));
-                    var response = SendModels.sendPhoto(message, notFound, inputFile, SliderMarkup.emptySlide());
+                    var response = SendModels.sendPhoto(message, NOT_FOUND, inputFile, SliderMarkup.emptySlide());
                     execute.sendPhoto(response);
                 } else {
                     var markupType = currentUsersList.size() == 1 ? SliderMarkup.oneSlide() : SliderMarkup.rightLeftSlide();

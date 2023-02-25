@@ -3,6 +3,7 @@ package kz.kuanysh.bot.chain.chains;
 import kz.kuanysh.bot.buttons.Command;
 import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
@@ -27,7 +28,7 @@ public class AboutChain extends DialogChain {
 
             state.setCategory(command);
             userService.saveDialog(message, state);
-        } else if (command.equals("/back")) {
+        } else if (command.equals(Commands.BACK.getCallback())) {
             state.backDialogState();
             userService.saveDialog(message, state);
 
@@ -35,7 +36,7 @@ public class AboutChain extends DialogChain {
             execute.sendBotApiMethod(SendModels.sendMessage(message,state.getText(message), state.getMarkup()));
 
         } else {
-            var response = SendModels.sendText(message.getChatId(), "Я About ещё не знаю как ответить на эту команду \uD83D\uDC7E");
+            var response = SendModels.sendText(message.getChatId(), UNKNOWN_MESSAGE);
             execute.sendBotApiMethod(response);
         }
     }

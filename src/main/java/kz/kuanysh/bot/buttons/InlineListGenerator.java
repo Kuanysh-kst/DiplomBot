@@ -23,14 +23,4 @@ public class InlineListGenerator extends InlineKeyboardMarkup {
         }
         return keyboard;
     }
-
-    public static List<InlineKeyboardButton> backButton() {
-        List<InlineKeyboardButton> row = new ArrayList<>();
-        InlineKeyboardButton button = InlineKeyboardButton.builder()
-                .text(Commands.BACK.getText())
-                .callbackData(Commands.BACK.getCallback())
-                .build();
-        row.add(button);
-        return row;
-    }
 }

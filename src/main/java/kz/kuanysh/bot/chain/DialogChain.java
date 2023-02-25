@@ -12,6 +12,10 @@ public abstract class DialogChain {
 
     private final DialogChain nextChain;
 
+    protected static final String UNKNOWN_MESSAGE = "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E";
+    protected static final String NOT_FOUND = "Упс , по вашему запросу нет результата \uD83E\uDEE4," +
+            " вы можете ожидать отклика или удалить настройки своего профиля";
+
     protected DialogChain(DialogChain nextChain) {
         this.nextChain = nextChain;
     }

@@ -38,7 +38,7 @@ public class ContactChain extends DialogChain {
 
             execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
         } else {
-            var response = SendModels.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
+            var response = SendModels.sendText(message.getChatId(), UNKNOWN_MESSAGE);
             execute.sendBotApiMethod(response);
         }
 

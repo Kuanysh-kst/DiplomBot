@@ -1,7 +1,5 @@
 package kz.kuanysh.bot.commands;
 
-import java.util.List;
-
 public enum Commands {
     SKIP("пропустить","/skip"),
     SET_CONTACT("Установить контакт", "/setContact"),

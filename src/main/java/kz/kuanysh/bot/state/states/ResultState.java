@@ -31,7 +31,7 @@ public class ResultState implements UserActivity {
     public ReplyKeyboard getMarkup() {
         InlineKeyboardButton back = InlineKeyboardButton.builder()
                 .text(Commands.GO_TO_MENU.getText())
-                .callbackData(Commands.GO_TO_MENU.getCallback())
+                .callbackData(Commands.GO_TO_MENU.getText())
                 .build();
         InlineKeyboardButton getResult = InlineKeyboardButton.builder()
                 .text(Commands.GET_RESULT.getText())

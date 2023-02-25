@@ -27,7 +27,7 @@ public class ChoiceDialogChiang extends DialogChain {
             userService.saveDialog(message, state);
 
         } else {
-            var response = SendModels.sendText(message.getChatId(), "Я ещё не знаю как ответить на эту команду \uD83D\uDC7E");
+            var response = SendModels.sendText(message.getChatId(), UNKNOWN_MESSAGE);
             execute.sendBotApiMethod(response);
         }
     }
