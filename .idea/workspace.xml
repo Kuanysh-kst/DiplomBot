@@ -14,46 +14,16 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.5.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/buttons/InlineListGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/buttons/InlineListGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/buttons/keyboards/LocationMarkup.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/buttons/keyboards/ResultMarkup.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/bot/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/bot/Bot.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/buttons/keyboards/SliderMarkup.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/buttons/keyboards/SliderMarkup.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/DialogChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/DialogChain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/AboutChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/AboutChain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/CategoryDialogChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/CategoryDialogChain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/ChoiceDialogChiang.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/ChoiceDialogChiang.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/ContactChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/ContactChain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/FinishChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/FinishChain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/LocationChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/LocationChain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/ResultChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/ResultChain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/ShowResultChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/ShowResultChain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/StartDialogChain.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/chain/chains/StartDialogChain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/commands/Commands.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/commands/Commands.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/exceptions/NotCorrectMessageException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/keyboards/ChoiceEditKeyboard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/keyboards/FindJobKeyboard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/keyboards/Keyboard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/keyboards/ResultKeyBoard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/keyboards/StartKeyboard.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/state/Dialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/state/Dialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/state/states/FinishState.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/kz/kuanysh/bot/state/states/FinishState.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/InlineListGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/InlineListGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/keyboards/LocationMarkup.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/keyboards/ResultMarkup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/bot/Bot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/keyboards/SliderMarkup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/buttons/keyboards/SliderMarkup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/DialogChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/DialogChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/AboutChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/AboutChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/CategoryDialogChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/CategoryDialogChain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/ChoiceDialogChiang.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/ChoiceDialogChiang.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/ContactChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/ContactChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/FinishChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/FinishChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/LocationChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/LocationChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/ResultChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/ResultChain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/ShowResultChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/ShowResultChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/StartDialogChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/chain/chains/StartDialogChain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/commands/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/commands/Commands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/state/states/ResultState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/kuanysh/bot/state/states/ResultState.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

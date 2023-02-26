@@ -26,7 +26,10 @@ public class ChoiceDialogChiang extends DialogChain {
             state.nextDialogState();
             userService.saveDialog(message, state);
 
-        } else {
+        } else if (command.equals(Commands.UNNECESSARY_NUMBER.getCallback())){
+            var response = SendModels.sendText(message.getChatId(), Commands.UNNECESSARY_NUMBER.getText());
+            execute.sendBotApiMethod(response);
+        }else {
             var response = SendModels.sendText(message.getChatId(), UNKNOWN_MESSAGE);
             execute.sendBotApiMethod(response);
         }

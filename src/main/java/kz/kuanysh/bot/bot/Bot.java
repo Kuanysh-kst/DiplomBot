@@ -3,6 +3,7 @@ package kz.kuanysh.bot.bot;
 import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.chain.chains.*;
+import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
@@ -78,11 +79,10 @@ public class Bot extends TelegramLongPollingBot {
             String command = update.getCallbackQuery().getData();
             Dialog dialog = userService.findDialog(message);
             dialogChain.processState(message, dialog, command, userService, new SendBotMessageServiceImp(this));
-        } else if ( update.hasMessage() && update.getMessage().hasContact() ) {
+        } else if (update.hasMessage() && update.getMessage().hasContact() && !update.getMessage().hasText()) {
             Message message = update.getMessage();
-                String command = message.getText();
-                Dialog dialog = userService.findDialog(message);
-                dialogChain.processState(message, dialog, command, userService, new SendBotMessageServiceImp(this));
+            Dialog dialog = userService.findDialog(message);
+            dialogChain.processState(message, dialog, Commands.UNNECESSARY_NUMBER.getCallback(), userService, new SendBotMessageServiceImp(this));
         } else if (update.getMessage().hasLocation()) {
             Message message = update.getMessage();
             String command = message.getText();

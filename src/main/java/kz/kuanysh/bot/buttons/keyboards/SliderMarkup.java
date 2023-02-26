@@ -11,7 +11,7 @@ public class SliderMarkup {
 
 
     public static ReplyKeyboardMarkup rightLeftSlide() {
-        List<List<String>> list = List.of(List.of("<<", ">>"), List.of("получить контакт"), List.of(Commands.GO_TO_MENU.getText()));
+        List<List<String>> list = List.of(List.of(Commands.LEFT.getCallback(), Commands.RIGHT.getCallback()), List.of("получить контакт"), List.of(Commands.GO_TO_MENU.getText()));
         return createKeyboard(list, false);
     }
 

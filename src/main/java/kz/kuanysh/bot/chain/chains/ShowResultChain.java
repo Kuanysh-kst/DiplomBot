@@ -23,6 +23,8 @@ import java.util.List;
 @Slf4j
 public class ShowResultChain extends DialogChain {
 
+    private final static String END_OF_LIST = "Вы дошли до финиша \uD83C\uDFC1, пользователи на данный момент закончелись \uD83D\uDE48";
+    private final static String START_OF_LIST = "Листай дальше чтобы найти пользователей \uD83E\uDDD1\u200D\uD83C\uDF3E";
     private int index;
     private List<User> currentUsersList;
     CreateAboutText text = (user) -> "Пользоваетель под именем " + user.getFirstName() + ", написал о себе следуещее: \n" + user.getAbout();
@@ -70,19 +72,19 @@ public class ShowResultChain extends DialogChain {
                 }
                 break;
             }
-            case ">>": {
+            case "➡": {
                 if (++val < currentUsersList.size()) {
                     sendMedia(message, execute, ++index);
                 } else {
-                    execute.sendBotApiMethod(SendModels.sendText(message.getChatId(), "Это конец списка"));
+                    execute.sendBotApiMethod(SendModels.sendText(message.getChatId(), END_OF_LIST));
                 }
                 break;
             }
-            case "<<": {
+            case "⬅": {
                 if (--val >= 0) {
                     sendMedia(message, execute, --index);
                 } else {
-                    execute.sendBotApiMethod(SendModels.sendText(message.getChatId(), "Это начало списка"));
+                    execute.sendBotApiMethod(SendModels.sendText(message.getChatId(), START_OF_LIST));
                 }
                 break;
             }

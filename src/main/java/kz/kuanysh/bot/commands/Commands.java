@@ -1,6 +1,6 @@
 package kz.kuanysh.bot.commands;
 
-public enum Commands {
+ public enum Commands {
     SKIP("пропустить","/skip"),
     SET_CONTACT("Установить контакт", "/setContact"),
     START("/start","/start"),
@@ -17,6 +17,9 @@ public enum Commands {
     DELIVERY_WORK( "работа по доставке","/delivery work"),
     WORK_CAFE("работа в кафе","/workCafe"),
     CLEANING_WORK("клининг работы","/cleaningWork"),
+    RIGHT("право","➡"),
+    LEFT("влево","⬅"),
+    UNNECESSARY_NUMBER("Этот номер не нужен","/unnecessary_number")
     ;
     private final String text;
 
