@@ -2,7 +2,7 @@ package kz.kuanysh.bot.commands;
 
  public enum Commands {
     SKIP("пропустить","/skip"),
-    SET_CONTACT("Установить контакт", "/setContact"),
+    SET_CONTACT("Зарегистрировать контакт", "/setContact"),
     START("/start","/start"),
     SET_LOCATION("указать местоположение","/setLocation"),
     NEXT("Далее","/next"),

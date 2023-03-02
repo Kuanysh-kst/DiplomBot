@@ -20,7 +20,7 @@ public class CategoryDialogChain extends DialogChain {
     @Override
     protected void doProcess(Message message, Dialog state, String command, UserService userService, SendBotMessageServiceImp execute) {
         if (Command.listChoiceCallBack(command)) {
-            execute.sendBotApiMethod(SendModels.sendMessage(message, message.getText(), state.getMarkup()));
+            execute.sendBotApiMethod(SendModels.sendMessage(message, state.getText(message), state.getMarkup()));
 
             state.setChoice(command);
 

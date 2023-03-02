@@ -62,8 +62,14 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         userService.saveUserInBase(update);
-
-        if (update.hasMessage() ) {
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            userService.saveUserInBase(update);
+            Message message = update.getMessage();
+            String command = message.getText();
+            Dialog dialog = userService.findDialog(message);
+            dialogChain.processState(message, dialog, command, userService, new SendBotMessageServiceImp(this));
+        } else if (update.hasMessage() && update.getMessage().hasPhoto()) {
+            userService.saveUserInBase(update);
             Message message = update.getMessage();
             String command = message.getText();
             Dialog dialog = userService.findDialog(message);
@@ -71,6 +77,16 @@ public class Bot extends TelegramLongPollingBot {
         } else if (update.hasCallbackQuery()) {
             Message message = update.getCallbackQuery().getMessage();
             String command = update.getCallbackQuery().getData();
+            Dialog dialog = userService.findDialog(message);
+            dialogChain.processState(message, dialog, command, userService, new SendBotMessageServiceImp(this));
+        } else if (update.getMessage().hasContact() && update.hasMessage()) {
+            Message message = update.getMessage();
+            String command = message.getText();
+            Dialog dialog = userService.findDialog(message);
+            dialogChain.processState(message, dialog, command, userService, new SendBotMessageServiceImp(this));
+        } else if (update.getMessage().hasLocation()) {
+            Message message = update.getMessage();
+            String command = message.getText();
             Dialog dialog = userService.findDialog(message);
             dialogChain.processState(message, dialog, command, userService, new SendBotMessageServiceImp(this));
         }
