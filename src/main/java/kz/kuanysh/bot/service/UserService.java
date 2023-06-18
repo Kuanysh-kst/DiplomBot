@@ -94,6 +94,16 @@ public class UserService {
             return userRepository.findByChoiceAndCategory("/findjob", category);
         }
     }
+
+    public List<User> findByChoiceAndCategoryWebApp(User user) {
+        log.info("Current user " + user.getFirstName() + " is searching now");
+        if (user.getChoice().equals("/findjob")) {
+            return userRepository.findByChoiceAndCategory("/findworker", user.getCategory());
+        } else {
+            return userRepository.findByChoiceAndCategory("/findjob", user.getCategory());
+        }
+    }
+
     public List<User> findAll() {
         return userRepository.findAll();
     }
