@@ -20,7 +20,6 @@ configurations {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter:3.1.0")
     implementation("org.telegram:telegrambots:6.5.0")
     implementation("ch.qos.logback:logback-classic:1.2.11")
     implementation("org.postgresql:postgresql:42.5.4")
