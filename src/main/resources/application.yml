@@ -42,4 +42,4 @@ spring:
 #        locations: classpath:db.migration
 #        url: jdbc:postgresql://localhost:5432/postgres
 #        user: postgres
-        password: password
+#        password: password
