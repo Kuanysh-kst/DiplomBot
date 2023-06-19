@@ -1,6 +1,5 @@
 package kz.kuanysh.bot.buttons;
 
-import kz.kuanysh.bot.commands.Commands;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
