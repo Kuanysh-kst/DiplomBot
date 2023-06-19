@@ -8,6 +8,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 
 import java.util.List;
 
+import static java.util.List.of;
+
 public class CategoryState implements UserActivity {
 
 
@@ -28,7 +30,7 @@ public class CategoryState implements UserActivity {
 
     @Override
     public InlineKeyboardMarkup getMarkup() {
-        List<String> text = List.of(
+        List<String> text = of(
                 Commands.CONSTRUCTION_WORK.getText(),
                 Commands.WORK_LOADER.getText(),
                 Commands.DELIVERY_WORK.getText(),
@@ -36,7 +38,7 @@ public class CategoryState implements UserActivity {
                 Commands.CLEANING_WORK.getText(),
                 Commands.BACK.getText()
         );
-        List<String> callback = List.of(
+        List<String> callback = of(
                 Commands.CONSTRUCTION_WORK.getCallback(),
                 Commands.WORK_LOADER.getCallback(),
                 Commands.DELIVERY_WORK.getCallback(),

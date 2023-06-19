@@ -4,15 +4,13 @@ import kz.kuanysh.bot.state.Dialog;
 import lombok.Data;
 import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.Location;
-import org.telegram.telegrambots.meta.api.objects.PhotoSize;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.File;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+
+import static java.util.Objects.requireNonNullElse;
 
 @Data
 @Entity(name = "usersDataTable")
@@ -33,8 +31,9 @@ public class User {
     private Dialog dialog;
 
     public String getAbout() {
-        return Objects.requireNonNullElse(about, "....");
+        return requireNonNullElse(about, "....");
     }
+
 
     @Override
     public String toString() {

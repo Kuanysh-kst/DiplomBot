@@ -6,6 +6,7 @@ import kz.kuanysh.bot.model.User;
 import kz.kuanysh.bot.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -35,8 +36,8 @@ public class UserService {
     }
 
     public void saveDialog(Message message, Dialog dialog) {
-        var chatId = message.getChatId();
-        var user = getUserById(chatId);
+        Long chatId = message.getChatId();
+        User user = getUserById(chatId);
         user.setDialog(dialog);
         userRepository.save(user);
     }
@@ -60,8 +61,8 @@ public class UserService {
     }
 
     public void saveUserParameters(Message message, Dialog state) {
-        var chatId = message.getChatId();
-        var chat = message.getChat();
+        Long chatId = message.getChatId();
+        Chat chat = message.getChat();
         User user = getUserById(chatId);
         user.setChatId(chatId);
         user.setFirstName(chat.getFirstName());

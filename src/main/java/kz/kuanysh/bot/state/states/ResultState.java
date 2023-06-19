@@ -2,12 +2,14 @@ package kz.kuanysh.bot.state.states;
 
 import kz.kuanysh.bot.commands.Commands;
 import kz.kuanysh.bot.state.UserActivity;
-import org.telegram.telegrambots.meta.api.objects.*;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.List;
+
+import static java.util.List.of;
 
 public class ResultState implements UserActivity {
     @Override
@@ -37,7 +39,7 @@ public class ResultState implements UserActivity {
                 .text(Commands.GET_RESULT.getText())
                 .callbackData(Commands.GET_RESULT.getCallback())
                 .build();
-        List<List<InlineKeyboardButton>> keyboard = List.of(List.of(getResult), List.of(back));
+        List<List<InlineKeyboardButton>> keyboard = of(of(getResult), of(back));
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(keyboard);
         return markup;
