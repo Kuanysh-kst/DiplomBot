@@ -1,0 +1,88 @@
+kz/kuanysh/bot/Main.java
+ kz.kuanysh.bot.Main
+kz/kuanysh/bot/model/Ads.java
+ kz.kuanysh.bot.model.Ads
+kz/kuanysh/bot/state/states/ChoiceState.java
+ kz.kuanysh.bot.state.states.ChoiceState
+kz/kuanysh/bot/state/states/CategoryState.java
+ kz.kuanysh.bot.state.states.CategoryState
+kz/kuanysh/bot/chain/chains/AboutChain.java
+ kz.kuanysh.bot.chain.chains.AboutChain
+kz/kuanysh/bot/repository/AdsRepository.java
+ kz.kuanysh.bot.repository.AdsRepository
+kz/kuanysh/bot/state/states/FinishState.java
+ kz.kuanysh.bot.state.states.FinishState
+kz/kuanysh/bot/photo/PhotoHandler.java
+ kz.kuanysh.bot.photo.PhotoHandler
+kz/kuanysh/bot/state/states/ResultState.java
+ kz.kuanysh.bot.state.states.ResultState
+kz/kuanysh/bot/chain/chains/ShowResultChain.java
+ kz.kuanysh.bot.chain.chains.ShowResultChain
+kz/kuanysh/bot/model/User.java
+ kz.kuanysh.bot.model.User
+kz/kuanysh/bot/commands/Commands.java
+ kz.kuanysh.bot.commands.Commands
+kz/kuanysh/bot/chain/chains/ResultChain.java
+ kz.kuanysh.bot.chain.chains.ResultChain
+kz/kuanysh/bot/buttons/InlineListGenerator.java
+ kz.kuanysh.bot.buttons.InlineListGenerator
+kz/kuanysh/bot/config/BotConfig.java
+ kz.kuanysh.bot.config.BotConfig
+kz/kuanysh/bot/state/states/PhotoState.java
+ kz.kuanysh.bot.state.states.PhotoState
+kz/kuanysh/bot/chain/chains/PhotoChain.java
+ kz.kuanysh.bot.chain.chains.PhotoChain
+kz/kuanysh/bot/state/states/LocationState.java
+ kz.kuanysh.bot.state.states.LocationState
+kz/kuanysh/bot/chain/chains/FinishChain.java
+ kz.kuanysh.bot.chain.chains.FinishChain
+kz/kuanysh/bot/chain/DialogChain.java
+ kz.kuanysh.bot.chain.DialogChain
+kz/kuanysh/bot/service/interfaces/SendBotMessageService.java
+ kz.kuanysh.bot.service.interfaces.SendBotMessageService
+kz/kuanysh/bot/buttons/Command.java
+ kz.kuanysh.bot.buttons.Command
+kz/kuanysh/bot/config/BotInitializer.java
+ kz.kuanysh.bot.config.BotInitializer
+kz/kuanysh/bot/chain/chains/StartDialogChain.java
+ kz.kuanysh.bot.chain.chains.StartDialogChain
+kz/kuanysh/bot/state/states/AboutState.java
+ kz.kuanysh.bot.state.states.AboutState
+kz/kuanysh/bot/buttons/SendModels.java
+ kz.kuanysh.bot.buttons.SendModels
+kz/kuanysh/bot/bot/Bot.java
+ kz.kuanysh.bot.bot.Bot
+kz/kuanysh/bot/state/states/ContactState.java
+ kz.kuanysh.bot.state.states.ContactState
+kz/kuanysh/bot/buttons/ReplyMarkupGenerator.java
+ kz.kuanysh.bot.buttons.ReplyMarkupGenerator
+kz/kuanysh/bot/chain/interfaces/CreateAboutText.java
+ kz.kuanysh.bot.chain.interfaces.CreateAboutText
+kz/kuanysh/bot/state/Dialog.java
+ kz.kuanysh.bot.state.Dialog
+kz/kuanysh/bot/state/states/StartState.java
+ kz.kuanysh.bot.state.states.StartState
+kz/kuanysh/bot/state/states/ShowResultState.java
+ kz.kuanysh.bot.state.states.ShowResultState
+kz/kuanysh/bot/repository/UserRepository.java
+ kz.kuanysh.bot.repository.UserRepository
+kz/kuanysh/bot/service/SendBotMessageServiceImp.java
+ kz.kuanysh.bot.service.SendBotMessageServiceImp
+kz/kuanysh/bot/controller/SearchController.java
+ kz.kuanysh.bot.controller.SearchController
+kz/kuanysh/bot/buttons/keyboards/SliderMarkup.java
+ kz.kuanysh.bot.buttons.keyboards.SliderMarkup
+kz/kuanysh/bot/chain/chains/ContactChain.java
+ kz.kuanysh.bot.chain.chains.ContactChain
+kz/kuanysh/bot/chain/chains/CategoryDialogChain.java
+ kz.kuanysh.bot.chain.chains.CategoryDialogChain
+kz/kuanysh/bot/service/UserService.java
+ kz.kuanysh.bot.service.UserService
+kz/kuanysh/bot/state/UserActivity.java
+ kz.kuanysh.bot.state.UserActivity
+kz/kuanysh/bot/config/SimpleCORSFilter.java
+ kz.kuanysh.bot.config.SimpleCORSFilter
+kz/kuanysh/bot/chain/chains/LocationChain.java
+ kz.kuanysh.bot.chain.chains.LocationChain
+kz/kuanysh/bot/chain/chains/ChoiceDialogChiang.java
+ kz.kuanysh.bot.chain.chains.ChoiceDialogChiang

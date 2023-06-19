@@ -2,7 +2,16 @@ package kz.kuanysh.bot.bot;
 
 import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
-import kz.kuanysh.bot.chain.chains.*;
+import kz.kuanysh.bot.chain.chains.AboutChain;
+import kz.kuanysh.bot.chain.chains.CategoryDialogChain;
+import kz.kuanysh.bot.chain.chains.ChoiceDialogChiang;
+import kz.kuanysh.bot.chain.chains.ContactChain;
+import kz.kuanysh.bot.chain.chains.FinishChain;
+import kz.kuanysh.bot.chain.chains.LocationChain;
+import kz.kuanysh.bot.chain.chains.PhotoChain;
+import kz.kuanysh.bot.chain.chains.ResultChain;
+import kz.kuanysh.bot.chain.chains.ShowResultChain;
+import kz.kuanysh.bot.chain.chains.StartDialogChain;
 import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
