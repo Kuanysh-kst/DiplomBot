@@ -19,7 +19,6 @@ configurations {
     }
 }
 
-
 dependencies {
     implementation("org.telegram:telegrambots:6.0.1")
     implementation("ch.qos.logback:logback-classic:1.2.11")
