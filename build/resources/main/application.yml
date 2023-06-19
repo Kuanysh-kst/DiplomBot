@@ -21,6 +21,29 @@
 #    user: postgres
 #    password: password
 
+#    bot:
+#      username: Diplom_kst_bot
+#      token: 5920322820:AAGDmCGI1cUjqa8p3LlSwEtWOTGEWv-2K9A
+#      owner: 928437440
+#    cron:
+#      scheduler: 0 0 * * * *
+#    spring:
+#      datasource:
+#        url: jdbc:postgresql://localhost:5432/postgres
+#        username: postgres
+#        password: password
+#      jpa:
+#        show-sql: false
+#        hibernate.dll-auto: create
+#        generate-ddl: false
+#        hibernate.ddl-auto: update
+#      flyway:
+#        baseline-on-migrate: true
+#        locations: classpath:db.migration
+#        url: jdbc:postgresql://localhost:5432/postgres
+#        user: postgres
+#        password: password
+
     bot:
       username: Diplom_kst_bot
       token: 5920322820:AAGDmCGI1cUjqa8p3LlSwEtWOTGEWv-2K9A
@@ -29,9 +52,9 @@
       scheduler: 0 0 * * * *
     spring:
       datasource:
-        url: jdbc:postgresql://localhost:5432/postgres
-        username: postgres
-        password: password
+        url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+        username: ${SPRING_DATASOURCE_USERNAME:postgres}
+        password: ${SPRING_DATASOURC_PASSWORD:password}
       jpa:
         show-sql: false
         hibernate.dll-auto: create
