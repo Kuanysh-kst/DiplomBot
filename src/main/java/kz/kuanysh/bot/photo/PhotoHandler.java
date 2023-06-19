@@ -26,7 +26,7 @@ public class PhotoHandler {
             try {
                 String fileUrl = execute.getPhotoUrl(photo);
                 URL url = new URL(fileUrl);
-                File file = new File("src/main/resources/Img/photo_" + message.getChatId() + ".jpeg");
+                File file = new File("src/main/resources/image/photo_" + message.getChatId() + ".svg");
                 FileUtils.copyURLToFile(url, file);
                 state.setFile(file);
                 log.info("Photo is saved");

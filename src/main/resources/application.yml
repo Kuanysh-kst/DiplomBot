@@ -1,45 +1,45 @@
-bot:
-  username: Diplom_kst_bot
-  token: 5920322820:AAGDmCGI1cUjqa8p3LlSwEtWOTGEWv-2K9A
-  owner: 928437440
-cron:
-  scheduler: 0 0 * * * *
-spring:
-  datasource:
-    url: jdbc:postgresql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}
-    username: ${PROD_DB_USERNAME}
-    password: ${PROD_DB_PASSWORD}
-  jpa:
-    show-sql: false
-    hibernate.dll-auto: create
-    generate-ddl: false
-    hibernate.ddl-auto: update
-  flyway:
-    baseline-on-migrate: true
-    locations: classpath:db.migration
-    url: jdbc:postgresql://localhost:5432/postgres
-    user: postgres
-    password: password
+#bot:
+#  username: Diplom_kst_bot
+#  token: 5920322820:AAGDmCGI1cUjqa8p3LlSwEtWOTGEWv-2K9A
+#  owner: 928437440
+#cron:
+#  scheduler: 0 0 * * * *
+#spring:
+#  datasource:
+#    url: jdbc:postgresql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}
+#    username: ${PROD_DB_USERNAME}
+#    password: ${PROD_DB_PASSWORD}
+#  jpa:
+#    show-sql: false
+#    hibernate.dll-auto: create
+#    generate-ddl: false
+#    hibernate.ddl-auto: update
+#  flyway:
+#    baseline-on-migrate: true
+#    locations: classpath:db.migration
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    user: postgres
+#    password: password
 
-#    bot:
-#      username: Diplom_kst_bot
-#      token: 5920322820:AAGDmCGI1cUjqa8p3LlSwEtWOTGEWv-2K9A
-#      owner: 928437440
-#    cron:
-#      scheduler: 0 0 * * * *
-#    spring:
-#      datasource:
-#        url: jdbc:postgresql://localhost:5432/postgres
-#        username: postgres
-#        password: password
-#      jpa:
-#        show-sql: false
-#        hibernate.dll-auto: create
-#        generate-ddl: false
-#        hibernate.ddl-auto: update
-#      flyway:
-#        baseline-on-migrate: true
-#        locations: classpath:db.migration
-#        url: jdbc:postgresql://localhost:5432/postgres
-#        user: postgres
-#        password: password
+    bot:
+      username: Diplom_kst_bot
+      token: 5920322820:AAGDmCGI1cUjqa8p3LlSwEtWOTGEWv-2K9A
+      owner: 928437440
+    cron:
+      scheduler: 0 0 * * * *
+    spring:
+      datasource:
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: postgres
+        password: password
+      jpa:
+        show-sql: false
+        hibernate.dll-auto: create
+        generate-ddl: false
+        hibernate.ddl-auto: update
+      flyway:
+        baseline-on-migrate: true
+        locations: classpath:db.migration
+        url: jdbc:postgresql://localhost:5432/postgres
+        user: postgres
+        password: password

@@ -61,7 +61,7 @@ public class ShowResultChain extends DialogChain {
                 this.currentUsersList = userService.findByChoiceAndCategory(message);
 
                 if (currentUsersList.isEmpty()) {
-                    InputFile inputFile = new InputFile(new File("src/main/resources/Img/not_found_users.jpeg"));
+                    InputFile inputFile = new InputFile(new File("src/main/resources/standarts/cat-on-holiday.png"));
                     var response = SendModels.sendPhoto(message, NOT_FOUND, inputFile, SliderMarkup.emptySlide());
                     execute.sendPhoto(response);
                 } else {
