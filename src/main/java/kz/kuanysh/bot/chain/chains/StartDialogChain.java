@@ -26,7 +26,7 @@ public class StartDialogChain extends DialogChain {
             state.nextDialogState();
             userService.saveDialog(message, state);
 
-        } else if( command.equals(Commands.HELP.getText())) {
+        } else if( command.equals(Commands.HELP.getCallback())) {
             execute.sendBotApiMethod(SendModels.sendText(message.getChatId(),"\uD83E\uDD14"));
             execute.sendBotApiMethod(SendModels.sendText(message.getChatId(),Commands.HELP_TEXT.getText()));
         }else {
