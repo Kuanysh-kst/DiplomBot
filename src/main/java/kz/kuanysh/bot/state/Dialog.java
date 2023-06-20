@@ -10,6 +10,8 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import java.io.File;
 import java.io.Serializable;
 
+import static java.util.Objects.requireNonNullElse;
+
 @Data
 @Slf4j
 public class Dialog implements Serializable {
@@ -38,6 +40,10 @@ public class Dialog implements Serializable {
 
     public String getText(Message message){
         return state.getText(message);
+    }
+
+    public File getFile() {
+        return requireNonNullElse(file,new File("src/main/resources/standarts/default.png"));
     }
 
     public void backDialogState() {
