@@ -21,7 +21,7 @@ configurations {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter" )
+    implementation("org.springframework.boot:spring-boot-starter-jdbc" )
     implementation("org.telegram:telegrambots:6.5.0")
     implementation("ch.qos.logback:logback-classic:1.2.11")
     implementation("org.postgresql:postgresql:42.5.4")
