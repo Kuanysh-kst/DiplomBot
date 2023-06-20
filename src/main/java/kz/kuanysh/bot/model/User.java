@@ -34,6 +34,9 @@ public class User {
         return requireNonNullElse(about, "....");
     }
 
+    public File getFile() {
+        return requireNonNullElse(file,new File("src/main/resources/standarts/default.png"));
+    }
 
     @Override
     public String toString() {
