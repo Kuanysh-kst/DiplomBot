@@ -3,7 +3,6 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("org.springframework.boot") version "2.7.5"
     id("io.spring.dependency-management") version ("1.0.15.RELEASE")
-
 }
 
 group = "kz.kuanysh.bot"
@@ -34,10 +33,13 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.22.0")
 }
 
+val mainClassName = "kz.kuanysh.bot.Main"
+
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "kz.kuanysh.bot.Main"
+        attributes["Main-Class"] = mainClassName
     }
+    from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
 
 tasks.getByName<Test>("test") {
