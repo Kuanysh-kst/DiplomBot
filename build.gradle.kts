@@ -42,7 +42,7 @@ tasks.jar {
     manifest {
         attributes["Main-Class"] = "kz.kuanysh.bot.Main"
     }
-    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+    from(configurations.runtimeClasspath.get().filter { it.name.endsWith(".jar") }.map { zipTree(it) })
 }
 
 
