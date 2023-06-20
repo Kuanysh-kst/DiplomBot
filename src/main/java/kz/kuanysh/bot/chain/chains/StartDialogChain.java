@@ -26,7 +26,10 @@ public class StartDialogChain extends DialogChain {
             state.nextDialogState();
             userService.saveDialog(message, state);
 
-        } else {
+        } else if( command.equals(Commands.HELP.getText())) {
+            execute.sendBotApiMethod(SendModels.sendText(message.getChatId(),"\uD83E\uDD14"));
+            execute.sendBotApiMethod(SendModels.sendText(message.getChatId(),Commands.HELP_TEXT.getText()));
+        }else {
             var response = SendModels.sendText(message.getChatId(), UNKNOWN_MESSAGE);
             execute.sendBotApiMethod(response);
         }
