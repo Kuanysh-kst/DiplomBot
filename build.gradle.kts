@@ -1,6 +1,5 @@
 plugins {
     java
-    id("com.github.johnrengelman.shadow") version "7.1.2"
     id("org.springframework.boot") version "2.7.5"
     id("io.spring.dependency-management") version ("1.0.15.RELEASE")
     kotlin("jvm") version "1.6.0"
@@ -38,6 +37,13 @@ dependencies {
 springBoot {
     mainClass.set("kz.kuanysh.bot.Main")
 }
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "kz.kuanysh.bot.Main"
+    }
+}
+
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
