@@ -111,7 +111,7 @@ public class UserService {
 
     private void setParameters(Message message){
         User user = new User();
-        user.setFile(new File("src/main/resources/standarts/cat-on-holiday.png"));
+        user.setFile(new File("src/main/resources/standarts/default.png"));
         user.setChatId(message.getChatId());
         user.setFirstName(message.getChat().getFirstName());
         user.setLastName(message.getChat().getLastName());
