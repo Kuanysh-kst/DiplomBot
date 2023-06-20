@@ -36,11 +36,16 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.22.0")
 }
 
+springBoot {
+    mainClass.set("kz.kuanysh.bot.Main")
+}
+
 tasks.jar {
     manifest {
         attributes["Main-Class"] = "kz.kuanysh.bot.Main"
     }
 }
+
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
