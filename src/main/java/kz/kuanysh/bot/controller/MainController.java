@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
     @GetMapping
     public String helloWorld() {
+        System.out.println("hello world from sout from /welcome");
         return "Hello, World!";
     }
 }
