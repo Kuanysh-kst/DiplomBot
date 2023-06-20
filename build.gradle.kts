@@ -3,6 +3,8 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("org.springframework.boot") version "2.7.5"
     id("io.spring.dependency-management") version ("1.0.15.RELEASE")
+    kotlin("jvm") version "1.6.0"
+    kotlin("plugin.spring") version "1.6.0"
 }
 
 group = "kz.kuanysh.bot"
@@ -19,6 +21,7 @@ configurations {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter:3.1.0")
     implementation("org.telegram:telegrambots:6.5.0")
     implementation("ch.qos.logback:logback-classic:1.2.11")
     implementation("org.postgresql:postgresql:42.5.4")
@@ -33,13 +36,10 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.22.0")
 }
 
-val mainClassName = "kz.kuanysh.bot.Main"
-
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = mainClassName
+        attributes["Main-Class"] = "kz.kuanysh.bot.Main"
     }
-    from(configurations.compileClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
 
 tasks.getByName<Test>("test") {
