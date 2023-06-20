@@ -33,14 +33,7 @@ public class StartState implements UserActivity{
         KeyboardButton next = KeyboardButton.builder()
                 .text(Commands.NEXT.getText())
                 .build();
-        KeyboardButton contact = KeyboardButton.builder()
-                .text(Commands.SET_CONTACT.getText())
-                .requestContact(true)
-                .build();
-        KeyboardButton ad = KeyboardButton.builder()
-                .text(Commands.INTEGRATION.getText())
-                .build();
-        List<List<KeyboardButton>> list = List.of(List.of(next), List.of(contact,ad));
+        List<List<KeyboardButton>> list = List.of(List.of(next));
         return ReplyMarkupGenerator.createListKeyboard(list, true);
     }
 }

@@ -7,11 +7,11 @@ import java.util.List;
 public class Command {
     public static Boolean callBackWorkNames(String command) {
         return List.of(
-                "/constructionWork",
-                "/workLoader",
-                "/delivery work",
-                "/workCafe",
-                "/cleaningWork"
+                "Стройтельные работы",
+                "Работа грузчиком",
+                "Работа по доставке",
+                "Работа в кафе",
+                "Клининг работы"
         ).contains(command);
     }
 
