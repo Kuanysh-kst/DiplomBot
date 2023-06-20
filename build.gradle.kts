@@ -26,7 +26,6 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.2.11")
     implementation("org.postgresql:postgresql:42.5.4")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.flywaydb:flyway-core")
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
@@ -39,13 +38,6 @@ dependencies {
 springBoot {
     mainClass.set("kz.kuanysh.bot.Main")
 }
-
-tasks.jar {
-    manifest {
-        attributes["Main-Class"] = "kz.kuanysh.bot.Main"
-    }
-}
-
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
