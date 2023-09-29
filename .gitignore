@@ -1,1 +1,6 @@
 *.jpeg*.jpeg
+*.iml
+.idea/
+build/
+out/
+.gradle/
