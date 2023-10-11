@@ -1,6 +1,5 @@
-*.jpeg*.jpeg
+*.jpeg
 *.iml
-.idea/
-build/
-out/
-.gradle/
+*.idea
+*build
+*.gradle
