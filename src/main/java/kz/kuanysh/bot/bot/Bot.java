@@ -1,10 +1,7 @@
 package kz.kuanysh.bot.bot;
 
-import kz.kuanysh.bot.bot.strategy.CallbackQueryUpdateStrategy;
-import kz.kuanysh.bot.bot.strategy.TextMessageUpdateStrategy;
 import kz.kuanysh.bot.bot.strategy.UpdateStrategy;
-import kz.kuanysh.bot.bot.strategy.UpdateStrategyFactory;
-import kz.kuanysh.bot.buttons.SendModels;
+import kz.kuanysh.bot.bot.strategy.update.UpdateStrategyFactory;
 import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.chain.chains.AboutChain;
 import kz.kuanysh.bot.chain.chains.CategoryDialogChain;
@@ -19,22 +16,11 @@ import kz.kuanysh.bot.chain.chains.StartDialogChain;
 import kz.kuanysh.bot.config.BotConfig;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
-import kz.kuanysh.bot.model.Ads;
-import kz.kuanysh.bot.model.User;
-import kz.kuanysh.bot.repository.AdsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import java.util.HashMap;
-import java.util.Map;
-
 
 @Slf4j
 @Component
@@ -44,10 +30,8 @@ public class Bot extends TelegramLongPollingBot {
     private final BotConfig botConfig;
 
     @Autowired
-    private AdsRepository adsRepository;
     private final UserService userService;
     private final DialogChain dialogChain;
-    private final Map<Class<?>, UpdateStrategy> strategyMap = new HashMap<>();
 
 
     public Bot(BotConfig botConfig, UserService userService) {
@@ -65,9 +49,6 @@ public class Bot extends TelegramLongPollingBot {
         DialogChain categoryDialogChain = new CategoryDialogChain(getNumChain);
         DialogChain choiceChain = new ChoiceDialogChiang(categoryDialogChain);
         this.dialogChain = new StartDialogChain(choiceChain);
-
-        strategyMap.put(Message.class, new TextMessageUpdateStrategy());
-        strategyMap.put(CallbackQuery.class, new CallbackQueryUpdateStrategy());
     }
 
 
@@ -86,25 +67,7 @@ public class Bot extends TelegramLongPollingBot {
         userService.saveUserInBase(update);
 
         UpdateStrategy updateStrategy = UpdateStrategyFactory.createStrategy(update);
-        assert updateStrategy != null;
         updateStrategy.handleUpdate(update, userService, new SendBotMessageServiceImp(this), dialogChain);
-    }
-
-
-    @Scheduled(cron = "${cron.scheduler}")
-    private void sendAds() {
-        var ads = adsRepository.findAll();
-        var users = userService.findAll();
-
-        for (Ads ad : ads) {
-            for (User user : users) {
-                try {
-                    execute(SendModels.sendText(user.getChatId(), ad.getAd()));
-                } catch (TelegramApiException e) {
-                    log.error("Error occurred: " + e.getMessage());
-                }
-            }
-        }
     }
 
 }

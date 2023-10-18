@@ -7,7 +7,7 @@ import kz.kuanysh.bot.state.Dialog;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-public class TextMessageUpdateStrategy implements UpdateStrategy{
+public class TextMessageUpdateStrategy implements UpdateStrategy {
 
     @Override
     public void handleUpdate(Update update, UserService service, SendBotMessageServiceImp messageService, DialogChain chain) {
