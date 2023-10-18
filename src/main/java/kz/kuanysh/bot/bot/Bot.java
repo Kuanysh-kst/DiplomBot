@@ -1,7 +1,7 @@
 package kz.kuanysh.bot.bot;
 
 import kz.kuanysh.bot.bot.strategy.UpdateStrategy;
-import kz.kuanysh.bot.bot.strategy.update.UpdateStrategyFactory;
+import kz.kuanysh.bot.bot.update.UpdateStrategyFactory;
 import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.chain.chains.AboutChain;
 import kz.kuanysh.bot.chain.chains.CategoryDialogChain;

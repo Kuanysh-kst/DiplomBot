@@ -1,4 +1,4 @@
-package kz.kuanysh.bot.bot.strategy.update;
+package kz.kuanysh.bot.bot.update;
 
 import kz.kuanysh.bot.bot.strategy.CallbackQueryUpdateStrategy;
 import kz.kuanysh.bot.bot.strategy.TextMessageUpdateStrategy;
