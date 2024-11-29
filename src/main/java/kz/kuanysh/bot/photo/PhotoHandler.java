@@ -15,7 +15,6 @@ import java.util.List;
 
 @Slf4j
 public class PhotoHandler {
-
     public static void savePhotoInFile(SendBotMessageServiceImp execute, Message message, Dialog state) {
 
         List<PhotoSize> photos = message.getPhoto();
@@ -35,6 +34,4 @@ public class PhotoHandler {
             }
         }
     }
-
-
 }

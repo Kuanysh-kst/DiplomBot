@@ -12,8 +12,6 @@ import kz.kuanysh.bot.state.states.AboutState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class AboutChain extends DialogChain {
-
-
     public AboutChain(DialogChain nextChain) {
         super(nextChain);
     }

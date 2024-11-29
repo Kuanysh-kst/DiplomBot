@@ -11,7 +11,6 @@ import kz.kuanysh.bot.state.states.LocationState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class LocationChain extends DialogChain {
-
     public LocationChain(DialogChain nextChain) {
         super(nextChain);
     }
@@ -41,7 +40,6 @@ public class LocationChain extends DialogChain {
             var response = SendModels.sendText(message.getChatId(), UNKNOWN_MESSAGE);
             execute.sendBotApiMethod(response);
         }
-
     }
 
     @Override

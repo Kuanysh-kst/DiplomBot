@@ -12,7 +12,6 @@ import kz.kuanysh.bot.state.states.CategoryState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class CategoryDialogChain extends DialogChain {
-
     public CategoryDialogChain(DialogChain nextChain) {
         super(nextChain);
     }

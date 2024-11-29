@@ -26,6 +26,7 @@ dependencies {
     implementation("org.postgresql:postgresql:42.5.4")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-rest")
+    implementation("org.jsoup:jsoup:1.7.2")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

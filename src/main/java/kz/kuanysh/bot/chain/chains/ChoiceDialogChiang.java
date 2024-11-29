@@ -13,7 +13,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Slf4j
 public class ChoiceDialogChiang extends DialogChain {
-
     public ChoiceDialogChiang(DialogChain nextChain) {
         super(nextChain);
     }
@@ -38,11 +37,8 @@ public class ChoiceDialogChiang extends DialogChain {
         }
     }
 
-
     @Override
     protected boolean shouldProcessState(UserActivity userActivity) {
         return userActivity instanceof ChoiceState;
     }
-
-
 }

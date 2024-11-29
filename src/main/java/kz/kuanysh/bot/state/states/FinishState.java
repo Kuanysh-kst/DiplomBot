@@ -5,7 +5,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 public class FinishState implements UserActivity{
-
     @Override
     public UserActivity nextDialogState() {
         return new FinishState();

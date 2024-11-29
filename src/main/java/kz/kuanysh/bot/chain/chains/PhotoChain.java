@@ -11,7 +11,6 @@ import kz.kuanysh.bot.state.states.PhotoState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class PhotoChain extends DialogChain {
-
     public PhotoChain(DialogChain nextChain) {
         super(nextChain);
     }

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReplyMarkupGenerator {
-
     public static ReplyKeyboardMarkup createKeyboard(List<List<String>> buttons, boolean isOneTime) {
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         keyboardMarkup.setResizeKeyboard(true);

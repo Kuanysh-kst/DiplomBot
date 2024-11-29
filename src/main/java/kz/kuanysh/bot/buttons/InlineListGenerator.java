@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InlineListGenerator extends InlineKeyboardMarkup {
-
     public static List<List<InlineKeyboardButton>> listButtons(List<String> buttonNames, List<String> callBackNames) {
 
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();

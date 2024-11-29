@@ -15,7 +15,6 @@ import static java.util.Objects.requireNonNullElse;
 @Data
 @Entity(name = "usersDataTable")
 public class User {
-
     @Id
     private Long chatId;
     private String firstName;
@@ -33,8 +32,6 @@ public class User {
     public String getAbout() {
         return requireNonNullElse(about, "....");
     }
-
-
 
     @Override
     public String toString() {

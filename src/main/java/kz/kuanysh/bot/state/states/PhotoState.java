@@ -9,8 +9,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.List;
 
 public class PhotoState implements UserActivity {
-
-
     @Override
     public UserActivity nextDialogState() {
         return new ContactState();

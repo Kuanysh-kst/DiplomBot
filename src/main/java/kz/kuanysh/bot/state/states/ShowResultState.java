@@ -5,8 +5,6 @@ import org.telegram.telegrambots.meta.api.objects.*;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 
 public class ShowResultState implements UserActivity {
-
-
     @Override
     public UserActivity nextDialogState() {
         return new CategoryState();

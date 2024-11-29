@@ -14,7 +14,6 @@ public class StartState implements UserActivity{
         return new ChoiceState();
     }
 
-
     @Override
     public UserActivity backDialogState() {
         return null;

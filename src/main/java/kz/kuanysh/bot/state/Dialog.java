@@ -15,7 +15,6 @@ import static java.util.Objects.requireNonNullElse;
 @Data
 @Slf4j
 public class Dialog implements Serializable {
-
     private String choice;
     private String category;
     private String about;
@@ -24,7 +23,6 @@ public class Dialog implements Serializable {
     private Location location;
     private int userIndex;
     private UserActivity state;
-
 
     public Dialog(UserActivity state) {
         this.state = state;
@@ -53,6 +51,4 @@ public class Dialog implements Serializable {
     public UserActivity getState() {
         return state;
     }
-
-
 }

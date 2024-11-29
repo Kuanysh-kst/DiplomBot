@@ -11,8 +11,6 @@ import java.util.List;
 import static java.util.List.of;
 
 public class CategoryState implements UserActivity {
-
-
     @Override
     public UserActivity nextDialogState() {
         return new AboutState();

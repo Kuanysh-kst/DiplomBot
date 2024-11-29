@@ -13,5 +13,4 @@ public interface UserActivity extends Serializable {
     String getText(Message message);
 
     ReplyKeyboard getMarkup();
-
 }

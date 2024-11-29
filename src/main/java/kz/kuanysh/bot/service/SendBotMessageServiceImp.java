@@ -18,7 +18,6 @@ import java.io.Serializable;
 @Slf4j
 @Service
 public class SendBotMessageServiceImp implements SendBotMessageService {
-
     @Autowired
     private final Bot bot;
 
@@ -71,5 +70,4 @@ public class SendBotMessageServiceImp implements SendBotMessageService {
             log.error("Error occurred:" + e);
         }
     }
-
 }

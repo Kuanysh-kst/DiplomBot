@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.List;
@@ -18,13 +17,11 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class UserService {
-
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
 
     public Dialog findDialog(Message message) {
         Long chatId = message.getChatId();
@@ -46,7 +43,6 @@ public class UserService {
         Optional<User> userOptional = findById(chatId);
         return userOptional.orElseGet(User::new);
     }
-
 
     public void saveUserInBase(Update update) {
         if (update.hasMessage() && !userRepository.existsById(update.getMessage().getChatId())){

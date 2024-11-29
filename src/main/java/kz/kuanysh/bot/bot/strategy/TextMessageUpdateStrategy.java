@@ -8,7 +8,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public class TextMessageUpdateStrategy implements UpdateStrategy {
-
     @Override
     public void handleUpdate(Update update, UserService service, SendBotMessageServiceImp messageService, DialogChain chain) {
             Message message = update.getMessage();

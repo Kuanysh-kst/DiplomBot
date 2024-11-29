@@ -10,8 +10,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.Keyboard
 import java.util.List;
 
 public class LocationState implements UserActivity {
-
-
     @Override
     public UserActivity nextDialogState() {
         return new ResultState();

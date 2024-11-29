@@ -12,7 +12,6 @@ import kz.kuanysh.bot.state.states.ContactState;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 public class ContactChain extends DialogChain {
-
     public ContactChain(DialogChain nextChain) {
         super(nextChain);
     }
@@ -41,7 +40,6 @@ public class ContactChain extends DialogChain {
             var response = SendModels.sendText(message.getChatId(), UNKNOWN_MESSAGE);
             execute.sendBotApiMethod(response);
         }
-
     }
 
     @Override

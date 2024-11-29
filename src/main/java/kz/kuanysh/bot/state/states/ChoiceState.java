@@ -9,12 +9,10 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import java.util.List;
 
 public class ChoiceState implements UserActivity {
-
     @Override
     public UserActivity nextDialogState() {
         return new CategoryState();
     }
-
 
     @Override
     public UserActivity backDialogState() {
@@ -39,7 +37,6 @@ public class ChoiceState implements UserActivity {
         markup.setKeyboard(InlineListGenerator.listButtons(text,callback));
         return markup;
     }
-
 }
 
 

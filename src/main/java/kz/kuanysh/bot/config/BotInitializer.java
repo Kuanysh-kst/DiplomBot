@@ -13,7 +13,6 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Slf4j
 @Component
 public class BotInitializer {
-
     @Autowired
     Bot bot;
 
@@ -26,5 +25,4 @@ public class BotInitializer {
             log.error("Error occurred: "+ e.getMessage());
         }
     }
-
 }

@@ -25,14 +25,11 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Slf4j
 @Component
 public class Bot extends TelegramLongPollingBot {
-
     @Autowired
     private final BotConfig botConfig;
-
     @Autowired
     private final UserService userService;
     private final DialogChain dialogChain;
-
 
     public Bot(BotConfig botConfig, UserService userService) {
 
@@ -51,7 +48,6 @@ public class Bot extends TelegramLongPollingBot {
         this.dialogChain = new StartDialogChain(choiceChain);
     }
 
-
     @Override
     public String getBotUsername() {
         return botConfig.getBotUserName();
@@ -69,5 +65,4 @@ public class Bot extends TelegramLongPollingBot {
         UpdateStrategy updateStrategy = UpdateStrategyFactory.createStrategy(update);
         updateStrategy.handleUpdate(update, userService, new SendBotMessageServiceImp(this), dialogChain);
     }
-
 }

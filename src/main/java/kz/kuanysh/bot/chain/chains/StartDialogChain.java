@@ -3,6 +3,7 @@ package kz.kuanysh.bot.chain.chains;
 import kz.kuanysh.bot.buttons.SendModels;
 import kz.kuanysh.bot.chain.DialogChain;
 import kz.kuanysh.bot.commands.Commands;
+import kz.kuanysh.bot.parsing.HMSTRPriceParser;
 import kz.kuanysh.bot.service.SendBotMessageServiceImp;
 import kz.kuanysh.bot.service.UserService;
 import kz.kuanysh.bot.state.Dialog;
@@ -29,7 +30,9 @@ public class StartDialogChain extends DialogChain {
         } else if( command.equals(Commands.HELP.getCallback())) {
             execute.sendBotApiMethod(SendModels.sendText(message.getChatId(),"\uD83E\uDD14"));
             execute.sendBotApiMethod(SendModels.sendText(message.getChatId(),Commands.HELP_TEXT.getText()));
-        }else {
+        } else if (command.equals(Commands.HMSTR.getCallback())){
+            execute.sendBotApiMethod(SendModels.sendText(message.getChatId(), HMSTRPriceParser.getHMSTRPrice()));
+        } else {
             var response = SendModels.sendText(message.getChatId(), UNKNOWN_MESSAGE);
             execute.sendBotApiMethod(response);
         }
